@@ -31,8 +31,9 @@
         <div class="navbar-nav">
           <a class="nav-item nav-link" id="home" href="/">Home</a>
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-          <a class="nav-item nav-link" id="offer" href="/offer">Offer</a>
-          <a class="nav-item nav-link" id="sing_up" href="/sing_un">Sing Un</a>
+          <a class="nav-item nav-link" id="offer" href="/offer">Task</a>
+          <a class="nav-item nav-link" id="sign_up" href="/sign_up">Sign Up</a>
+          <a class="nav-item nav-link" id="login" href="/login">Login</a>
         </div>
       </div>
     </nav>
@@ -53,6 +54,8 @@
       crossorigin="anonymous"
     ></script>
 
+  <!--Come si importano i file dalla cartella static in cui c'è tutto Javascript -->
+    <!-- Le parentesi graffe servono per le python expression -->
     <script
       type="text/javascript"
       src="{{ url_for('static', filename='index.js') }}"

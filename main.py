@@ -1,8 +1,6 @@
-
-from website import create_app #min 10
+from website import create_app  # min 10
 
 app = create_app()
 
 if __name__ == '__main__':
-    app.run(debug=True) #min 12.11
-
+    app.run(debug=True)  # run a flask application.
