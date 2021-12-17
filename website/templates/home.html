@@ -1,5 +1,23 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
-<h1>This is the home page</h1>
-{{ text }}
-
+    <h1 align="center">Post a Task</h1>
+<ul class="list-group list-group-flush" id="offers">
+  {% for offer in user.offers %}
+  <li class="list-group-item">
+    {{ offer.title }}
+    <button type="button" class="close" onClick="deleteOffer({{ offer.id }})">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+  {% endfor %}
+</ul>
+<form method="POST">
+    <textarea align="center" name="title" id="title" class="form-control" placeholder="Enter Offer Title"></textarea>
+    <br />
+    <textarea name="description" id="description" class="form-control" placeholder="Enter Offer description"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Post a Task</button>
+  </div>
+</form>
 {% endblock %}
+

@@ -17,7 +17,7 @@ class Offer(db.Model, UserMixin):
     title = db.Column(db.String(150))
     description = db.Column(db.String(150))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
-    date_task = db.Column(db.DateTime(timezone=True))
+    #date_task = db.Column(db.DateTime(timezone=True))
     id_user = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
