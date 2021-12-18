@@ -1,5 +1,30 @@
-{% extends "base.html" %} {% block title %}Task{% endblock %} {% block content%}
-<h1>This is the Task page</h1>
-{{ text }}
+{% extends "base.html" %} {% block title %}Apply for Tasks{% endblock %} {% block content%}
+ <br />
+    <h1 align="center">Apply for a Task</h1>
+    <form method="POST">
+        <br />
+        <h3 align= "center"> List of Task </h3>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Apply</th>
+            </tr>
+            </thead>
+            {% for offer in tasks %}
+            <tbody>
+            <tr>
+                <th scope="row" value="1"></th>
+                <td> <a href={{ url_for('taskscelta') }}>{{ offer.title }} </a></td>
+                <td>{{ offer.description }}</td>
+                <td></td>
 
-{% endblock %}
+            </tr>
+
+            </tbody>
+            {% endfor %}
+        </table>
+    </form>
+        {% endblock %}

@@ -1,12 +1,13 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
+    <br />
     <h1 align="center">Post a Task</h1>
 <ul class="list-group list-group-flush" id="offers">
   {% for offer in user.offers %}
   <li class="list-group-item">
     {{ offer.title }}
-    <button type="button" class="close" onClick="deleteOffer({{ offer.id }})">
-      <span aria-hidden="true">&times;</span>
-    </button>
+         <button type="button" class="close" onClick="deleteOffer({{ offer.id }})">
+             <span aria-hidden="true">&times;</span>
+         </button>
   </li>
   {% endfor %}
 </ul>
