@@ -4,7 +4,7 @@
 <ul class="list-group list-group-flush" id="offers">
   {% for offer in user.offers %}
   <li class="list-group-item">
-    {{ offer.title }}
+    {{ offer.title }} {{ offer.id_user }}
          <button type="button" class="close" onClick="deleteOffer({{ offer.id }})">
              <span aria-hidden="true">&times;</span>
          </button>

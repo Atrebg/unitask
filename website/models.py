@@ -17,8 +17,10 @@ class Offer(db.Model, UserMixin):
     title = db.Column(db.String(150))
     description = db.Column(db.String(150))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
+    #isAss = db.Column(db.Boolean, default=False)
     #date_task = db.Column(db.DateTime(timezone=True))
     id_user = db.Column(db.Integer, db.ForeignKey('user.id'))
+    #id_studente = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
 class Review(db.Model, UserMixin):

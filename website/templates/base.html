@@ -30,12 +30,20 @@
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
             {% if user.is_authenticated %}
-            <a class="nav-item nav-link" id="home" href="/">Home</a>
-            <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-            <a class="nav-item nav-link" id="offer" href="/offer">Apply for Task</a>
+                <ul class="nav navbar-nav">
+                    <li><a class="nav-item nav-link" id="home" href="/">Home</a></li>
+                    <li><a class="nav-item nav-link" id="logout" href="/logout">Logout</a></li>
+                    <li><a class="nav-item nav-link" id="offer" href="/offer">Apply for Task</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li> {{ user.id }}</li>
+                    <li> {{ user.email }}</li>
+                </ul>
+
             {% else %}
           <a class="nav-item nav-link" id="sign_up" href="/sign_up">Sign Up</a>
           <a class="nav-item nav-link" id="login" href="/login">Login</a>
+
             {% endif %}
         </div>
       </div>

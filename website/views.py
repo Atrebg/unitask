@@ -22,7 +22,7 @@ def home():
         if len(title) < 1:
             flash('Title is too short!', category='error')
         else:
-            new_offer = Offer(title=title, description=description, id_user=current_user.id)
+            new_offer = Offer(title=title, description=description, id_poster=current_user.id)
             db.session.add(new_offer)
             db.session.commit()
             flash('Task posted!', category='success')
@@ -33,8 +33,8 @@ def home():
 @views.route('/delete-offer', methods=['POST'])
 def delete_offer():
     offer = json.loads(request.data)
-    noteId = offer['offerId']
-    of = Offer.query.get(noteId)
+    offerId = offer['offerId']
+    of = Offer.query.get(offerId)
     if of:
         if of.id_user == current_user.id:
             db.session.delete(of)
@@ -46,12 +46,17 @@ def delete_offer():
 @views.route('/offer')
 @login_required
 def offer():
-    tasks = Offer.query.filter(id != current_user.id).all()
+    tasks = Offer.query.filter(Offer.id_user!=current_user.id).all()  # controllare perche non filtra
     return render_template("offer.html", user=current_user, tasks=tasks)
 
 
-@views.route('/task')
+@views.route('/task/<task_id>', methods=['GET', 'POST'])
 @login_required
-def taskscelta():
-    #t = Offer.query.filter(id=id).first()
-    return render_template("task.html", user=current_user)
+def taskscelta(task_id):
+    t = Offer.query.filter(Offer.id == task_id).first()
+    return render_template("task.html", user=current_user, taskscelta=t)
+
+
+def sendapplycation(task_id):
+    if request.method == 'POST':
+        return render_template("home.html", user=current_user)
