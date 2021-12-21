@@ -16,9 +16,10 @@ to do:
 8) Pagamento
 9) Dividere i tipi di user
 10) Aggiungere le maps
-11) Aggiungere About Us
+11) Aggiungere About Us 
 
-FATTO: 
-1) Sistemare query per vedere le task postate a cui applicare 
+
+FATTO 
+1) Sistemare query per veder e le task postate a cui applicare
 
 
