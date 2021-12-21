@@ -22,7 +22,7 @@ def home():
         if len(title) < 1:
             flash('Title is too short!', category='error')
         else:
-            new_offer = Offer(title=title, description=description, id_poster=current_user.id)
+            new_offer = Offer(title=title, description=description, id_user=current_user.id)
             db.session.add(new_offer)
             db.session.commit()
             flash('Task posted!', category='success')
@@ -36,7 +36,7 @@ def delete_offer():
     offerId = offer['offerId']
     of = Offer.query.get(offerId)
     if of:
-        if of.id_poster == current_user.id:
+        if of.id_user == current_user.id:
             db.session.delete(of)
             db.session.commit()
 
