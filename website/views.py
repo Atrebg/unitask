@@ -36,7 +36,7 @@ def delete_offer():
     offerId = offer['offerId']
     of = Offer.query.get(offerId)
     if of:
-        if of.id_user == current_user.id:
+        if of.id_poster == current_user.id:
             db.session.delete(of)
             db.session.commit()
 
