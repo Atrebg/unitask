@@ -2,12 +2,20 @@
     <br />
     <h1 align="center">Post a Task</h1>
 <ul class="list-group list-group-flush" id="offers">
-  {% for offer in user.offers %}
+  {% for offer in user.tasks %}
   <li class="list-group-item">
     {{ offer.title }} {{ offer.id_user }}
-         <button type="button" class="close" onClick="deleteOffer({{ offer.id }})">
+      <div>
+      {% if offer.isAss!=True %}
+        {% for applicant in offer.applicant %}
+            <a href={{ url_for('views.sceglistud', task_id=offer.id, stud_id=applicant.id) }} >{{ applicant.id }} </a>
+      </div>
+          {% endfor %}
+          <button type="button" class="close" onClick="deleteOffer({{ offer.id }})">
              <span aria-hidden="true">&times;</span>
          </button>
+        {% endif %}
+
   </li>
   {% endfor %}
 <!--Si è rotto qualcosa? vedo ci sono un po di errori nella console? Ho provato a creare una task e si è rotto

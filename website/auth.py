@@ -1,7 +1,7 @@
 # Authentication
 
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import *
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -20,6 +20,8 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
+                if user.type == 'student':
+                    return redirect(url_for('views.offer'))
                 return redirect(url_for('views.home'))
             else:
                 flash('Incorrect password, try again.', category='error')
@@ -43,6 +45,7 @@ def sign_up():
         surname = request.form.get('surName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
+        tipo=request.form.get('type')
 
         user = User.query.filter_by(email=email).first()
         if user:
@@ -58,10 +61,19 @@ def sign_up():
         elif len(password1) < 7:
             flash('Password must be at least 7 characters.', category='error')
         else:
-            new_user = User(email=email, password=generate_password_hash(password1, method='sha256'), first_name=first_name, surname=surname)
+            if tipo == 'student':
+                new_user = Student(email=email, password=generate_password_hash(password1, method='sha256'), first_name=first_name, surname=surname, type=tipo)
+            elif tipo == 'adult':
+                new_user = Adult(email=email, password=generate_password_hash(password1, method='sha256'),
+                                   first_name=first_name, surname=surname, type=tipo)
+            else:
+                flash('Type errato scrivere student o adult', category='error')
             db.session.add(new_user)
             db.session.commit()
             flash('Account created!', category='success')
             login_user(new_user, remember=True)
+            if new_user.type == 'student':
+                return redirect(url_for('views.offer'))
+            
             return redirect(url_for('views.home'))
     return render_template("sign_up.html", user=current_user)

@@ -3,7 +3,7 @@
 
 import json
 
-from flask import Blueprint, render_template, flash, jsonify, request
+from flask import Blueprint, render_template, flash, jsonify, request, url_for
 from flask_login import login_required, current_user
 
 from models import *
@@ -16,13 +16,14 @@ views = Blueprint('views', __name__)
 @login_required  # every time we go to the home page
 def home():
     if request.method == 'POST':
+        # mettere if not adult
         title = request.form.get('title')
         description = request.form.get('description')
 
         if len(title) < 1:
             flash('Title is too short!', category='error')
         else:
-            new_offer = Offer(title=title, description=description, id_user=current_user.id)
+            new_offer = Offer(title=title, description=description, id_adult=current_user.id)
             db.session.add(new_offer)
             db.session.commit()
             flash('Task posted!', category='success')
@@ -46,7 +47,7 @@ def delete_offer():
 @views.route('/offer')
 @login_required
 def offer():
-    tasks = Offer.query.filter(Offer.id_user!=current_user.id).all()  # controllare perche non filtra
+    tasks = Offer.query.all()  # controllare perche non filtra
     return render_template("offer.html", user=current_user, tasks=tasks)
 
 
@@ -57,6 +58,31 @@ def taskscelta(task_id):
     return render_template("task.html", user=current_user, taskscelta=t)
 
 
-def sendapplycation(task_id):
-    if request.method == 'POST':
-        return render_template("home.html", user=current_user)
+@views.route('/apply/<task_id>', methods=['GET', 'POST'])
+@login_required
+def sendapplication(task_id):
+    id_stud = current_user.id
+    task = Offer.query.filter(Offer.id == task_id).first()
+    task.applicant.append(current_user)
+    print(task.applicant)
+    db.session.commit()
+    tasks = Offer.query.all()  # controllare perche non filtra
+    for task in tasks:
+        for user in task.applicant:
+            if user.id == current_user.id:
+                tasks.remove(task)
+
+    return render_template("offer.html", user=current_user, tasks=tasks)
+
+
+@views.route('/scelta/<task_id>/<stud_id>', methods=['GET', 'POST'])
+@login_required
+def sceglistud(task_id, stud_id):
+    task = Offer.query.filter(Offer.id == task_id).first()
+    task.scelta = stud_id
+    task.isAss = True
+    db.session.commit()
+    print("sono qui")
+    return render_template("home.html", user=current_user)
+
+

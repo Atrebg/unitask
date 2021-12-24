@@ -12,7 +12,7 @@
               <p class="d-none d-lg-block">{{ taskscelta.description }}</p>
               {{ taskscelta.id }}
 
-              <div class="it-btn-container"><button type= "submit" class="btn btn-sm btn-outline-primary" >Apply for This Task</button></div>
+              <div class="it-btn-container"><button class="btn btn-sm btn-outline-primary" > <a href={{ url_for('views.sendapplication', task_id=taskscelta.id) }} >Apply for This Task </a></button></div>
           </div>
         </div>
     </div>

@@ -31,13 +31,19 @@
         <div class="navbar-nav">
             {% if user.is_authenticated %}
                 <ul class="nav navbar-nav">
+                {% if user.type=='adult' %}
                     <li><a class="nav-item nav-link" id="home" href="/">Home</a></li>
-                    <li><a class="nav-item nav-link" id="logout" href="/logout">Logout</a></li>
+
+                    {% elif user.type=='student' %}
                     <li><a class="nav-item nav-link" id="offer" href="/offer">Apply for Task</a></li>
+                    {% endif %}
+                    <li><a class="nav-item nav-link" id="logout" href="/logout">Logout</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li> {{ user.id }}</li>
                     <li> {{ user.email }}</li>
+                    <li> {{ user.type }}</li>
+
                 </ul>
 
             {% else %}
