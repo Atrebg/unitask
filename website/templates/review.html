@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %}Review{% endblock %} {% block content%}
+    <br />
+    <h1 align="center">Review a Task</h1>
+
+<form method="POST", action={{ url_for('views.scrivirecensione', task_id=task_id) }}>
+    <textarea align="center" name="titolo" id="titolo" class="form-control" placeholder="Enter Review Title"></textarea>
+    <br />
+    <textarea name="testo" id="testo" class="form-control" placeholder="Enter Review description"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Send Review</button>
+  </div>
+</form>
+{% endblock %}

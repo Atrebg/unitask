@@ -1,5 +1,5 @@
 # Authentication
-
+import bcrypt as bcrypt
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import *
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -69,6 +69,8 @@ def sign_up():
             else:
                 flash('Type errato scrivere student o adult', category='error')
             db.session.add(new_user)
+            riempidb()
+
             db.session.commit()
             flash('Account created!', category='success')
             login_user(new_user, remember=True)
@@ -77,3 +79,41 @@ def sign_up():
             
             return redirect(url_for('views.home'))
     return render_template("sign_up.html", user=current_user)
+
+
+def riempidb():
+    studenti = [
+        {'name': "Giacomo", 'surname': "Bertazzolo"},
+        {'name': "Valeria", 'surname': "Liuni"},
+        {'name': "Samuele", 'surname': "Stasi"},
+        {'name': "Oliviero", 'surname': "Vidoni"},
+    ]
+
+    adulti = [
+        {'name': "mamma", 'surname': "papa"},
+        {'name': "zia", 'surname': "zio"},
+        {'name': "nonno", 'surname': "nonna"},
+    ]
+
+    for studente in studenti:
+        mail = studente['name'].lower() + studente['surname'].lower() + '@mail.com'
+        user_db = User(first_name=studente['name'],
+                       surname=studente['surname'],
+                       email=mail,
+                       password_hash=bcrypt.generate_password_hash('1234567890'),
+                       type='student')
+        db.session.add(user_db)
+        db.session.commit()
+
+    for adulto in adulti:
+        mail = adulto['name'].lower() + adulto['surname'].lower() + '@mail.com'
+        user_db = User(first_name=adulto['name'],
+                       surname=adulto['surname'],
+                       email=mail,
+                       password_hash=bcrypt.generate_password_hash('1234567890'),
+                       type='adult')
+        db.session.add(user_db)
+        db.session.commit()
+
+
+

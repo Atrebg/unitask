@@ -4,16 +4,17 @@
 <ul class="list-group list-group-flush" id="offers">
   {% for offer in user.tasks %}
   <li class="list-group-item">
-    {{ offer.title }} {{ offer.id_user }}
+     <a href={{ url_for('views.taskscelta', task_id=offer.id) }} >{{ offer.title }}</a> {{ offer.id_user }}
       <div>
       {% if offer.isAss!=True %}
         {% for applicant in offer.applicant %}
-            <a href={{ url_for('views.sceglistud', task_id=offer.id, stud_id=applicant.id) }} >{{ applicant.id }} </a>
-      </div>
+            {{ applicant.id }}
+
           {% endfor %}
           <button type="button" class="close" onClick="deleteOffer({{ offer.id }})">
              <span aria-hidden="true">&times;</span>
          </button>
+          </div>
         {% endif %}
 
   </li>
@@ -29,6 +30,9 @@ prova ora-->
     <br />
     <textarea name="description" id="description" class="form-control" placeholder="Enter Offer description"></textarea>
   <br />
+    Data Task
+    <input type="date" id="dataesecuione" name="dataesecuzione" class="form-control" placeholder="YYYY-DD-MM">
+    <br />
   <div align="center">
     <button type="submit" class="btn btn-primary">Post a Task</button>
   </div>

@@ -5,6 +5,7 @@ import json
 
 from flask import Blueprint, render_template, flash, jsonify, request, url_for
 from flask_login import login_required, current_user
+from datetime import date, datetime
 
 from models import *
 
@@ -17,13 +18,22 @@ views = Blueprint('views', __name__)
 def home():
     if request.method == 'POST':
         # mettere if not adult
+        print("qui")
+        datatask = request.form['dataesecuzione']
+        dt = datetime.strptime(datatask, '%Y-%m-%d')
+        today = datetime.now()
+        print(type(today))
+        print(type(dt))
+        # if datatask < today:
+        # flash('La data non puo essere anteriore a quella di oggi', category='error')
+        # else:
         title = request.form.get('title')
         description = request.form.get('description')
 
         if len(title) < 1:
             flash('Title is too short!', category='error')
         else:
-            new_offer = Offer(title=title, description=description, id_adult=current_user.id)
+            new_offer = Offer(title=title, description=description, date_task=dt, id_adult=current_user.id)
             db.session.add(new_offer)
             db.session.commit()
             flash('Task posted!', category='success')
@@ -54,8 +64,12 @@ def offer():
 @views.route('/task/<task_id>', methods=['GET', 'POST'])
 @login_required
 def taskscelta(task_id):
-    t = Offer.query.filter(Offer.id == task_id).first()
-    return render_template("task.html", user=current_user, taskscelta=t)
+    if current_user.type == 'student':
+        t = Offer.query.filter(Offer.id == task_id).first()
+        return render_template("task.html", user=current_user, taskscelta=t)
+    else:
+        t = Offer.query.filter(Offer.id == task_id).first()
+        return render_template("sceltastud.html", user=current_user, taskscelta=t)
 
 
 @views.route('/apply/<task_id>', methods=['GET', 'POST'])
@@ -86,3 +100,31 @@ def sceglistud(task_id, stud_id):
     return render_template("home.html", user=current_user)
 
 
+@views.route('/sceltarecensione/<task_id>', methods=['GET', 'POST'])
+@login_required
+def sceltarecensione(task_id):
+    t = Offer.query.filter(Offer.id == task_id).first()
+    return render_template("review.html", user=current_user, taskscelta=t)
+
+
+@views.route('/scrivirecensione/<task_id>', methods=['GET', 'POST'])
+@login_required
+def postareview(task_id):
+    if request.method == 'POST':
+        titolo = request.form.get('titolo')
+        testo = request.form.get('testo')
+
+        t = Offer.query.filter(Offer.id == task_id).first()
+        new_review = Review(title=titolo, text=testo, id_reviewer=current_user.id, id_reviewed=t.scelta)
+        db.session.add(new_review)
+        db.session.commit()
+        return render_template("home.html", user=current_user)
+
+
+@views.route('/vedirecensioni/<stud_id>', methods=['GET', 'POST'])
+@login_required
+def vedirecensioni(stud_id):
+    print stud_id
+    stud = User.query.filter(User.id == stud_id).first()
+    recensioni = Review.query.filter(Review.id_reviewed == stud_id).all()
+    return render_template("vedireview.html", user=current_user, recensioni=recensioni, stud=stud)
