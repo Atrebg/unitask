@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
 
     __mapper_args__ = {
         'polymorphic_on': type,
-        'polymorphic_identity': 'user'
+        'polymorphic_identity': 'user',
     }
 
 
@@ -35,16 +35,17 @@ application_table = db.Table('application_table',
                              )
 
 
-class Student(User):
+class Student(User, db.Model):
     __tablename__ = 'student'
     __mapper_args__ = {
         'polymorphic_identity': 'student',
     }
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    position=db.Column(db.String(150))
     applications = db.relationship('Offer', secondary=application_table, backref=db.backref('applicant'))
 
 
-class Adult(User):
+class Adult(User, db.Model):
     __tablename__ = 'adult'
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     tasks = db.relationship('Offer', back_populates="adult")
