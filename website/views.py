@@ -22,21 +22,19 @@ def home():
         datatask = request.form['dataesecuzione']
         dt = datetime.strptime(datatask, '%Y-%m-%d')
         today = datetime.now()
-        print(type(today))
-        print(type(dt))
-        # if datatask < today:
-        # flash('La data non puo essere anteriore a quella di oggi', category='error')
-        # else:
-        title = request.form.get('title')
-        description = request.form.get('description')
-
-        if len(title) < 1:
-            flash('Title is too short!', category='error')
+        if dt < today:
+            flash('La data non puo essere anteriore a quella di oggi', category='error')
         else:
-            new_offer = Offer(title=title, description=description, date_task=dt, id_adult=current_user.id)
-            db.session.add(new_offer)
-            db.session.commit()
-            flash('Task posted!', category='success')
+            title = request.form.get('title')
+            description = request.form.get('description')
+
+            if len(title) < 1:
+                flash('Title is too short!', category='error')
+            else:
+                new_offer = Offer(title=title, description=description, date_task=dt, id_adult=current_user.id)
+                db.session.add(new_offer)
+                db.session.commit()
+                flash('Task posted!', category='success')
 
     return render_template("home.html", user=current_user)
 

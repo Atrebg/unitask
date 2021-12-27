@@ -3,6 +3,16 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 
 
+class Review(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(150))
+    text = db.Column(db.String(150))
+    date = db.Column(db.DateTime(timezone=True), default=func.now)
+    id_reviewer = db.Column(db.Integer, db.ForeignKey('user.id'))
+    id_reviewed = db.Column(db.Integer, db.ForeignKey('user.id'))
+    pass
+
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)
@@ -10,6 +20,8 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     surname = db.Column(db.String(150))
     type = db.Column(db.String(20))
+    reviewedmade = db.relationship('Review', foreign_keys=[Review.id_reviewed],)
+    reviewsubite = db.relationship('Review', foreign_keys=[Review.id_reviewer],)
 
     __mapper_args__ = {
         'polymorphic_on': type,
@@ -25,12 +37,11 @@ application_table = db.Table('application_table',
 
 class Student(User):
     __tablename__ = 'student'
-    id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    applications = db.relationship('Offer', secondary=application_table, backref=db.backref('applicant'))
-
     __mapper_args__ = {
         'polymorphic_identity': 'student',
     }
+    id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    applications = db.relationship('Offer', secondary=application_table, backref=db.backref('applicant'))
 
 
 class Adult(User):
@@ -54,14 +65,5 @@ class Offer(db.Model, UserMixin):
     adult = db.relationship("Adult", back_populates="tasks")
     scelta = db.Column(db.Integer)
 
-    #applications = db.relationship("Student", secondary=application_table)
+    # applications = db.relationship("Student", secondary=application_table)
     # id_student = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-
-class Review(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150))
-    text = db.Column(db.String(150))
-    date = db.Column(db.DateTime(timezone=True), default=func.now)
-    id_reviewer = db.Column(db.Integer, db.ForeignKey('user.id'))
-    id_reviewed = db.Column(db.Integer, db.ForeignKey('user.id'))
