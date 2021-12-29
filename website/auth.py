@@ -1,10 +1,13 @@
 # Authentication
-import bcrypt as bcrypt
+from datetime import datetime
+
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import *
-from werkzeug.security import generate_password_hash, check_password_hash
-from . import db
 from flask_login import login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
+
+from . import db
+from .form import LoginForm
+from .models import *
 
 auth = Blueprint('auth', __name__)
 
@@ -12,6 +15,11 @@ auth = Blueprint('auth', __name__)
 # We sad clearly that we can accept get and post requests
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    form = LoginForm()
+    a = 0
+    if a == 1:
+        riempidb()
+        return render_template("login.html", user=current_user, form=form)
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -27,7 +35,7 @@ def login():
                 flash('Incorrect password, try again.', category='error')
         else:
             flash('Email does not exist.', category='error')
-    return render_template("login.html", user=current_user)
+    return render_template("login.html", user=current_user, form=form)
 
 
 @auth.route('/logout')
@@ -45,7 +53,7 @@ def sign_up():
         surname = request.form.get('surName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
-        tipo=request.form.get('type')
+        tipo = request.form.get('type')
 
         user = User.query.filter_by(email=email).first()
         if user:
@@ -95,25 +103,56 @@ def riempidb():
         {'name': "nonno", 'surname': "nonna"},
     ]
 
+    tasks = [
+        {'titolo': "cane", 'descrizione': "bla bla bla bla", 'date': "2022-02-16"},
+        {'titolo': "gatto", 'descrizione': "bla bla bla bla", 'date': "2022-02-17"},
+        {'titolo': "nonna", 'descrizione': "bla bla bla bla", 'date': "2022-02-18"},
+        {'titolo': "nonno", 'descrizione': "bla bla bla bla", 'date': "2022-02-19"},
+        {'titolo': "spazzatura", 'descrizione': "bla bla bla bla", 'date': "2022-02-19"},
+        {'titolo': "trasloco", 'descrizione': "bla bla bla bla", 'date': "2022-02-24"},
+        {'titolo': "compiti", 'descrizione': "bla bla bla bla", 'date': "2022-03-28"},
+    ]
+
+    ids = {5,6,7,5,6,7,5}
+
     for studente in studenti:
         mail = studente['name'].lower() + studente['surname'].lower() + '@mail.com'
-        user_db = User(first_name=studente['name'],
+        user_db = Student(first_name=studente['name'],
                        surname=studente['surname'],
                        email=mail,
-                       password_hash=bcrypt.generate_password_hash('1234567890'),
+                       password=generate_password_hash('1234567890', method='sha256'),
                        type='student')
         db.session.add(user_db)
         db.session.commit()
 
     for adulto in adulti:
         mail = adulto['name'].lower() + adulto['surname'].lower() + '@mail.com'
-        user_db = User(first_name=adulto['name'],
+        user_db = Adult(first_name=adulto['name'],
                        surname=adulto['surname'],
                        email=mail,
-                       password_hash=bcrypt.generate_password_hash('1234567890'),
+                       password=generate_password_hash('1234567890', method='sha256'),
                        type='adult')
         db.session.add(user_db)
         db.session.commit()
+
+    for task in tasks:
+            b = 5
+            dt = datetime.strptime(task['date'], '%Y-%m-%d')
+            us = User.query.get(b)
+            b+=1
+            new_offer = Offer(title=task['titolo'], description=task['descrizione'], date_task=dt, id_adult=us.id)
+            db.session.add(new_offer)
+            db.session.commit()
+
+    applicant = User.query.get(1)
+    offer1 = Offer.query.get(1)
+    offer1.applicants.append(applicant)
+    applicant2 = User.query.get(2)
+    offer1.applicants.append(applicant2)
+    print offer1.applicants
+    db.session.commit()
+
+
 
 
 

@@ -6,26 +6,21 @@
     <br />
     <h3 align= "center"> Login </h3>
     <div class="form-group">
-        <label for="email">Email Address</label>
-        <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="Enter email"
-        />
+        {{ form.email.label }}
+        {{ form.email(class = 'form-control') }}
+        {% for error in form.email.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
     </div>
      <div class="form-group">
-    <label for="password">Password</label>
-    <input
-      type="password"
-      class="form-control"
-      id="password"
-      name="password"
-      placeholder="Enter password"
-    />
-  </div>
-    <br />
-  <button type="submit" class="btn btn-primary">Log In</button>
+         {{ form.password.label }}
+         {{ form.password(class = 'form-control') }}
+         {% for error in form.password.errors %}
+             <p>{{ error }}</p>
+         {% endfor %}
+     </div>
+    <br/>
+    {{ form.submit(class='btn btn-primary m-2') }}
+    {{ form.hidden_tag() }}
 </form>
 {% endblock %}

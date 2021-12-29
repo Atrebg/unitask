@@ -4,13 +4,22 @@
 <ul class="list-group list-group-flush" id="offers">
 
   <li class="list-group-item">
-    {{ taskscelta.title }} {{ taskscelta.id_user }}
+    <h3>{{ taskscelta.title }}</h3>
+  <br/>
+      <div>{{ taskscelta.description }}</div>
       <div>
-        {% for applicant in taskscelta.applicant %}
-            <a href={{ url_for('views.vedirecensioni', stud_id=applicant.id) }} >{{ applicant.id }}</a>
+      <br/>
+      <h3>Applicants:</h3>
+      <br/>
+        {% for applicant in taskscelta.applicants %}
+            <div>
+            <a href={{ url_for('views.vedirecensioni', stud_id=applicant.id) }} > {{ applicant.id }} {{ applicant.first_name }} {{ applicant.surname }}</a>
             <button class="btn btn-sm btn-outline-primary" > <a href={{ url_for('views.sceglistud', task_id=taskscelta.id, stud_id=applicant.id) }} >Scegli questo studente </a></button>
+
             </div>
+            <br/>
           {% endfor %}
+      </div>
 
 
   </li></ul>

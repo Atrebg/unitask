@@ -10,7 +10,7 @@ class Review(db.Model, UserMixin):
     date = db.Column(db.DateTime(timezone=True), default=func.now)
     id_reviewer = db.Column(db.Integer, db.ForeignKey('user.id'))
     id_reviewed = db.Column(db.Integer, db.ForeignKey('user.id'))
-    pass
+    task_id = db.Column(db.Integer, db.ForeignKey('offer.id'))
 
 
 class User(db.Model, UserMixin):
@@ -20,8 +20,10 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     surname = db.Column(db.String(150))
     type = db.Column(db.String(20))
-    reviewedmade = db.relationship('Review', foreign_keys=[Review.id_reviewed],)
-    reviewsubite = db.relationship('Review', foreign_keys=[Review.id_reviewer],)
+    recensionipostate = db.relationship('Review', foreign_keys='Review.id_reviewer',
+                                        backref='author')
+    recensioniricevute = db.relationship('Review', foreign_keys='Review.id_reviewed',
+                                         backref='ricevitore')
 
     __mapper_args__ = {
         'polymorphic_on': type,
@@ -37,18 +39,19 @@ application_table = db.Table('application_table',
 
 class Student(User, db.Model):
     __tablename__ = 'student'
+
+    id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    position = db.Column(db.String(150))
+    applications = db.relationship('Offer', secondary=application_table, backref='applicants')
     __mapper_args__ = {
         'polymorphic_identity': 'student',
     }
-    id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    position=db.Column(db.String(150))
-    applications = db.relationship('Offer', secondary=application_table, backref=db.backref('applicant'))
 
 
 class Adult(User, db.Model):
     __tablename__ = 'adult'
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    tasks = db.relationship('Offer', back_populates="adult")
+    tasks = db.relationship('Offer')
 
     __mapper_args__ = {
         'polymorphic_identity': 'adult',
@@ -63,8 +66,9 @@ class Offer(db.Model, UserMixin):
     isAss = db.Column(db.Boolean, default=False)
     date_task = db.Column(db.DateTime(timezone=True))
     id_adult = db.Column(db.Integer, db.ForeignKey('adult.id'))
-    adult = db.relationship("Adult", back_populates="tasks")
     scelta = db.Column(db.Integer)
+    rece = db.relationship('Review', backref='recensione', uselist=False)
 
-    # applications = db.relationship("Student", secondary=application_table)
+    #applications = db.relationship("Student", secondary=application_table)
+    #db.UniqueConstraint('applications')
     # id_student = db.Column(db.Integer, db.ForeignKey('user.id'))

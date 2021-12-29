@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% block title %}Home Stud{% endblock %} {% block content%}
+    <br />
+    <h1 align="center">List of Applications Open</h1>
+<ul class="list-group list-group-flush" id="offers">
+  {% for offer in user.applications %}
+      {% if offer.isAss==False %}
+  <li class="list-group-item">
+     <a href= >{{ offer.title }}</a> {{ offer.date_task }}
+      <button> <a href={{ url_for('views.sceltarecensione', task_id=offer.id) }} > Recensisci</a></button>
+
+          <br/>
+
+  </li>
+      {% endif %}
+  {% endfor %}
+</ul>
+    <br/>
+    <br/>
+    <h1 align="center">List of Applications Closed</h1>
+<ul class="list-group list-group-flush" id="offers">
+  {% for offer in user.applications %}
+      {% if offer.isAss==True %}
+          {% if offer.scelta==user.id %}
+        <li class="list-group-item">
+            <a href= >{{ offer.title }}</a> vinta
+
+          <br/>
+
+  </li>
+          {% else %}
+       <li class="list-group-item">
+            <a href= >{{ offer.title }}</a> persa
+
+          <br/>
+            {% endif %}
+      {% endif %}
+
+  {% endfor %}
+</ul>
+{% endblock %}

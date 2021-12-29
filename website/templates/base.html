@@ -33,9 +33,11 @@
                 <ul class="nav navbar-nav">
                 {% if user.type=='adult' %}
                     <li><a class="nav-item nav-link" id="home" href="/">Home</a></li>
+                    <li><a class="nav-item nav-link" id="posttask" href="/posttask">Post a Task</a></li>
 
                     {% elif user.type=='student' %}
                     <li><a class="nav-item nav-link" id="offer" href="/offer">Apply for Task</a></li>
+                    <li><a class="nav-item nav-link" id="applications" href="/listapplications">Applications</a></li>
                     {% endif %}
                     <li><a class="nav-item nav-link" id="logout" href="/logout">Logout</a></li>
                 </ul>

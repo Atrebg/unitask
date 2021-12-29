@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block title %}Post Task{% endblock %} {% block content%}
+    <br />
+<form method="POST">
+<br />
+    <h3 align= "center"> Post A Task </h3>
+    <div class="form-group">
+        {{ form.tasktitle.label }}
+        {{ form.tasktitle(class = 'form-control') }}
+        {% for error in form.tasktitle.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+    <br />
+    <div class="form-group">
+         {{ form.taskdescription.label }}
+         {{ form.taskdescription(class = 'form-control') }}
+         {% for error in form.taskdescription.errors %}
+             <p>{{ error }}</p>
+         {% endfor %}
+     </div>
+  <br />
+    <div class="form-group">
+         {{ form.date.label }}
+         {{ form.date(class = 'form-control') }}
+         {% for error in form.date.errors %}
+             <p>{{ error }}</p>
+         {% endfor %}
+     </div>
+  <div align="center">
+    {{ form.submit(class='btn btn-primary m-2') }}
+    {{ form.hidden_tag() }}
+  </div>
+</form>
+{% endblock %}

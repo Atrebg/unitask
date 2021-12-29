@@ -1,13 +1,13 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
     <br />
-    <h1 align="center">Post a Task</h1>
+    <h1 align="center">List of Task Posted</h1>
 <ul class="list-group list-group-flush" id="offers">
   {% for offer in user.tasks %}
   <li class="list-group-item">
      <a href={{ url_for('views.taskscelta', task_id=offer.id) }} >{{ offer.title }}</a> {{ offer.id_user }}
       <div>
       {% if offer.isAss!=True %}
-        {% for applicant in offer.applicant %}
+        {% for applicant in offer.applicants %}
             {{ applicant.id }}
 
           {% endfor %}
@@ -15,27 +15,11 @@
              <span aria-hidden="true">&times;</span>
          </button>
           </div>
+          <br/>
         {% endif %}
 
   </li>
   {% endfor %}
-<!--Si è rotto qualcosa? vedo ci sono un po di errori nella console? Ho provato a creare una task e si è rotto
-
-hai cambiato il model? non ho fatto niente ho solo creato la cartella bootstrap
-ahahah
-prova ora-->
 </ul>
-<form method="POST">
-    <textarea align="center" name="title" id="title" class="form-control" placeholder="Enter Offer Title"></textarea>
-    <br />
-    <textarea name="description" id="description" class="form-control" placeholder="Enter Offer description"></textarea>
-  <br />
-    Data Task
-    <input type="date" id="dataesecuione" name="dataesecuzione" class="form-control" placeholder="YYYY-DD-MM">
-    <br />
-  <div align="center">
-    <button type="submit" class="btn btn-primary">Post a Task</button>
-  </div>
-</form>
 {% endblock %}
 
