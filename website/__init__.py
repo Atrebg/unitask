@@ -41,12 +41,12 @@ def create_app():
 
 def create_database(app):
     if not path.exists(app.config['SQLALCHEMY_DATABASE_URI']):
-        #db.drop_all(app=app)
+        db.drop_all(app=app)
         db.create_all(app=app)
         print('Created Database!')
 
         # qua ci potrei mettere il popolamento del DB
     else:
-        #db.drop_all(app=app)
+        db.drop_all(app=app)
         db.create_all(app=app)
         print('Esiste gia')
