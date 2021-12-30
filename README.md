@@ -6,11 +6,10 @@ flask-login
 flask-sqlalchemy
 
 TODO:
-1) Flask form come da edo e meugi
-2) Aggiungere le date
-3) TUTTI I CSS
-4) Pagamento
-5) Aggiungere le maps
+1) Aggiungere le date
+2) TUTTI I CSS
+3) Pagamento
+4) Aggiungere le maps
 
 
 FATTO 
@@ -21,5 +20,6 @@ FATTO
 5) review
 6) Aggiungere About Us
 7) Gestire application è fatto ma manca qualcosa
+8) Flask form come da edo e meugi
 
 
