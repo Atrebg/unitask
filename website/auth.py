@@ -70,6 +70,7 @@ def sign_up():
         elif len(password1) < 7:
             flash('Password must be at least 7 characters.', category='error')
         else:
+            new_user = User
             if type == 'student':
                 new_user = Student(email=email, password=generate_password_hash(password1, method='sha256'), first_name=first_name, surname=surname, type=type)
             elif type == 'adult':
@@ -78,6 +79,7 @@ def sign_up():
             else:
                 flash('Type errato scrivere student o adult', category='error')
             db.session.add(new_user)
+            db.session.commit()
             flash('Account created!', category='success')
             login_user(new_user, remember=True)
             if new_user.type == 'student':
