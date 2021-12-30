@@ -43,6 +43,8 @@ class Student(User, db.Model):
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     position = db.Column(db.String(150))
     applications = db.relationship('Offer', secondary=application_table, backref='applicants')
+    performed = db.relationship('Offer')
+
     __mapper_args__ = {
         'polymorphic_identity': 'student',
     }
@@ -66,8 +68,10 @@ class Offer(db.Model, UserMixin):
     isAss = db.Column(db.Boolean, default=False)
     date_task = db.Column(db.DateTime(timezone=True))
     id_adult = db.Column(db.Integer, db.ForeignKey('adult.id'))
-    scelta = db.Column(db.Integer)
+    scelta = db.Column(db.Integer, db.ForeignKey('student.id'))
+    isPerf = db.Column(db.Boolean, default=False)
     rece = db.relationship('Review', backref='recensione', uselist=False)
+
 
     #applications = db.relationship("Student", secondary=application_table)
     #db.UniqueConstraint('applications')

@@ -6,7 +6,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from . import db
-from .form import LoginForm
+from .form import LoginForm, SignupForm
 from .models import *
 
 auth = Blueprint('auth', __name__)
@@ -16,10 +16,10 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    a = 0
-    if a == 1:
-        riempidb()
-        return redirect(url_for('views.offer'))
+    #a = 0
+    #if a == 1:
+     #   riempidb()
+     #   return redirect(url_for('views.offer'))
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -47,6 +47,7 @@ def logout():
 
 @auth.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():
+    form = SignupForm()
     if request.method == 'POST':
         email = request.form.get('email')
         first_name = request.form.get('firstName')
@@ -77,16 +78,13 @@ def sign_up():
             else:
                 flash('Type errato scrivere student o adult', category='error')
             db.session.add(new_user)
-            riempidb()
-
-            db.session.commit()
             flash('Account created!', category='success')
             login_user(new_user, remember=True)
             if new_user.type == 'student':
                 return redirect(url_for('views.offer'))
             
             return redirect(url_for('views.home'))
-    return render_template("sign_up.html", user=current_user)
+    return render_template("sign_up.html", user=current_user, form = form)
 
 
 def riempidb():

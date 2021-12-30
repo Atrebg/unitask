@@ -4,9 +4,9 @@
 <ul class="list-group list-group-flush" id="offers">
   {% for offer in user.tasks %}
   <li class="list-group-item">
+        {% if offer.isAss!=True %}
      <a href={{ url_for('views.taskscelta', task_id=offer.id) }} >{{ offer.title }}</a> {{ offer.id_user }}
       <div>
-      {% if offer.isAss!=True %}
         {% for applicant in offer.applicants %}
             {{ applicant.id }}
 
@@ -18,8 +18,10 @@
           <br/>
         {% endif %}
 
+
   </li>
   {% endfor %}
 </ul>
+
 {% endblock %}
 

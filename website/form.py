@@ -33,3 +33,4 @@ class ReviewForm(FlaskForm):
     reviewtitle = StringField('Titolo:')
     reviewdescription = StringField('Description:')
     submit = SubmitField('Review')
+
