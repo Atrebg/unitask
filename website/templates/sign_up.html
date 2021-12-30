@@ -3,7 +3,7 @@
 <!-- create database -->
 <form method = "POST">
     <br />
-    <h3 align= "center"> Sign Up</h3>
+    <h3 align= "center"> Sign-up</h3>
     <div class="form-group">
         <label for="email">Email Address</label>
         <input
@@ -15,7 +15,7 @@
         />
     </div>
     <div class="form-group">
-        <label for="firstName">First Name</label>
+        <label for="firstName">Name</label>
         <input
                 type="text"
                 class="form-control"
@@ -37,14 +37,10 @@
 
     <div class="form-group">
         <label for="type">Type</label>
-        <input
-                type="text"
-                class="form-control"
-                id="type"
-                name="type"
-                placeholder="Enter type"
-                defaultValue="student"
-        />
+        <select id="type" name="type">
+            <option value="student">Student</option>
+            <option value="adult">Adult</option>
+        </select>
   </div>
         <div class="form-group">
     <label for="password1">Password</label>

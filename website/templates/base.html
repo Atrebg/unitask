@@ -15,7 +15,7 @@
       crossorigin="anonymous"
     />
 
-    <title> {% block title %}Home{% endblock %}</title>
+    <title> {% block title %}HomePage{% endblock %}</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -32,12 +32,12 @@
             {% if user.is_authenticated %}
                 <ul class="nav navbar-nav">
                 {% if user.type=='adult' %}
-                    <li><a class="nav-item nav-link" id="home" href="/">Home</a></li>
+                    <li><a class="nav-item nav-link" id="home" href="/">Welcome!</a></li>
                     <li><a class="nav-item nav-link" id="posttask" href="/posttask">Post a Task</a></li>
 
                     {% elif user.type=='student' %}
-                    <li><a class="nav-item nav-link" id="offer" href="/offer">Apply for Task</a></li>
-                    <li><a class="nav-item nav-link" id="applications" href="/listapplications">Applications</a></li>
+                    <li><a class="nav-item nav-link" id="offer" href="/offer">Welcome!</a></li>
+                    <li><a class="nav-item nav-link" id="applications" href="/listapplications">Apply for a Task</a></li>
                     {% endif %}
                     <li><a class="nav-item nav-link" id="logout" href="/logout">Logout</a></li>
                 </ul>

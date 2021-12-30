@@ -14,6 +14,14 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
+class SignupForm(FlaskForm):
+    email = StringField('Email:', validators=[DataRequired(), Email()])
+    name = StringField('Name:', validators=[DataRequired(), Length(min=3, max=25)])
+    surname = StringField('Surname:', validators=[DataRequired(), Length(min=3, max=25)])
+    password = PasswordField('Password:', validators=[DataRequired(), Length(min=8, max=16)])
+    submit = SubmitField('Register')
+
+
 class PosttaskForm(FlaskForm):
     tasktitle = StringField('Titolo:')
     taskdescription = StringField('Description:')

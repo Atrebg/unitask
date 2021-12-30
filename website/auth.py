@@ -53,7 +53,7 @@ def sign_up():
         surname = request.form.get('surName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
-        tipo = request.form.get('type')
+        type = request.form.get('type')
 
         user = User.query.filter_by(email=email).first()
         if user:
@@ -69,11 +69,11 @@ def sign_up():
         elif len(password1) < 7:
             flash('Password must be at least 7 characters.', category='error')
         else:
-            if tipo == 'student':
-                new_user = Student(email=email, password=generate_password_hash(password1, method='sha256'), first_name=first_name, surname=surname, type=tipo)
-            elif tipo == 'adult':
+            if type == 'student':
+                new_user = Student(email=email, password=generate_password_hash(password1, method='sha256'), first_name=first_name, surname=surname, type=type)
+            elif type == 'adult':
                 new_user = Adult(email=email, password=generate_password_hash(password1, method='sha256'),
-                                   first_name=first_name, surname=surname, type=tipo)
+                                 first_name=first_name, surname=surname, type=type)
             else:
                 flash('Type errato scrivere student o adult', category='error')
             db.session.add(new_user)
