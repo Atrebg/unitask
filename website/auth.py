@@ -50,10 +50,10 @@ def sign_up():
     form = SignupForm()
     if request.method == 'POST':
         email = request.form.get('email')
-        first_name = request.form.get('firstName')
-        surname = request.form.get('surName')
-        password1 = request.form.get('password1')
-        password2 = request.form.get('password2')
+        name = request.form.get('name')
+        surname = request.form.get('surname')
+        password = request.form.get('password')
+        passwordconf = request.form.get('passwordconf')
         type = request.form.get('type')
 
         user = User.query.filter_by(email=email).first()
@@ -61,22 +61,22 @@ def sign_up():
             flash('Email already exists.', category='error')
         elif len(email) < 4:
             flash('Email must be greater than 3 characters.', category='error')
-        elif len(first_name) < 2:
+        elif len(name) < 2:
             flash('First name must be greater than 1 character.', category='error')
         elif len(surname) < 2:
             flash('Surname must be greater than 1 character.', category='error')
-        elif password1 != password2:
+        elif password != passwordconf:
             flash('Passwords don\'t match.', category='error')
-        elif len(password1) < 7:
+        elif len(password) < 7:
             flash('Password must be at least 7 characters.', category='error')
         else:
             new_user = User
             if type == 'student':
-                new_user = Student(email=email, password=generate_password_hash(password1, method='sha256'), first_name=first_name, surname=surname, type=type)
+                new_user = Student(email=email, password=generate_password_hash(password, method='sha256'), first_name=name, surname=surname, type=type)
             elif type == 'adult':
-                new_user = Adult(email=email, password=generate_password_hash(password1, method='sha256'),
-                                 first_name=first_name, surname=surname, type=type)
-            else:
+                new_user = Adult(email=email, password=generate_password_hash(password, method='sha256'),
+                                 first_name=name, surname=surname, type=type)
+            else: #in questo else lui non dovrebbe finire mai
                 flash('Type errato scrivere student o adult', category='error')
             db.session.add(new_user)
             db.session.commit()

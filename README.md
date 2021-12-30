@@ -1,15 +1,19 @@
 # unitask
 information system code
-per runnare installa da terminale pip install:
+per runnare INSTALLA da terminale pip install:
 flask 
 flask-login 
 flask-sqlalchemy
+
+IMPORTA DA PYTHON PACKAGES
+WTFSelectField
 
 TODO:
 1) Aggiungere le date
 2) TUTTI I CSS
 3) Pagamento
 4) Aggiungere le maps
+5) Implementare mail di benvenuto quando fai il login
 
 
 FATTO 

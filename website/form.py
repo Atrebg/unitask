@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm, Form
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField, RadioField, \
-    FormField, FieldList
+    FormField, FieldList, SelectField
 from wtforms.fields.html5 import DateField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Optional
 from flask_login import current_user
@@ -18,7 +18,9 @@ class SignupForm(FlaskForm):
     email = StringField('Email:', validators=[DataRequired(), Email()])
     name = StringField('Name:', validators=[DataRequired(), Length(min=3, max=25)])
     surname = StringField('Surname:', validators=[DataRequired(), Length(min=3, max=25)])
+    type = SelectField("Select type of user:", choices=[('student', 'Student'), ('adult', 'Adult')])
     password = PasswordField('Password:', validators=[DataRequired(), Length(min=8, max=16)])
+    passwordconf = PasswordField('Confirm Password:', validators=[DataRequired(), Length(min=8, max=16)])
     submit = SubmitField('Register')
 
 
@@ -33,4 +35,3 @@ class ReviewForm(FlaskForm):
     reviewtitle = StringField('Titolo:')
     reviewdescription = StringField('Description:')
     submit = SubmitField('Review')
-

@@ -5,65 +5,50 @@
     <br />
     <h3 align= "center"> Sign-up</h3>
     <div class="form-group">
-        <label for="email">Email Address</label>
-        <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="Enter email"
-        />
+        {{ form.email.label }}
+        {{ form.email(class = 'form-control') }}
+        {% for error in form.email.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
     </div>
     <div class="form-group">
-        <label for="firstName">Name</label>
-        <input
-                type="text"
-                class="form-control"
-                id="firstName"
-                name="firstName"
-                placeholder="Enter first name"
-        />
+        {{ form.name.label }}
+        {{ form.name(class = 'form-control') }}
+        {% for error in form.name.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
   </div>
     <div class="form-group">
-        <label for="surName">Surname</label>
-        <input
-                type="text"
-                class="form-control"
-                id="surName"
-                name="surName"
-                placeholder="Enter surname"
-        />
+        {{ form.surname.label }}
+        {{ form.surname(class = 'form-control') }}
+        {% for error in form.surname.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
   </div>
 
     <div class="form-group">
-        <label for="type">Type</label>
-        <select id="type" name="type">
-            <option value="student">Student</option>
-            <option value="adult">Adult</option>
-        </select>
+        {{ form.type.label}}
+        {{ form.type }}
+        {% for error in form.type.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
   </div>
         <div class="form-group">
-    <label for="password1">Password</label>
-    <input
-      type="password"
-      class="form-control"
-      id="password1"
-      name="password1"
-      placeholder="Enter password"
-    />
+            {{ form.password.label }}
+            {{ form.password(class = 'form-control') }}
+            {% for error in form.password.errors %}
+             <p>{{ error }}</p>
+         {% endfor %}
   </div>
         <div class="form-group">
-    <label for="password2">Password (Confirm)</label>
-    <input
-      type="password"
-      class="form-control"
-      id="password2"
-      name="password2"
-      placeholder="Confirm password"
-    />
+            {{ form.passwordconf.label }}
+            {{ form.passwordconf(class = 'form-control') }}
+            {% for error in form.passwordconf.errors %}
+             <p>{{ error }}</p>
+         {% endfor %}
   </div>
         <br />
-  <button type="submit" class="btn btn-primary">Submit</button>
-
+  {{ form.submit(class='btn btn-primary m-2') }}
+    {{ form.hidden_tag() }}
 </form>
 {% endblock %}
