@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block title %}Task Performed{% endblock %} {% block content%}
+    <br />
+    <h1 align="center">List of Task Performed</h1>
+<ul class="list-group list-group-flush" id="offers">
+  {% for task in tasksperformed %}
+  <li class="list-group-item">
+     <a href= >{{ task.title }}</a> {{ offer.date_task }}
+      <button> <a href={{ url_for('views.sceltarecensione', task_id=offer.id) }} > Recensisci</a></button>
+
+          <br/>
+
+  </li>
+  {% endfor %}
+</ul>
+
+
+    <br/>
+    <br/>
+{% endblock %}
+
+<h1 align="center">List of Task in attesa di essere svolte</h1>
+<ul class="list-group list-group-flush" id="offers">
+  {% for offer in user.tasks %}
+  <li class="list-group-item">
+        {% if offer.isAss==True %}
+     <a href={{ url_for('views.taskperformed', task_id=offer.id) }} >{{ offer.title }}</a> Studente scelto: <a href={{ url_for('views.vedirecensioni', stud_id=applicant.id) }} > {{ applicant.id }} {{ applicant.first_name }} {{ applicant.surname }}</a>
+      <div>
+
+          </div>
+          <br/>
+        {% endif %}
+
+
+  </li>
+  {% endfor %}
+</ul>
