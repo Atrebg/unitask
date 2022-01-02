@@ -176,3 +176,11 @@ def vedirecensioni(stud_id):
     stud = User.query.filter(User.id == stud_id).first()
     recensioni = Review.query.filter(Review.id_reviewed == stud_id).all()
     return render_template("vedireview.html", user=current_user, recensioni=recensioni, stud=stud)
+
+@views.route('/about_us')
+def about_us():
+    return render_template("about_us.html", user=current_user)
+
+@views.route('/account')
+def account():
+    return render_template("account.html", user=current_user)
