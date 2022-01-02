@@ -4,6 +4,8 @@ per runnare INSTALLA da terminale pip install:
 flask 
 flask-login 
 flask-sqlalchemy
+flask-bootstrap
+flask.ext
 
 IMPORTA DA PYTHON PACKAGES
 WTFSelectField

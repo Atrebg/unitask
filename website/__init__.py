@@ -6,8 +6,6 @@ from os import path
 from flask_login import LoginManager
 from werkzeug.security import generate_password_hash, check_password_hash
 
-#brava vale sto finendo PM!! ciao amo mi sono spaventata quando ho visto la scritta =)
-
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
@@ -37,7 +35,6 @@ def create_app():
         return User.query.get(int(id))
 
     return app
-
 
 def create_database(app):
     if not path.exists(app.config['SQLALCHEMY_DATABASE_URI']):
