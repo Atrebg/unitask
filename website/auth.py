@@ -111,6 +111,7 @@ def riempidb():
         {'titolo': "spazzatura", 'descrizione': "bla bla bla bla", 'date': "2022-02-19"},
         {'titolo': "trasloco", 'descrizione': "bla bla bla bla", 'date': "2022-02-24"},
         {'titolo': "compiti", 'descrizione': "bla bla bla bla", 'date': "2022-03-28"},
+        {'titolo': "roba", 'descrizione': "bla bla bla bla", 'date': "2021-03-28"}
     ]
 
     ids = {5,6,7,5,6,7,5}

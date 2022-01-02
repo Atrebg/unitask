@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %}Non so come chiamarlo{% endblock %} {% block content%}
+    <br />
+    <h1 align="center">List of Task Closed</h1>
+<ul class="list-group list-group-flush" id="offers">
+  {% for offer in pending %}
+            <li class="list-group-item">
+     {{ offer.title }} {{ offer.performer.first_name }}
+          <br/>
+                {% if offer.isAss==True and offer.isPerf==False %}
+            <button> <a href={{ url_for('views.sceltarecensione', task_id=offer.id) }} > Performata e Recensisci</a></button>
+            </li>
+        {% endif %}
+
+
+
+  {% endfor %}
+</ul>
+
+{% endblock %}

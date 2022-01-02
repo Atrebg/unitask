@@ -43,7 +43,7 @@ class Student(User, db.Model):
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     position = db.Column(db.String(150))
     applications = db.relationship('Offer', secondary=application_table, backref='applicants')
-    performed = db.relationship('Offer')
+    performed = db.relationship('Offer', backref='performer')
 
     __mapper_args__ = {
         'polymorphic_identity': 'student',

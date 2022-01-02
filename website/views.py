@@ -3,9 +3,11 @@
 
 import json
 
-from flask import Blueprint, render_template, flash, jsonify, request, url_for
+from flask import Blueprint, render_template, flash, jsonify, request, url_for, redirect
 from flask_login import login_required, current_user
 from datetime import date, datetime
+
+from .auth import riempidb
 from .form import *
 
 from models import *
@@ -17,10 +19,20 @@ views = Blueprint('views', __name__)
                            'POST'])  # 17,14 views is the name of our blueprint (/ is the main page, this function will run
 @login_required  # every time we go to the home page
 def home():
-    return render_template("home.html", user=current_user)
+    today=datetime.today()
+    stamp =[]
+    for task in current_user.tasks:
+        if task.date_task>today:
+            stamp.append(task)
+        else:
+            task.isPerf = True
+            db.session.commit()
+
+    return render_template("home.html", user=current_user, tasks=stamp)
+
 
 @views.route('/posttask', methods=['GET',
-                           'POST'])  # 17,14 views is the name of our blueprint (/ is the main page, this function will run
+                                   'POST'])  # 17,14 views is the name of our blueprint (/ is the main page, this function will run
 @login_required  # every time we go to the home page
 def posttask():
     form = PosttaskForm()
@@ -45,6 +57,7 @@ def posttask():
                 flash('Task posted!', category='success')
 
     return render_template("posttask.html", user=current_user, form=form)
+
 
 @views.route('/delete-offer', methods=['POST'])
 def delete_offer():
@@ -116,8 +129,8 @@ def sceglistud(task_id, stud_id):
     task.scelta = stud_id
     task.isAss = True
     db.session.commit()
-    print("sono qui")
-    return render_template("home.html", user=current_user)
+
+    return redirect(url_for('views.home'))
 
 
 @views.route('/listapplications', methods=['GET', 'POST'])
@@ -133,14 +146,16 @@ def sceltarecensione(task_id):
         form = ReviewForm()
         title = form.reviewtitle.data
         description = form.reviewdescription.data
-        print('qui')
         date = datetime.now()
 
         t = Offer.query.filter(Offer.id == task_id).first()
-        new_review = Review(title=title, text=description, date=date, id_reviewer=current_user.id, id_reviewed=t.scelta)
+        if current_user.type == 'adult':
+            t.isPerf = True
+        #aggiungere reviews all'user
+        new_review = Review(title=title, text=description, date=date, id_reviewer=current_user.id, id_reviewed=t.scelta, task_id=t.id)
         db.session.add(new_review)
         db.session.commit()
-        if current_user.type =='adult':
+        if current_user.type == 'adult':
             return render_template("home.html", user=current_user)
         else:
             return render_template("listapplication.html", user=current_user)
@@ -148,25 +163,6 @@ def sceltarecensione(task_id):
         form = ReviewForm()
         t = Offer.query.filter(Offer.id == task_id).first()
         return render_template("review.html", user=current_user, taskscelta=t, form=form)
-
-
-@views.route('/review', methods=['GET', 'POST'])
-@login_required
-def postareview(idt):
-    if request.method == 'POST':
-        form = ReviewForm()
-        title = form.reviewtitle.data
-        description = form.reviewdescription.data
-        print('qui')
-
-        t = Offer.query.filter(Offer.id == idt).first()
-        new_review = Review(title=title, text=description, id_reviewer=current_user.id, id_reviewed=t.scelta)
-        db.session.add(new_review)
-        db.session.commit()
-        if current_user.type =='adult':
-            return render_template("home.html", user=current_user)
-        else:
-            return render_template("listapplication.html", user=current_user)
 
 
 @views.route('/vedirecensioni/<stud_id>', methods=['GET', 'POST'])
@@ -177,10 +173,32 @@ def vedirecensioni(stud_id):
     recensioni = Review.query.filter(Review.id_reviewed == stud_id).all()
     return render_template("vedireview.html", user=current_user, recensioni=recensioni, stud=stud)
 
+
 @views.route('/about_us')
 def about_us():
     return render_template("about_us.html", user=current_user)
 
+
 @views.route('/account')
 def account():
     return render_template("account.html", user=current_user)
+
+
+@views.route('/taskpending')
+def taskpending():
+    pending = []
+    for task in current_user.tasks:
+        if task.isAss:
+            pending.append(task)
+        if task.isAss == False and task.isPerf == True:
+            pending.append(task)
+
+    return render_template("taskspending.html", user=current_user, pending=pending)
+
+
+@views.route('/resetdb')
+def resetdb():
+    db.drop_all()
+    db.create_all()
+    riempidb()
+    return redirect(url_for('auth.logout'))
