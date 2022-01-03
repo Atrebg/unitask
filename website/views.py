@@ -78,13 +78,15 @@ def delete_offer():
 @login_required
 def offer():
     tasks = Offer.query.all()
-    stamp = Offer.query.filter(Offer.isAss == False, Offer.date_task > datetime.today())
+    q = Offer.query.filter(Offer.isAss == False, Offer.date_task > datetime.today()).all()
+    stamp = []
+    stamp = q
     u = current_user
     daeli = []
     for task in stamp:
-            for stud in task.applicants:
-                if stud.id == current_user.id:
-                    daeli.append(task)
+        for stud in task.applicants:
+            if stud.id == current_user.id:
+                daeli.append(task)
     for task in daeli:
         stamp.remove(task)
 
@@ -159,7 +161,8 @@ def sceltarecensione(task_id):
                                 task_id=t.id)
         # aggiungere reviews all'user
         else:
-            new_review = Review(title=title, text=description, date=date, id_reviewer=current_user.id, id_reviewed=t.id_adult,
+            new_review = Review(title=title, text=description, date=date, id_reviewer=current_user.id,
+                                id_reviewed=t.id_adult,
                                 task_id=t.id)
         db.session.add(new_review)
         db.session.commit()
@@ -172,7 +175,7 @@ def sceltarecensione(task_id):
         return render_template("User/review.html", user=current_user, taskscelta=t, form=form)
 
 
-@views.route('/vedirecensioni/<stud_id>', methods=['GET', 'POST'])
+@views.route('/showreviews/<user_id>', methods=['GET', 'POST'])
 @login_required
 def showreviews(user_id):
     reviewed = User.query.filter(User.id == user_id).first()
@@ -201,11 +204,10 @@ def taskpending():
 
     return render_template("Adult/taskspending.html", user=current_user, pending=pending)
 
+
 @views.route('/personalreviews')
 def personalreviews():
     return render_template("User/personalreviews.html", user=current_user)
-
-
 
 
 @views.route('/resetdb')

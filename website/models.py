@@ -53,7 +53,7 @@ class Student(User, db.Model):
 class Adult(User, db.Model):
     __tablename__ = 'adult'
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    tasks = db.relationship('Offer')
+    tasks = db.relationship('Offer', backref='poster')
 
     __mapper_args__ = {
         'polymorphic_identity': 'adult',
@@ -71,6 +71,7 @@ class Offer(db.Model, UserMixin):
     scelta = db.Column(db.Integer, db.ForeignKey('student.id'))
     isPerf = db.Column(db.Boolean, default=False)
     rece = db.relationship('Review', backref='recensione', uselist=False)
+    isClosed = db.Column(db.Boolean, default=False)
 
 
     #applications = db.relationship("Student", secondary=application_table)

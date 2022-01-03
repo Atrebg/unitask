@@ -15,10 +15,10 @@
             {% for offer in tasks %}
             <tbody>
             <tr>
-                <th scope="row" value="1"></th>
-                <td> <a href={{ url_for('views.taskscelta', task_id=offer.id) }} >{{ offer.title }} </a></td>
+
+                <td> <a href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }} </a></td>
                 <td>{{ offer.description }}</td>
-                <td></td>
+                <td> <button><a href={{ url_for('views.task', task_id=offer.id) }} > Apply for this task</a> </button></td>
 
             </tr>
 
