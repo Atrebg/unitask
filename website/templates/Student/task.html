@@ -1,13 +1,13 @@
 {% extends "base.html" %} {% block title %}Apply for Tasks{% endblock %} {% block content%}
  <br />
+    <h1 align ="center">Task description</h1>
 
 <div class="it-hero-wrapper">
   <div class="container">
     <div class="row">
         <div class="col-12">
 
-          <div class="it-hero-text-wrapper">
-              <span class="it-category">Category</span>
+          <div align = "center" class="it-hero-text-wrapper">
               <h1 class="no_toc">{{ taskscelta.title }}</h1>
               <p class="d-none d-lg-block">{{ taskscelta.description }}</p>
               {{ taskscelta.id }}

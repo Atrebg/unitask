@@ -1,13 +1,11 @@
-{% extends "base.html" %} {% block title %}Home Stud{% endblock %} {% block content%}
+{% extends "base.html" %} {% block title %}List of application{% endblock %} {% block content%}
     <br />
-    <h1 align="center">List of Applications Open</h1>
+    <h1 align="center">Pending applications</h1>
 <ul class="list-group list-group-flush" id="offers">
   {% for offer in user.applications %}
       {% if offer.isAss==False %}
   <li class="list-group-item">
-     <a href= >{{ offer.title }}</a> {{ offer.date_task }}
-      <button> <a href={{ url_for('views.sceltarecensione', task_id=offer.id) }} > Recensisci</a></button>
-
+     <a href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a> {{ offer.date_task }}
           <br/>
 
   </li>
@@ -16,7 +14,7 @@
 </ul>
     <br/>
     <br/>
-    <h1 align="center">List of Applications Closed</h1>
+    <h1 align="center">Closed application! Are you ready to perform?</h1>
 <ul class="list-group list-group-flush" id="offers">
   {% for offer in user.applications %}
       {% if offer.isAss==True %}
@@ -24,7 +22,7 @@
         <li class="list-group-item">
             <a href= >{{ offer.title }}</a> vinta
             {% if offer.isPerf==True %}
-            <button> <a href={{ url_for('views.sceltarecensione', task_id=offer.id) }} > Performata e Recensisci</a></button>
+            <button> <a href={{ url_for('views.sceltarecensione', task_id=offer.id) }} > I performed the task. Review task poster</a></button>
             {% endif %}
           <br/>
 

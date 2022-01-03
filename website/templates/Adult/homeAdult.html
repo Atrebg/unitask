@@ -5,7 +5,7 @@
   {% for offer in tasks %}
   <li class="list-group-item">
         {% if offer.isAss!=True %}
-     <a href={{ url_for('views.taskscelta', task_id=offer.id) }} >{{ offer.title }}</a> {{ offer.date_task }}
+     <a href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a> {{ offer.date_task }}
       <div>
         {% for applicant in offer.applicants %}
             {{ applicant.id }}

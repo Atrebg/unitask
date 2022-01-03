@@ -35,7 +35,7 @@ def login():
                 flash('Incorrect password, try again.', category='error')
         else:
             flash('Email does not exist.', category='error')
-    return render_template("login.html", user=current_user, form=form)
+    return render_template("User/login.html", user=current_user, form=form)
 
 
 @auth.route('/logout')
@@ -86,7 +86,7 @@ def sign_up():
                 return redirect(url_for('views.offer'))
             
             return redirect(url_for('views.home'))
-    return render_template("sign_up.html", user=current_user, form = form)
+    return render_template("User/sign_up.html", user=current_user, form = form)
 
 
 def riempidb():
