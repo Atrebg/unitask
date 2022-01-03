@@ -70,7 +70,7 @@ class Offer(db.Model, UserMixin):
     id_adult = db.Column(db.Integer, db.ForeignKey('adult.id'))
     scelta = db.Column(db.Integer, db.ForeignKey('student.id'))
     isPerf = db.Column(db.Boolean, default=False)
-    rece = db.relationship('Review', backref='recensione', uselist=False)
+    rece = db.relationship('Review', backref='recensione')
     isClosed = db.Column(db.Boolean, default=False)
 
 

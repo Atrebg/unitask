@@ -6,6 +6,7 @@
       {% if offer.isAss==False %}
   <li class="list-group-item">
      <a href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a> {{ offer.date_task }}
+       <button> <a href={{ url_for('views.deleteapplication', task_id=offer.id) }} > Delete Application</a></button>
           <br/>
   </li>
       {% endif %}

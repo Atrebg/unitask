@@ -209,6 +209,12 @@ def taskpending():
 def personalreviews():
     return render_template("User/personalreviews.html", user=current_user)
 
+@views.route('/deleteapplication/<task_id>')
+def deleteapplication(task_id):
+    t = Offer.query.filter(Offer.id == task_id).first()
+    t.applicants.remove(current_user)
+    db.session.commit()
+    return redirect(url_for('views.home'))
 
 @views.route('/resetdb')
 def resetdb():
