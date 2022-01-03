@@ -15,13 +15,15 @@ Listofrevoew: scrivere quando non ci sono ancora revieww
 IMPORTA DA PYTHON PACKAGES
 WTFSelectField
 
-TODO:
+TODO GIACOMO:
 1) Aggiungere le date
-2) TUTTI I CSS
+2) Update personal settings account
 3) Pagamento (?)
 4) Aggiungere le maps
 5) Implementare mail di benvenuto quando fai il login
 
+TODO VALE:
+1) TUTTI I CSS
 
 FATTO 
 1) Sistemare query per veder e le task postate a cui applicare
