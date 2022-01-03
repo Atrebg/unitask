@@ -19,16 +19,18 @@ views = Blueprint('views', __name__)
                            'POST'])  # 17,14 views is the name of our blueprint (/ is the main page, this function will run
 @login_required  # every time we go to the home page
 def home():
-    today=datetime.today()
-    stamp =[]
-    for task in current_user.tasks:
-        if task.date_task>today:
-            stamp.append(task)
-        else:
-            task.isPerf = True
-            db.session.commit()
+    if current_user.type == 'adult':
+        today = datetime.today()
+        stamp = []
+        for task in current_user.tasks:
+            if task.date_task > today:
+                stamp.append(task)
+            else:
+                task.isPerf = True
+                db.session.commit()
 
-    return render_template("home.html", user=current_user, tasks=stamp)
+        return render_template("home.html", user=current_user, tasks=stamp)
+    return redirect(url_for('views.offer'))
 
 
 @views.route('/posttask', methods=['GET',
@@ -76,19 +78,17 @@ def delete_offer():
 @login_required
 def offer():
     tasks = Offer.query.all()
+    stamp = Offer.query.filter(Offer.isAss == False, Offer.date_task > datetime.today())
     u = current_user
     daeli = []
-    for task in tasks:
-        if task.isAss == False:
+    for task in stamp:
             for stud in task.applicants:
                 if stud.id == current_user.id:
                     daeli.append(task)
-        else:
-            daeli.append(task)
     for task in daeli:
-        tasks.remove(task)
+        stamp.remove(task)
 
-    return render_template("offer.html", user=current_user, tasks=tasks)
+    return render_template("offer.html", user=current_user, tasks=stamp)
 
 
 @views.route('/task/<task_id>', methods=['GET', 'POST'])
@@ -151,14 +151,18 @@ def sceltarecensione(task_id):
         t = Offer.query.filter(Offer.id == task_id).first()
         if current_user.type == 'adult':
             t.isPerf = True
-        #aggiungere reviews all'user
-        new_review = Review(title=title, text=description, date=date, id_reviewer=current_user.id, id_reviewed=t.scelta, task_id=t.id)
+            new_review = Review(title=title, text=description, date=date, id_reviewer=current_user.id,
+                                id_reviewed=t.scelta,
+                                task_id=t.id)
+        # aggiungere reviews all'user
+        else:
+            new_review = Review(title=title, text=description, date=date, id_reviewer=current_user.id, id_reviewed=t.id_adult,
+                                task_id=t.id)
         db.session.add(new_review)
         db.session.commit()
-        if current_user.type == 'adult':
-            return render_template("home.html", user=current_user)
-        else:
-            return render_template("listapplication.html", user=current_user)
+
+        return redirect(url_for('views.home'))
+
     else:
         form = ReviewForm()
         t = Offer.query.filter(Offer.id == task_id).first()
@@ -194,6 +198,12 @@ def taskpending():
             pending.append(task)
 
     return render_template("taskspending.html", user=current_user, pending=pending)
+
+@views.route('/personalreviews')
+def personalreviews():
+    return render_template("personalreviews.html", user=current_user)
+
+
 
 
 @views.route('/resetdb')

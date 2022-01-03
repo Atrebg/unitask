@@ -23,7 +23,9 @@
           {% if offer.scelta==user.id %}
         <li class="list-group-item">
             <a href= >{{ offer.title }}</a> vinta
-
+            {% if offer.isPerf==True %}
+            <button> <a href={{ url_for('views.sceltarecensione', task_id=offer.id) }} > Performata e Recensisci</a></button>
+            {% endif %}
           <br/>
 
   </li>

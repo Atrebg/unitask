@@ -5,5 +5,8 @@
     {% if user.type=='adult' %}
      <button> <a href={{ url_for('views.taskpending') }} > Lista task chiuse</a></button>
     {% endif %}
+
+    <h2 align ="center">Vedi recensioni Personali</h2>
+    <button> <a href={{ url_for('views.personalreviews') }} > Lista reviews</a></button>
     <h2 align ="center">Personal settings</h2>
 {% endblock %}

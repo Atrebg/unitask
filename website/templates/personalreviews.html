@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %}Lista Review{% endblock %} {% block content%}
+    <br />
+    <h1 align="center">Lista review ricevute: </h1>
+<ul class="list-group list-group-flush" id="offers">
+
+  <li class="list-group-item">
+      <div>
+        {% for recens in user.recensioniricevute %}
+            {{ recens.title }} {{ recens.text }}
+            <br/>
+            Reviewed by:
+            {{ recens.author.first_name }}
+            </div>
+          {% endfor %}
+
+
+  </li></ul>
+
+{% endblock %}
