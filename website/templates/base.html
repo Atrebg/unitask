@@ -36,6 +36,7 @@
                 {% if user.type=='adult' %}
                     <li><a class="nav-item nav-link" id="home" href="/">Home</a></li>
                     <li><a class="nav-item nav-link" id="posttask" href="/posttask">Post a Task</a></li>
+                    <li><a class="nav-item nav-link" id="offer" href="/taskpending">Task Pending</a></li>
                     <li><a class="nav-item nav-link" id="account" href="/account">Account</a></li>
                     <li><a class="nav-item nav-link" id="aboutus" href="/about_us">About us</a></li>
                     <li><a class="nav-item nav-link" id="logout" href="/logout">Logout</a></li>
@@ -43,6 +44,7 @@
                     {% elif user.type=='student' %}
                     <li><a class="nav-item nav-link" id="offer" href="/offer">Home</a></li>
                     <li><a class="nav-item nav-link" id="applications" href="/listapplications">Your applications</a></li>
+
                     <li><a class="nav-item nav-link" id="account" href="/account">Account</a></li>
                     <li><a class="nav-item nav-link" id="aboutus" href="/about_us">About us</a></li>
                     <li><a class="nav-item nav-link" id="logout" href="/logout">Logout</a></li>

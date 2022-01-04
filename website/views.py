@@ -29,7 +29,7 @@ def home():
                 task.isPerf = True
                 db.session.commit()
 
-        return render_template("User/templates/homeAdult.html", user=current_user, tasks=stamp)
+        return render_template("Adult/homeAdult.html", user=current_user, tasks=stamp)
     return redirect(url_for('views.offer'))
 
 
@@ -39,13 +39,13 @@ def home():
 def posttask():
     form = PosttaskForm()
     if request.method == 'POST':
-        # mettere if not adult
-
         datatask = request.form['date']
         dt = datetime.strptime(datatask, '%Y-%m-%d')
         today = datetime.now()
         if dt < today:
+            form.date.data = ''
             flash('La data non puo essere anteriore a quella di oggi', category='error')
+            return redirect(url_for('views.posttask'))
         else:
             title = form.tasktitle.data
             description = form.taskdescription.data
@@ -57,21 +57,9 @@ def posttask():
                 db.session.add(new_offer)
                 db.session.commit()
                 flash('Task posted!', category='success')
+                return redirect(url_for('views.home'))
 
     return render_template("Adult/posttask.html", user=current_user, form=form)
-
-
-@views.route('/delete-offer', methods=['POST'])
-def delete_offer():
-    offer = json.loads(request.data)
-    offerId = offer['offerId']
-    of = Offer.query.get(offerId)
-    if of:
-        if of.id_user == current_user.id:
-            db.session.delete(of)
-            db.session.commit()
-
-    return jsonify({})
 
 
 @views.route('/offer')
@@ -175,12 +163,12 @@ def sceltarecensione(task_id):
         return render_template("User/review.html", user=current_user, taskscelta=t, form=form)
 
 
-@views.route('/showreviews/<user_id>', methods=['GET', 'POST'])
+@views.route('/showreviews/<user_id>/<task_id>', methods=['GET', 'POST'])
 @login_required
-def showreviews(user_id):
+def showreviews(user_id, task_id):
     reviewed = User.query.filter(User.id == user_id).first()
     recensioni = Review.query.filter(Review.id_reviewed == user_id).all()
-    return render_template("User/listofreview.html", user=current_user, recensioni=recensioni, reviewed=reviewed)
+    return render_template("User/listofreview.html", user=current_user, recensioni=recensioni, reviewed=reviewed, task_id=task_id)
 
 
 @views.route('/about_us')
@@ -209,12 +197,31 @@ def taskpending():
 def personalreviews():
     return render_template("User/personalreviews.html", user=current_user)
 
+
 @views.route('/deleteapplication/<task_id>')
 def deleteapplication(task_id):
     t = Offer.query.filter(Offer.id == task_id).first()
+    if t.scelta == current_user.id:
+        flash('You have been chosen for this task, you cannot delete this task', category='error')
+        return redirect(url_for('views.home'))
+
     t.applicants.remove(current_user)
     db.session.commit()
+    flash('Application deleted!', category='success')
     return redirect(url_for('views.home'))
+
+
+@views.route('/deletetask/<task_id>')
+def deletetask(task_id):
+    t = Offer.query.filter(Offer.id == task_id).first()
+    if t.applicants:
+        flash('There are already applications for this task you cannot delete this task', category='error')
+        return redirect(url_for('views.home'))
+    db.session.delete(t)
+    db.session.commit()
+    flash('Task deleted!', category='success')
+    return redirect(url_for('views.home'))
+
 
 @views.route('/resetdb')
 def resetdb():
