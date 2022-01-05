@@ -20,17 +20,18 @@ views = Blueprint('views', __name__)
 @login_required  # every time we go to the home page
 def home():
     if current_user.type == 'adult':
-        today = datetime.today()
-        stamp = []
-        for task in current_user.tasks:
-            if task.date_task > today:
-                stamp.append(task)
-            else:
-                task.isPerf = True
-                db.session.commit()
-
-        return render_template("Adult/homeAdult.html", user=current_user, tasks=stamp)
+        Offer.controltasksdate()
+        return render_template("Adult/homeAdult.html", user=current_user)
     return redirect(url_for('views.offer'))
+
+
+@views.route('/offer')
+@login_required
+def offer():
+    q = Offer.query.filter(Offer.isAss == False, Offer.isClosed == False,
+                           Offer.applicants.contains(current_user) == False).all()
+
+    return render_template("Student/homeStud.html", user=current_user, tasks=q)
 
 
 @views.route('/posttask', methods=['GET',
@@ -62,30 +63,12 @@ def posttask():
     return render_template("Adult/posttask.html", user=current_user, form=form)
 
 
-@views.route('/offer')
-@login_required
-def offer():
-    tasks = Offer.query.all()
-    q = Offer.query.filter(Offer.isAss == False, Offer.date_task > datetime.today()).all()
-    stamp = []
-    stamp = q
-    u = current_user
-    daeli = []
-    for task in stamp:
-        for stud in task.applicants:
-            if stud.id == current_user.id:
-                daeli.append(task)
-    for task in daeli:
-        stamp.remove(task)
-
-    return render_template("Student/homeStud.html", user=current_user, tasks=stamp)
-
-
 @views.route('/task/<task_id>', methods=['GET', 'POST'])
 @login_required
 def task(task_id):
     if current_user.type == 'student':
         t = Offer.query.filter(Offer.id == task_id).first()
+        # controllo se ho gia applicato cosi so se posso far comparire il bottone oppure no
         btn = True
         if current_user in t.applicants:
             btn = False
@@ -98,29 +81,31 @@ def task(task_id):
 @views.route('/apply/<task_id>', methods=['GET', 'POST'])
 @login_required
 def sendapplication(task_id):
-    id_stud = current_user.id
     task = Offer.query.filter(Offer.id == task_id).first()
+    if not current_user.controlapplication(current_user, task):
+        flash('You already apply for this task', category='error')
+        return redirect(url_for('views.home'))
     task.applicants.append(current_user)
-    print(task.applicants)
     db.session.commit()
-    tasks = Offer.query.all()
-    daeli = []
-    for task in tasks:
-        for user in task.applicants:
-            if user.id == current_user.id:
-                daeli.append(task)
-    for task in daeli:
-        tasks.remove(task)
-
-    return render_template("Student/homeStud.html", user=current_user, tasks=tasks)
+    return redirect(url_for('views.home'))
+    # daeli = []
+    # for task in tasks:
+    #   for user in task.applicants:
+    #      if user.id == current_user.id:
+    #         daeli.append(task)
+    # for task in daeli:
+    #   tasks.remove(task)
 
 
-@views.route('/scelta/<task_id>/<stud_id>', methods=['GET', 'POST'])
+@views.route('/choosestud/<task_id>/<stud_id>', methods=['GET', 'POST'])
 @login_required
 def choosestud(task_id, stud_id):
-    task = Offer.query.filter(Offer.id == task_id).first()
-    task.scelta = stud_id
-    task.isAss = True
+    task1 = Offer.query.filter(Offer.id == task_id).first()
+    if not Offer.controldate(task1):
+        flash('Too late the task is closed', category='error')
+        return redirect(url_for('views.home'))
+    task1.scelta = stud_id
+    task1.isAss = True
     db.session.commit()
 
     return redirect(url_for('views.home'))
@@ -132,9 +117,9 @@ def listapplications():
     return render_template("Student/listapplication.html", user=current_user)
 
 
-@views.route('/sceltarecensione/<task_id>', methods=['GET', 'POST'])
+@views.route('/writereview/<task_id>', methods=['GET', 'POST'])
 @login_required
-def sceltarecensione(task_id):
+def writereview(task_id):
     if request.method == 'POST':
         form = ReviewForm()
         title = form.reviewtitle.data
@@ -149,6 +134,7 @@ def sceltarecensione(task_id):
                                 task_id=t.id)
         # aggiungere reviews all'user
         else:
+            t.isClosed = True
             new_review = Review(title=title, text=description, date=date, id_reviewer=current_user.id,
                                 id_reviewed=t.id_adult,
                                 task_id=t.id)
@@ -166,9 +152,17 @@ def sceltarecensione(task_id):
 @views.route('/showreviews/<user_id>/<task_id>', methods=['GET', 'POST'])
 @login_required
 def showreviews(user_id, task_id):
-    reviewed = User.query.filter(User.id == user_id).first()
-    recensioni = Review.query.filter(Review.id_reviewed == user_id).all()
-    return render_template("User/listofreview.html", user=current_user, recensioni=recensioni, reviewed=reviewed, task_id=task_id)
+    if current_user.type == 'adult':
+        reviewed = User.query.filter(User.id == user_id).first()
+        var = current_user.reviewsreceived
+        recensioni = Review.query.filter(Review.id_reviewed == user_id).all()
+        return render_template("User/listofreview.html", user=current_user, recensioni=recensioni, reviewed=reviewed,
+                               task_id=task_id)
+    else:
+        reviewed = User.query.filter(User.id == user_id).first()
+        recensioni = Review.query.filter(Review.id_reviewed == user_id).all()
+        return render_template("User/listofreview.html", user=current_user, recensioni=recensioni, reviewed=reviewed,
+                               task_id=0)
 
 
 @views.route('/about_us')

@@ -7,7 +7,7 @@
      {{ offer.title }} {{ offer.performer.first_name }}
           <br/>
                 {% if offer.isAss==True and offer.isPerf==False %}
-            <button> <a href={{ url_for('views.sceltarecensione', task_id=offer.id) }} > The task has been performed! Review the performer</a></button>
+            <button> <a href={{ url_for('views.writereview', task_id=offer.id) }} > The task has been performed! Review the performer</a></button>
             </li>
         {% endif %}
 

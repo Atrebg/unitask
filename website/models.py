@@ -20,10 +20,10 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     surname = db.Column(db.String(150))
     type = db.Column(db.String(20))
-    recensionipostate = db.relationship('Review', foreign_keys='Review.id_reviewer',
-                                        backref='author')
-    recensioniricevute = db.relationship('Review', foreign_keys='Review.id_reviewed',
-                                         backref='ricevitore')
+    reviewsposted = db.relationship('Review', foreign_keys='Review.id_reviewer',
+                                    backref='author')
+    reviewsreceived = db.relationship('Review', foreign_keys='Review.id_reviewed',
+                                      backref='received')
 
     __mapper_args__ = {
         'polymorphic_on': type,
@@ -49,6 +49,11 @@ class Student(User, db.Model):
         'polymorphic_identity': 'student',
     }
 
+    def controlapplication(self, task):
+        if task in self.applications:
+            return False
+        return True
+
 
 class Adult(User, db.Model):
     __tablename__ = 'adult'
@@ -73,7 +78,24 @@ class Offer(db.Model, UserMixin):
     rece = db.relationship('Review', backref='recensione')
     isClosed = db.Column(db.Boolean, default=False)
 
-
-    #applications = db.relationship("Student", secondary=application_table)
-    #db.UniqueConstraint('applications')
+    # applications = db.relationship("Student", secondary=application_table)
+    # db.UniqueConstraint('applications')
     # id_student = db.Column(db.Integer, db.ForeignKey('user.id'))
+    @staticmethod
+    def controltasksdate():
+        from datetime import datetime
+        today = datetime.today()
+        for task in Offer.query.filter(Offer.isClosed == False):
+            if task.date_task <= today and task.isAss == False:
+                task.isClosed = True
+
+        db.session.commit()
+
+    def controldate(self):
+        from datetime import datetime
+        today = datetime.today()
+        if self.date_task <= today:
+            self.isClosed = True
+            db.session.commit()
+            return False
+        return True

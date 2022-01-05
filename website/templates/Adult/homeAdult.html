@@ -2,9 +2,10 @@
     <br />
     <h1 align="center">List of Task Posted</h1>
 <ul class="list-group list-group-flush" id="offers">
-  {% for offer in tasks %}
-  <li class="list-group-item">
-        {% if offer.isAss!=True %}
+  {% for offer in user.tasks %}
+
+        {% if offer.isAss!=True and offer.isClosed==False %}
+            <li class="list-group-item">
      <a href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a> {{ offer.date_task }}
       <div>
         {% for applicant in offer.applicants %}
@@ -17,10 +18,11 @@
          </button>
           </div>
           <br/>
+            </li>
         {% endif %}
 
 
-  </li>
+
   {% endfor %}
 </ul>
 

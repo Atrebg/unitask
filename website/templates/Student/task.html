@@ -10,7 +10,7 @@
           <div align = "center" class="it-hero-text-wrapper">
               <h1 class="no_toc">{{ taskscelta.title }}</h1>
               <p class="d-none d-lg-block">{{ taskscelta.description }}</p>
-              Posted by: <a href="{{ url_for('views.showreviews', user_id=taskscelta.id_adult) }}">{{ taskscelta.poster.first_name }}{{ taskscelta.poster.surname }}</a>
+              Posted by: <a href="{{ url_for('views.showreviews', user_id=taskscelta.id_adult, task_id='0') }}">{{ taskscelta.poster.first_name }}{{ taskscelta.poster.surname }}</a>
                 {% if btn ==True %}
               <div class="it-btn-container"><button class="btn btn-sm btn-outline-primary" > <a href={{ url_for('views.sendapplication', task_id=taskscelta.id) }} >Apply for This Task</a></button></div>
                 {% endif %}

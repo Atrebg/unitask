@@ -6,8 +6,8 @@
   <li class="list-group-item">
     {{ reviewed.first_name }} {{ reviewed.surname }}
       <div>
-      {% if recensioni %}
-        {% for recens in recensioni %}
+      {% if user.reviewsposted %}
+        {% for recens in user.reviewsposted %}
             {{ recens.title }} {{ recens.text }}
             By: {{ recens.author.first_name }}
             {% if user.type=='adult' %}

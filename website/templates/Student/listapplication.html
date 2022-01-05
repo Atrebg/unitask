@@ -22,14 +22,14 @@
         <li class="list-group-item">
             <a href= {{ url_for('views.task', task_id=offer.id) }}>{{ offer.title }}</a> vinta
             {% if offer.isPerf==True %}
-            <button> <a href={{ url_for('views.sceltarecensione', task_id=offer.id) }} > I performed the task. Review task poster</a></button>
+            <button> <a href={{ url_for('views.writereview', task_id=offer.id) }} > I performed the task. Review task poster</a></button>
             {% endif %}
           <br/>
 
   </li>
           {% else %}
        <li class="list-group-item">
-            <a href= >{{ offer.title }}</a> persa
+            {{ offer.title }} persa
 
           <br/>
             {% endif %}

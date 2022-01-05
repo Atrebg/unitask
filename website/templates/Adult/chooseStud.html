@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block title %}Scelta Studente{% endblock %} {% block content%}
     <br />
-    <h1 align="center">Scegli studente</h1>
+    <h1 align="center"> Choose a Student</h1>
 <ul class="list-group list-group-flush" id="offers">
 
   <li class="list-group-item">
@@ -14,7 +14,7 @@
         {% for applicant in taskscelta.applicants %}
             <div>
             <a href={{ url_for('views.showreviews', user_id=applicant.id, task_id=taskscelta.id) }} >{{ applicant.first_name }} {{ applicant.surname }}</a>
-            <button class="btn btn-sm btn-outline-primary" > <a href={{ url_for('views.choosestud', task_id=taskscelta.id, stud_id=applicant.id) }} >Scegli questo studente </a></button>
+            <button class="btn btn-sm btn-outline-primary" > <a href={{ url_for('views.choosestud', task_id=taskscelta.id, stud_id=applicant.id) }} >Choose this student </a></button>
 
             </div>
             <br/>
