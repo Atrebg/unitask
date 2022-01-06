@@ -217,6 +217,24 @@ def deletetask(task_id):
     return redirect(url_for('views.home'))
 
 
+@views.route("/account", methods=['GET', 'POST'])
+@login_required
+def account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.email = form.email.data
+        current_user.name = form.name.data
+        db.session.commit()
+        flash('Succesfully updated informations', 'success')
+        return redirect(url_for('users.account'))
+    elif request.method == 'GET':
+        form.email.data = current_user.email
+        form.name.data = current_user.name
+    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    return render_template(form=form)
+
+
+
 @views.route('/resetdb')
 def resetdb():
     db.drop_all()

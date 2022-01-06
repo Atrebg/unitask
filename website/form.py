@@ -23,6 +23,11 @@ class SignupForm(FlaskForm):
     passwordconf = PasswordField('Confirm Password:', validators=[DataRequired(), Length(min=8, max=16)])
     submit = SubmitField('Register')
 
+    def validate_email(self, email):
+        race = User.query.filter_by(email=email.data).first()
+        if race:
+            raise ValidationError('Email already in use, please follow password recovery procedure')
+
 
 class PosttaskForm(FlaskForm):
     tasktitle = StringField('Titolo:')
@@ -35,3 +40,21 @@ class ReviewForm(FlaskForm):
     reviewtitle = StringField('Titolo:')
     reviewdescription = StringField('Description:')
     submit = SubmitField('Review')
+
+
+class UpdateAccountForm (FlaskForm):
+
+    name = StringField('Name:', validators=[DataRequired(), Length(min=3, max=25)])
+    surname = StringField('Surname:', validators=[DataRequired(), Length(min=3, max=25)])
+
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
+
+    submit = SubmitField('Update')
+
+
+    def validate_email(self, email):
+        race = User.query.filter_by(email=email.data).first()
+        if race:
+            raise ValidationError('Email already in use, please follow password recovery procedure')
+
