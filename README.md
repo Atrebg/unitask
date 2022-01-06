@@ -16,7 +16,7 @@ IMPORTA DA PYTHON PACKAGES
 WTFSelectField
 
 TODO GIACOMO:
-1) Aggiungere le date
+1) Aggiungere le date dovrei aver fatto
 2) Update personal settings account
 3) Pagamento (?)
 4) Aggiungere le maps
