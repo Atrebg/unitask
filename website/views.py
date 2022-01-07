@@ -217,9 +217,9 @@ def deletetask(task_id):
     return redirect(url_for('views.home'))
 
 
-@views.route("/account", methods=['GET', 'POST'])
+@views.route("/updateaccount", methods=['GET', 'POST'])
 @login_required
-def account():
+def updateaccount():
     form = UpdateAccountForm()
     if form.validate_on_submit():
         current_user.email = form.email.data
@@ -230,8 +230,8 @@ def account():
     elif request.method == 'GET':
         form.email.data = current_user.email
         form.name.data = current_user.name
-    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template(form=form)
+       #manca il render template capire cosa serve
+    return render_template(user = current_user, form=form)
 
 
 
