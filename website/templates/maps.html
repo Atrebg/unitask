@@ -1,0 +1,83 @@
+{% extends "base.html" %} {% block scripts %}
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/handlebars/4.7.7/handlebars.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="static/css/locatorplus.css" rel="stylesheet">
+    <script src="/static/locatorplus.js"></script>
+
+    <script>
+      const CONFIGURATION = {
+        "locations": [
+          {"title":"Death Valley National Park","address1":"California","address2":"United States","coords":{"lat":36.4617,"lng":-116.8668},"placeId":"ChIJR4qudndLx4ARVLDye3zwycw"},
+          {"title":"Yosemite National Park","address1":"California","address2":"USA","coords":{"lat":37.7487,"lng":-119.5873},"placeId":"ChIJxeyK9Z3wloAR_gOA7SycJC0"},
+          {"title":"Joshua Tree National Park","address1":"California","address2":"USA","coords":{"lat":33.9157,"lng":-115.8807},"placeId":"ChIJe6hluYWP2oAR4p3rOqftdxk"},
+          {"title":"Lassen Volcanic National Park","address1":"California","address2":"USA","coords":{"lat":40.4377,"lng":-121.5338},"placeId":"ChIJvzhBwQdWnYARQmdmeqfYNI8"},
+          {"title":"Sequoia National Park","address1":"California","address2":"USA","coords":{"lat":36.491,"lng":-118.8253},"placeId":"ChIJeWUZLX37v4ARZPQen_nfCkQ"},
+          {"title":"Pinnacles National Park","address1":"California","address2":"USA","coords":{"lat":36.4938,"lng":-121.1465},"placeId":"ChIJn93OiYBDkoAR7kSomO77gps"},
+          {"title":"Redwood National and State Parks","address1":"California","address2":"USA","coords":{"lat":41.3025,"lng":-124.0471},"placeId":"ChIJpX9B9TZm0FQRjl87lWYyzzY"},
+          {"title":"Kings Canyon National Park","address1":"California","address2":"USA","coords":{"lat":36.74,"lng":-118.9633},"placeId":"ChIJe6fxX-7Vv4ARTA9DcLeDZII"}
+        ],
+        "mapOptions": {"center":{"lat":38.0,"lng":-100.0},"fullscreenControl":true,"mapTypeControl":false,"streetViewControl":false,"zoom":4,"zoomControl":true,"maxZoom":17},
+        "mapsApiKey": "AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A"
+      };
+
+      function initMap() {
+        new LocatorPlus(CONFIGURATION);
+      }
+
+    </script>
+    {% raw %}
+    <script id="locator-result-items-tmpl" type="text/x-handlebars-template">
+      {{#each locations}}
+        <li class="location-result" data-location-index="{{index}}">
+          <button class="select-location">
+            <h2 class="name">{{title}}</h2>
+          </button>
+          <div class="address">{{address1}}<br>{{address2}}</div>
+          {{#if travelDistanceText}}
+            <div class="distance">{{travelDistanceText}}</div>
+          {{/if}}
+        </li>
+      {{/each}}
+    </script>
+      {% endraw %}
+  {% endblock %}
+
+    {% block title %}Locator{% endblock %}
+
+  {% block content%}
+    <br />
+    <div id="map-container">
+      <div id="locations-panel">
+        <div id="locations-panel-list">
+          <header>
+            <h1 class="search-title">
+              <img src="https://fonts.gstatic.com/s/i/googlematerialicons/place/v15/24px.svg"/>
+              Find a location near you
+            </h1>
+            <div class="search-input">
+              <input id="location-search-input" placeholder="Enter your address or zip code">
+              <div id="search-overlay-search" class="search-input-overlay search">
+                <button id="location-search-button">
+                  <img class="icon" src="https://fonts.gstatic.com/s/i/googlematerialicons/search/v11/24px.svg" alt="Search"/>
+                </button>
+              </div>
+            </div>
+          </header>
+          <div class="section-name" id="location-results-section-name">
+            All locations
+          </div>
+          <div class="results">
+            <ul id="location-results-list"></ul>
+          </div>
+        </div>
+      </div>
+      <div id="map"></div>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A&callback=initMap&libraries=places,geometry&solution_channel=GMP_QB_locatorplus_v4_cABD" async defer></script>
+
+
+{% endblock %}
+
