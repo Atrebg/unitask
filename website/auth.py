@@ -16,10 +16,7 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    #a = 0
-    #if a == 1:
-     #   riempidb()
-     #   return redirect(url_for('views.offer'))
+
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
