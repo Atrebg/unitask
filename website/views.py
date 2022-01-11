@@ -230,8 +230,9 @@ def updateaccount():
     elif request.method == 'GET':
         form.email.data = current_user.email
         form.name.data = current_user.name
-       #manca il render template capire cosa serve
-    return render_template(user = current_user, form=form)
+    # manca il render template capire cosa serve
+    return render_template(user=current_user, form=form)
+
 
 @views.route('/resetdb')
 def resetdb():
@@ -244,22 +245,34 @@ def resetdb():
 @views.route('/maps')
 @login_required
 def maps():
-    locations = [
-    {"title": "Death Valley National Park", "address1": "California", "address2": "United States",
-     "coords": {"lat": 36.4617, "lng": -116.8668}, "placeId": "ChIJR4qudndLx4ARVLDye3zwycw"},
-    {"title": "Yosemite National Park", "address1": "California", "address2": "USA",
-     "coords": {"lat": 37.7487, "lng": -119.5873}, "placeId": "ChIJxeyK9Z3wloAR_gOA7SycJC0"},
-    {"title": "Joshua Tree National Park", "address1": "California", "address2": "USA",
-     "coords": {"lat": 33.9157, "lng": -115.8807}, "placeId": "ChIJe6hluYWP2oAR4p3rOqftdxk"},
-    {"title": "Lassen Volcanic National Park", "address1": "California", "address2": "USA",
-     "coords": {"lat": 40.4377, "lng": -121.5338}, "placeId": "ChIJvzhBwQdWnYARQmdmeqfYNI8"},
-    {"title": "Sequoia National Park", "address1": "California", "address2": "USA",
-     "coords": {"lat": 36.491, "lng": -118.8253}, "placeId": "ChIJeWUZLX37v4ARZPQen_nfCkQ"},
-    {"title": "Pinnacles National Park", "address1": "California", "address2": "USA",
-     "coords": {"lat": 36.4938, "lng": -121.1465}, "placeId": "ChIJn93OiYBDkoAR7kSomO77gps"},
-    {"title": "Redwood National and State Parks", "address1": "California", "address2": "USA",
-     "coords": {"lat": 41.3025, "lng": -124.0471}, "placeId": "ChIJpX9B9TZm0FQRjl87lWYyzzY"},
-    {"title": "Latina", "address1": "Via Palestro", "address2": "ITA",
-     "coords": {"lat": 41.4662056, "lng": 12.8971524}, "placeId": "ChIJPSJsk4ALJRMR1Rctc49Mwzw"} ]
+    configurations = {"locations": [
+        {"title": "Death Valley National Park", "address1": "California", "address2": "United States",
+         "coords": {"lat": 36.4617, "lng": -116.8668}, "placeId": "ChIJR4qudndLx4ARVLDye3zwycw"},
+        {"title": "Yosemite National Park", "address1": "California", "address2": "USA",
+         "coords": {"lat": 37.7487, "lng": -119.5873}, "placeId": "ChIJxeyK9Z3wloAR_gOA7SycJC0"},
+        {"title": "Joshua Tree National Park", "address1": "California", "address2": "USA",
+         "coords": {"lat": 33.9157, "lng": -115.8807}, "placeId": "ChIJe6hluYWP2oAR4p3rOqftdxk"},
+        {"title": "Lassen Volcanic National Park", "address1": "California", "address2": "USA",
+         "coords": {"lat": 40.4377, "lng": -121.5338}, "placeId": "ChIJvzhBwQdWnYARQmdmeqfYNI8"},
+        {"title": "Sequoia National Park", "address1": "California", "address2": "USA",
+         "coords": {"lat": 36.491, "lng": -118.8253}, "placeId": "ChIJeWUZLX37v4ARZPQen_nfCkQ"},
+        {"title": "Pinnacles National Park", "address1": "California", "address2": "USA",
+         "coords": {"lat": 36.4938, "lng": -121.1465}, "placeId": "ChIJn93OiYBDkoAR7kSomO77gps"},
+        {"title": "Redwood National and State Parks", "address1": "California", "address2": "USA",
+         "coords": {"lat": 41.3025, "lng": -124.0471}, "placeId": "ChIJpX9B9TZm0FQRjl87lWYyzzY"},
+        {"title": "Kings Canyon National Park", "address1": "California", "address2": "USA",
+         "coords": {"lat": 36.74, "lng": -118.9633}, "placeId": "ChIJe6fxX-7Vv4ARTA9DcLeDZII"}
+    ],
+        "mapOptions": {"center": {"lat": 38.0, "lng": -100.0}, "fullscreenControl": True, "mapTypeControl": False,
+                       "streetViewControl": False, "zoom": 4, "zoomControl": True, "maxZoom": 17},
+        "mapsApiKey": "AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A"
+    }
+    mapsApi = "AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A"
+    mapOptions = { "center" : {"lat": 38.0, "lng": -100.0}, "fullscreenControl ": True, " mapTypeControl ": False,"streetViewControl": False, "zoom": 4, "zoomControl": True, "maxZoom": 17}
 
-    return render_template("maps.html", user=current_user)
+    return render_template("maps.html", user=current_user, CONFIGURATIONS=configurations, api = mapsApi, mapsOptions=mapOptions)
+
+@views.route('/prova/<offerId>')
+def prova(offerId):
+    print offerId
+    return jsonify({})

@@ -123,7 +123,7 @@ function LocatorPlus(configuration) {
       // Clicking anywhere on the item selects this location.
       // Additionally, create a button element to make this behavior
       // accessible under tab navigation.
-      item.addEventListener('click', resultSelectionHandler);
+      //item.addEventListener('click', resultSelectionHandler); questo rende cliccabile tutto il box
       item.querySelector('.select-location')
           .addEventListener('click', function(e) {
             resultSelectionHandler();

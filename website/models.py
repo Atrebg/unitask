@@ -99,3 +99,8 @@ class Offer(db.Model, UserMixin):
             db.session.commit()
             return False
         return True
+
+
+# {"title": "Death Valley National Park", "address1": "California", "address2": "United States",
+#    "coords": {"lat": 36.4617, "lng": -116.8668}, "placeId": "ChIJR4qudndLx4ARVLDye3zwycw"},
+

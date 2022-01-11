@@ -7,7 +7,7 @@
     <link href="static/css/locatorplus.css" rel="stylesheet">
     <script src="/static/locatorplus.js"></script>
 
-    <script>
+    <script type="text/javascript">
       const CONFIGURATION = {
         "locations": [
           {"title":"Death Valley National Park","address1":"California","address2":"United States","coords":{"lat":36.4617,"lng":-116.8668},"placeId":"ChIJR4qudndLx4ARVLDye3zwycw"},
@@ -24,24 +24,27 @@
       };
 
       function initMap() {
-        new LocatorPlus(CONFIGURATION);
+        new LocatorPlus({{ CONFIGURATIONS|tojson }});
       }
 
     </script>
     {% raw %}
-    <script id="locator-result-items-tmpl" type="text/x-handlebars-template">
-      {{#each locations}}
-        <li class="location-result" data-location-index="{{index}}">
-          <button class="select-location">
-            <h2 class="name">{{title}}</h2>
-          </button>
-          <div class="address">{{address1}}<br>{{address2}}</div>
-          {{#if travelDistanceText}}
-            <div class="distance">{{travelDistanceText}}</div>
-          {{/if}}
-        </li>
-      {{/each}}
-    </script>
+        <script id="locator-result-items-tmpl" type="text/x-handlebars-template">
+          {{#each locations}}
+            <li class="location-result" data-location-index="{{index}}">
+              <button class="select-location">
+                <h2 class="name">{{title}}</h2>
+              </button>
+              <div class="address">{{address1}}<br>{{address2}}</div>
+              {{#if travelDistanceText}}
+                <div class="distance">{{travelDistanceText}}</div>
+              {{/if}}
+                <button type="Submit" onClick="chooseTask({{ index }})">Scegli Task</button>
+            </li>
+
+          {{/each}}
+
+        </script>
       {% endraw %}
   {% endblock %}
 
