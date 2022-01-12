@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="static/css/locatorplus.css" rel="stylesheet">
     <script src="/static/locatorplus.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <script type="text/javascript">
       const CONFIGURATION = {
@@ -28,6 +29,7 @@
       }
 
     </script>
+
     {% raw %}
         <script id="locator-result-items-tmpl" type="text/x-handlebars-template">
           {{#each locations}}
@@ -39,13 +41,14 @@
               {{#if travelDistanceText}}
                 <div class="distance">{{travelDistanceText}}</div>
               {{/if}}
-                <button type="Submit" onClick="chooseTask({{ index }})">Scegli Task</button>
+                <button type="Submit" onClick="window.location.href = '/prova/'+{{ index }}">Scegli Task</button>
             </li>
 
           {{/each}}
 
         </script>
       {% endraw %}
+
   {% endblock %}
 
     {% block title %}Locator{% endblock %}

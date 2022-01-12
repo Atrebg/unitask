@@ -245,6 +245,8 @@ def resetdb():
 @views.route('/maps')
 @login_required
 def maps():
+
+    aa=""
     configurations = {"locations": [
         {"title": "Death Valley National Park", "address1": "California", "address2": "United States",
          "coords": {"lat": 36.4617, "lng": -116.8668}, "placeId": "ChIJR4qudndLx4ARVLDye3zwycw"},
@@ -270,9 +272,10 @@ def maps():
     mapsApi = "AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A"
     mapOptions = { "center" : {"lat": 38.0, "lng": -100.0}, "fullscreenControl ": True, " mapTypeControl ": False,"streetViewControl": False, "zoom": 4, "zoomControl": True, "maxZoom": 17}
 
-    return render_template("maps.html", user=current_user, CONFIGURATIONS=configurations, api = mapsApi, mapsOptions=mapOptions)
+    return render_template("maps.html", user=current_user, CONFIGURATIONS=configurations, api = mapsApi, mapsOptions=mapOptions, aa=aa)
 
 @views.route('/prova/<offerId>')
 def prova(offerId):
     print offerId
-    return jsonify({})
+    print 'qui'
+    return redirect(url_for('views.home'))

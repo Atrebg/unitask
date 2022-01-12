@@ -9,11 +9,3 @@ function deleteOffer(offerId) {
     window.location.href = "/";
   });
 }
-
-function chooseTask(offerId) {
-  fetch( "/prova/offerId", {
-    method: "GET"
-  }).then((_res)=> {
-    window.location.href="/";
-  });
-}
