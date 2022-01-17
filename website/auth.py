@@ -45,7 +45,8 @@ def logout():
 @auth.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():
     form = SignupForm()
-    if request.method == 'POST':
+    if request.method == 'POST' and form.validate_on_submit():
+
         email = request.form.get('email')
         name = request.form.get('name')
         surname = request.form.get('surname')
@@ -83,7 +84,7 @@ def sign_up():
                 return redirect(url_for('views.offer'))
             
             return redirect(url_for('views.home'))
-    return render_template("User/sign_up.html", user=current_user, form = form)
+    return render_template("User/sign_up.html", user=current_user, form=form)
 
 
 def riempidb():
@@ -101,7 +102,7 @@ def riempidb():
     ]
 
     tasks = [
-        {'titolo': "cane", 'descrizione': "bla bla bla bla", 'date': "2022-02-16"},
+        {'titolo': "cane", 'descrizione': "bla bla bla bla", 'date': "2022-02-16", },
         {'titolo': "gatto", 'descrizione': "bla bla bla bla", 'date': "2022-02-17"},
         {'titolo': "nonna", 'descrizione': "bla bla bla bla", 'date': "2022-02-18"},
         {'titolo': "nonno", 'descrizione': "bla bla bla bla", 'date': "2022-02-19"},

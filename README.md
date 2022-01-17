@@ -16,11 +16,8 @@ IMPORTA DA PYTHON PACKAGES
 WTFSelectField
 
 TODO GIACOMO:
-1) Aggiungere le date dovrei aver fatto
-2) Update personal settings account
-3) Pagamento (?)
-4) Aggiungere le maps
-5) Implementare mail di benvenuto quando fai il login
+1) Update personal settings account
+2) Pagamento (?)
 
 TODO VALE:
 1) TUTTI I CSS

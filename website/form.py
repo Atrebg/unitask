@@ -1,3 +1,4 @@
+from flask import flash
 from flask_wtf import FlaskForm, Form
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField, RadioField, \
@@ -23,15 +24,21 @@ class SignupForm(FlaskForm):
     passwordconf = PasswordField('Confirm Password:', validators=[DataRequired(), Length(min=8, max=16)])
     submit = SubmitField('Register')
 
-    def validate_email(self, email):
-        race = User.query.filter_by(email=email.data).first()
+    @staticmethod
+    def validate_email(self, email1):
+        race = User.query.filter_by(email=email1.data).first()
         if race:
-            raise ValidationError('Email already in use, please follow password recovery procedure')
+            raise ValidationError(flash('Email already exists.', category='error'))
 
 
 class PosttaskForm(FlaskForm):
-    tasktitle = StringField('Titolo:')
+    tasktitle = StringField('Title:')
     taskdescription = StringField('Description:')
+    address = StringField('Address:')
+    spt = StringField('Apt, Suite, etc (optional):')
+    state = StringField('State:')
+    zip = StringField('Zip:')
+    country = StringField('Country:')
     date = DateField()
     submit = SubmitField('Post Task')
 

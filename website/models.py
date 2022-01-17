@@ -69,6 +69,10 @@ class Offer(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
     description = db.Column(db.String(150))
+    address = db.Column(db.String(150))
+    placeId = db.Column(db.String(150))
+    lat = db.Column(db.Float)
+    lng = db.Column(db.Float)
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     isAss = db.Column(db.Boolean, default=False)
     date_task = db.Column(db.DateTime(timezone=True))
@@ -100,6 +104,17 @@ class Offer(db.Model, UserMixin):
             return False
         return True
 
+    def __contains__(self, user):
+        for a in self.applicants:
+            if a.id == user.id:
+                return True
+        return False
+
+    def getdict(self):
+        a = {"title": self.title, "address1": self.address, "address2": "Torino", "coords": {"lat": self.lat, "lng": self.lng},
+            "placeId": self.placeId, "task_id": self.id}
+
+        return a
 
 # {"title": "Death Valley National Park", "address1": "California", "address2": "United States",
 #    "coords": {"lat": 36.4617, "lng": -116.8668}, "placeId": "ChIJR4qudndLx4ARVLDye3zwycw"},

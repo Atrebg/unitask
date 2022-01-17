@@ -6,12 +6,16 @@ import json
 from flask import Blueprint, render_template, flash, jsonify, request, url_for, redirect
 from flask_login import login_required, current_user
 from datetime import date, datetime
+import googlemaps
+import requests
+from werkzeug.security import generate_password_hash
 
 from .auth import riempidb
 from .form import *
 
 from models import *
-
+API_KEY = "AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A"
+base_url= 'https://maps.googleapis.com/maps/api/geocode/json?'
 views = Blueprint('views', __name__)
 
 
@@ -28,10 +32,16 @@ def home():
 @views.route('/offer')
 @login_required
 def offer():
-    q = Offer.query.filter(Offer.isAss == False, Offer.isClosed == False,
-                           Offer.applicants.contains(current_user) == False).all()
+    q = Offer.query.filter(Offer.isAss == False, Offer.isClosed == False).all()
 
-    return render_template("Student/homeStud.html", user=current_user, tasks=q)
+    def filtro(t):
+        if t.__contains__(current_user):
+            return False
+        return True
+
+    q1 = filter(filtro, q)
+
+    return render_template("Student/homeStud.html", user=current_user, tasks=q1)
 
 
 @views.route('/posttask', methods=['GET',
@@ -41,7 +51,25 @@ def posttask():
     form = PosttaskForm()
     if request.method == 'POST':
         datatask = request.form['date']
+        address = request.form['location']
+        locality = request.form['locality']
+        administrative_area_level_1 = request.form['administrative_area_level_1']
+        postal_code = request.form['postal_code']
+        country = request.form['country']
+        print(address)
         dt = datetime.strptime(datatask, '%Y-%m-%d')
+        params = {
+            'key' : API_KEY,
+            'address' : address+locality+administrative_area_level_1+postal_code+country
+        }
+        r = requests.get(base_url, params=params).json()
+        geometry = r['results'][0]['geometry']['location']
+        lat = geometry['lat']
+        lng = geometry['lng']
+        placeId = r['results'][0]['place_id']
+
+
+        print(geometry)
         today = datetime.now()
         if dt < today:
             form.date.data = ''
@@ -54,7 +82,8 @@ def posttask():
             if len(title) < 1:
                 flash('Title is too short!', category='error')
             else:
-                new_offer = Offer(title=title, description=description, date_task=dt, id_adult=current_user.id)
+                a = {"title": title, "address1": address, "address2": "Torino", "coords": {"lat": lat, "lng": lng}, "placeId": placeId}
+                new_offer = Offer(title=title, description=description, date_task=dt, id_adult=current_user.id, lat = lat, lng = lng, placeId=placeId)
                 db.session.add(new_offer)
                 db.session.commit()
                 flash('Task posted!', category='success')
@@ -82,7 +111,7 @@ def task(task_id):
 @login_required
 def sendapplication(task_id):
     task = Offer.query.filter(Offer.id == task_id).first()
-    if not current_user.controlapplication(current_user, task):
+    if not current_user.controlapplication(task):
         flash('You already apply for this task', category='error')
         return redirect(url_for('views.home'))
     task.applicants.append(current_user)
@@ -189,6 +218,7 @@ def taskpending():
 
 @views.route('/personalreviews')
 def personalreviews():
+
     return render_template("User/personalreviews.html", user=current_user)
 
 
@@ -241,38 +271,67 @@ def resetdb():
     riempidb()
     return redirect(url_for('auth.logout'))
 
+@views.route('/resetdbusers')
+def resetdbuser():
+    db.drop_all()
+    db.create_all()
+    studenti = [
+        {'name': "Giacomo", 'surname': "Bertazzolo"},
+        {'name': "Valeria", 'surname': "Liuni"},
+        {'name': "Samuele", 'surname': "Stasi"},
+        {'name': "Oliviero", 'surname': "Vidoni"},
+    ]
+
+    adulti = [
+        {'name': "mamma", 'surname': "papa"},
+        {'name': "zia", 'surname': "zio"},
+        {'name': "nonno", 'surname': "nonna"},
+    ]
+
+    for studente in studenti:
+        mail = studente['name'].lower() + studente['surname'].lower() + '@mail.com'
+        user_db = Student(first_name=studente['name'],
+                       surname=studente['surname'],
+                       email=mail,
+                       password=generate_password_hash('1234567890', method='sha256'),
+                       type='student')
+        db.session.add(user_db)
+        db.session.commit()
+
+    for adulto in adulti:
+        mail = adulto['name'].lower() + adulto['surname'].lower() + '@mail.com'
+        user_db = Adult(first_name=adulto['name'],
+                       surname=adulto['surname'],
+                       email=mail,
+                       password=generate_password_hash('1234567890', method='sha256'),
+                       type='adult')
+        db.session.add(user_db)
+        db.session.commit()
+
+    return redirect(url_for('auth.logout'))
 
 @views.route('/maps')
 @login_required
 def maps():
+    q = Offer.query.filter(Offer.isAss == False, Offer.isClosed == False).all()
 
-    aa=""
-    configurations = {"locations": [
-        {"title": "Death Valley National Park", "address1": "California", "address2": "United States",
-         "coords": {"lat": 36.4617, "lng": -116.8668}, "placeId": "ChIJR4qudndLx4ARVLDye3zwycw"},
-        {"title": "Yosemite National Park", "address1": "California", "address2": "USA",
-         "coords": {"lat": 37.7487, "lng": -119.5873}, "placeId": "ChIJxeyK9Z3wloAR_gOA7SycJC0"},
-        {"title": "Joshua Tree National Park", "address1": "California", "address2": "USA",
-         "coords": {"lat": 33.9157, "lng": -115.8807}, "placeId": "ChIJe6hluYWP2oAR4p3rOqftdxk"},
-        {"title": "Lassen Volcanic National Park", "address1": "California", "address2": "USA",
-         "coords": {"lat": 40.4377, "lng": -121.5338}, "placeId": "ChIJvzhBwQdWnYARQmdmeqfYNI8"},
-        {"title": "Sequoia National Park", "address1": "California", "address2": "USA",
-         "coords": {"lat": 36.491, "lng": -118.8253}, "placeId": "ChIJeWUZLX37v4ARZPQen_nfCkQ"},
-        {"title": "Pinnacles National Park", "address1": "California", "address2": "USA",
-         "coords": {"lat": 36.4938, "lng": -121.1465}, "placeId": "ChIJn93OiYBDkoAR7kSomO77gps"},
-        {"title": "Redwood National and State Parks", "address1": "California", "address2": "USA",
-         "coords": {"lat": 41.3025, "lng": -124.0471}, "placeId": "ChIJpX9B9TZm0FQRjl87lWYyzzY"},
-        {"title": "Kings Canyon National Park", "address1": "California", "address2": "USA",
-         "coords": {"lat": 36.74, "lng": -118.9633}, "placeId": "ChIJe6fxX-7Vv4ARTA9DcLeDZII"}
-    ],
-        "mapOptions": {"center": {"lat": 38.0, "lng": -100.0}, "fullscreenControl": True, "mapTypeControl": False,
-                       "streetViewControl": False, "zoom": 4, "zoomControl": True, "maxZoom": 17},
-        "mapsApiKey": "AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A"
-    }
+    def filtro(t):
+        if t.__contains__(current_user):
+            return False
+        return True
+
+    q1 = filter(filtro, q)
+
+    configurations = {"locations": []}
+    for offer in q1:
+         configurations["locations"].append(offer.getdict())
+
     mapsApi = "AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A"
-    mapOptions = { "center" : {"lat": 38.0, "lng": -100.0}, "fullscreenControl ": True, " mapTypeControl ": False,"streetViewControl": False, "zoom": 4, "zoomControl": True, "maxZoom": 17}
+    mapOptions = { "center" : {"lat": 45.1161, "lng": 7.7420}, "fullscreenControl ": True, " mapTypeControl ": False,"streetViewControl": False, "zoom": 4, "zoomControl": True, "maxZoom": 17}
+    configurations['mapsApiKey'] = mapsApi
+    configurations['mapOptions'] = mapOptions
+    return render_template("maps.html", user=current_user, CONFIGURATIONS=configurations, api = mapsApi, mapsOptions=mapOptions)
 
-    return render_template("maps.html", user=current_user, CONFIGURATIONS=configurations, api = mapsApi, mapsOptions=mapOptions, aa=aa)
 
 @views.route('/prova/<offerId>')
 def prova(offerId):

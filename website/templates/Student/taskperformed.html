@@ -5,7 +5,7 @@
   {% for task in tasksperformed %}
   <li class="list-group-item">
      <a href= >{{ task.title }}</a> {{ offer.date_task }}
-      <button> <a href={{ url_for('views.sceltarecensione', task_id=offer.id) }} > Recensisci</a></button>
+      <button> <a href={{ url_for('views.writereview', task_id=offer.id) }} > Recensisci</a></button>
 
           <br/>
 
