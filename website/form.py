@@ -16,12 +16,12 @@ class LoginForm(FlaskForm):
 
 
 class SignupForm(FlaskForm):
-    email = StringField('E-mail:', validators=[DataRequired(), Email()])
+    email = StringField('Email:', validators=[DataRequired(), Email()])
     name = StringField('Name:', validators=[DataRequired(), Length(min=3, max=25)])
     surname = StringField('Surname:', validators=[DataRequired(), Length(min=3, max=25)])
     type = SelectField("Select type of user:", choices=[('student', 'Student'), ('adult', 'Adult')])
     password = PasswordField('Password:', validators=[DataRequired(), Length(min=8, max=16)])
-    passwordconf = PasswordField('Confirm Password:', validators=[DataRequired(), Length(min=8, max=16)])
+    passwordconf = PasswordField('Confirm Password:', validators=[DataRequired(), Length(min=8, max=16), EqualTo('password', message='Password must match')])
     submit = SubmitField('Register')
 
     @staticmethod
@@ -32,20 +32,20 @@ class SignupForm(FlaskForm):
 
 
 class PosttaskForm(FlaskForm):
-    tasktitle = StringField('Title:')
-    taskdescription = StringField('Description:')
-    address = StringField('Address:')
+    tasktitle = StringField('Title:', validators=[DataRequired(), Length(min=3, max=25)])
+    taskdescription = StringField('Description:', validators=[DataRequired(), Length(min=3, max=25)])
+    address = StringField('Address:', validators=[DataRequired(), Length(min=3, max=25)])
     spt = StringField('Apt, Suite, etc (optional):')
-    state = StringField('State:')
+    state = StringField('State:', validators=[DataRequired(), Length(min=3, max=25)])
     zip = StringField('Zip:')
     country = StringField('Country:')
-    date = DateField()
+    date = DateField(validators=[DataRequired()])
     submit = SubmitField('Post Task')
 
 
 class ReviewForm(FlaskForm):
-    reviewtitle = StringField('Titolo:')
-    reviewdescription = StringField('Description:')
+    reviewtitle = StringField('Titolo:', validators=[DataRequired(), Length(min=3, max=25)])
+    reviewdescription = StringField('Description:', validators=[DataRequired(), Length(min=3, max=25)])
     submit = SubmitField('Review')
 
 
@@ -53,10 +53,7 @@ class UpdateAccountForm (FlaskForm):
 
     name = StringField('Name:', validators=[DataRequired(), Length(min=3, max=25)])
     surname = StringField('Surname:', validators=[DataRequired(), Length(min=3, max=25)])
-
-    email = StringField('Email',
-                        validators=[DataRequired(), Email()])
-
+    email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Update')
 
 
