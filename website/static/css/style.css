@@ -1,75 +1,21 @@
-body {
-  margin: 0;
+.navbar{
+     list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: blue;
 }
 
-.sb-title {
-  position: relative;
-  top: -12px;
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
+.navbar-voice{
+    float: left;
 }
 
-.sb-title-icon {
-  position: relative;
-  top: -5px;
-}
-
-.card-container {
-  display: flex;
-  height: 500px;
-  width: 300px;
-}
-
-.panel {
-  background: white;
-  width: 300px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.half-input-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.half-input {
-  max-width: 120px;
-}
-
-h2 {
-  margin: 0;
-  font-family: Roboto, sans-serif;
-}
-
-input {
-  height: 30px;
-}
-
-input {
-  border: 0;
-  border-bottom: 1px solid black;
-  font-size: 14px;
-  font-family: Roboto, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-}
-
-input:focus::placeholder {
+.navbar-voice-link{
+    display: block;
   color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.button-cta {
-  height: 40px;
-  width: 40%;
-  background: #3367d6;
-  color: white;
-  font-size: 15px;
-  text-transform: uppercase;
-  font-family: Roboto, sans-serif;
-  border: 0;
-  border-radius: 3px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.48);
-  cursor: pointer;
-}
