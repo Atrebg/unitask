@@ -1,24 +1,24 @@
 {% extends "base.html" %} {% block title %}Sign-up{% endblock %} {% block content%}
 
 <!-- create database -->
-<form method = "POST">
+<form style="margin:5em 28em 0em 28em;"  method = "POST">
     <br />
     <h3 align= "center"> Signup</h3>
-    <div class="form-group">
+    <div style="padding:0.5em;" class="form-group">
         {{ form.email.label }}
         {{ form.email(class = 'form-control') }}
         {% for error in form.email.errors %}
             <p>{{ error }}</p>
         {% endfor %}
     </div>
-    <div class="form-group">
+    <div style="padding:0.5em;" class="form-group">
         {{ form.name.label }}
         {{ form.name(class = 'form-control') }}
         {% for error in form.name.errors %}
             <p>{{ error }}</p>
         {% endfor %}
   </div>
-    <div class="form-group">
+    <div style="padding:0.5em;" class="form-group">
         {{ form.surname.label }}
         {{ form.surname(class = 'form-control') }}
         {% for error in form.surname.errors %}
@@ -26,21 +26,21 @@
         {% endfor %}
   </div>
 
-    <div class="form-group">
+    <div style="padding:0.5em;" class="form-group">
         {{ form.type.label}}
         {{ form.type }}
         {% for error in form.type.errors %}
             <p>{{ error }}</p>
         {% endfor %}
   </div>
-        <div class="form-group">
+        <div style="padding:0.5em;" class="form-group">
             {{ form.password.label }}
             {{ form.password(class = 'form-control') }}
             {% for error in form.password.errors %}
              <p>{{ error }}</p>
          {% endfor %}
   </div>
-        <div class="form-group">
+        <div style="padding:0.5em;" class="form-group">
             {{ form.passwordconf.label }}
             {{ form.passwordconf(class = 'form-control') }}
             {% for error in form.passwordconf.errors %}
@@ -48,7 +48,9 @@
          {% endfor %}
   </div>
         <br />
+    <div align="center" style="font-size:1em">
   {{ form.submit(class='btn btn-primary m-2') }}
     {{ form.hidden_tag() }}
+    </div>
 </form>
 {% endblock %}

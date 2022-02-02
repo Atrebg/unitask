@@ -4,76 +4,82 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link href="static/css/style.css" rel="stylesheet">
 
-      <link
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    {% block styles %}
+    {% endblock %}
+      <!--<link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
-    />
-    <link
+    />-->
+    <!--<link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="static/css/style.css"/>
+    />-->
+   <!-- <link rel="stylesheet" href="static/css/style.css"/>-->
     <script src="static/app.js"></script>
     {% block scripts %} {% endblock %}
     <title> {% block title %}HomePage{% endblock %}</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbar"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar">
-        <div class="navbar-nav">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <ul class="navbar-nav mr-auto">
+    <li>
+    <a style="padding-left:1em;" class="navbar-brand" href="#">
+        <img src="/static/images/pic/puzzle.png" width="45" height="45"/>
+        UNITASK
+    </a></li>
             {% if user.is_authenticated %}
-                <ul class="nav navbar-nav">
                 {% if user.type=='adult' %}
-                    <li><a class="nav-item nav-link" id="home" href="/">Home</a></li>
-                    <li><a class="nav-item nav-link" id="posttask" href="/posttask">Post a Task</a></li>
-                    <li><a class="nav-item nav-link" id="offer" href="/taskpending">Task Pending</a></li>
-                    <li><a class="nav-item nav-link" id="account" href="/account">Account</a></li>
-                    <li><a class="nav-item nav-link" id="aboutus" href="/about_us">About us</a></li>
-                    <li><a class="nav-item nav-link" id="logout" href="/logout">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" id="home" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" id="posttask" href="/posttask">Post a Task</a></li>
+                    <li class="nav-item"><a class="nav-link" id="offer" href="/taskpending">Task Pending</a></li>
+                    <li class="nav-item"><a class="nav-link" id="account" href="/account">Account</a></li>
+                    <li class="nav-item"><a class="nav-link" id="aboutus" href="/about_us">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" id="logout" href="/logout">Logout</a></li>
 
                     {% elif user.type=='student' %}
-                    <li><a class="nav-item nav-link" id="offer" href="/offer">Home</a></li>
-                    <a class="nav-item nav-link" id="maps" href="/maps">Maps</a>
-                    <li><a class="nav-item nav-link" id="applications" href="/listapplications">Your applications</a></li>
+                     <li class="nav-item"><a class="nav-link" id="offer" href="/offer">Home</a></li>
+                     <li class="nav-item"><a class="nav-link" id="maps" href="/maps">Maps</a>
+                    <li class="nav-item"><a class="nav-link" id="applications" href="/listapplications">Your applications</a></li>
 
-                    <li><a class="nav-item nav-link" id="account" href="/account">Account</a></li>
-                    <li><a class="nav-item nav-link" id="aboutus" href="/about_us">About us</a></li>
-                    <li><a class="nav-item nav-link" id="logout" href="/logout">Logout</a></li>
+                   <li class="nav-item"><a class="nav-link" id="account" href="/account">Account</a></li>
+                     <li class="nav-item"><a class="nav-link" id="aboutus" href="/about_us">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" id="logout" href="/logout">Logout</a></li>
 
 
-                {% endif %}
-                   <!--  <li><a class="nav-item nav-link" id="logout" href="/logout">Loguot</a></li>
-                    <li><a class="nav-item nav-link" id="aboutus" href="/about_us">About us</a></li>-->
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li> {{ user.email}}</li>
-
+                    {% endif %}
                 </ul>
 
-            {% else %}
+                <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <span style="padding-right:1em;" class="navbar-text d-flex justify-content-end">
+                     {{ user.email}}
+                       </span>
+                </li>
 
-                <a class="nav-item nav-link" id="sign_up" href="/sign_up">Signup</a>
-                <a class="nav-item nav-link" id="login" href="/login">Login</a>
-                <a class="nav-item nav-link" id="aboutus" href="/about_us">About us</a>
+                </ul>
 
 
+
+
+                    {% else %}
+
+                <li class="nav-item"><a class="nav-link" id="sign_up" href="/sign_up">Signup</a></li>
+                <li class="nav-item"><a class="nav-link" id="login" href="/login">Login</a>
+                <li class="nav-item"> <a class="nav-link" id="aboutus" href="/about_us">About us</a></li>
 
             {% endif %}
-        </div>
-      </div>
-    </nav>
+    </ul>
+</nav>
+
+
     {% if form %}
     {% for field in form.errors %}
     {% for error in form.errors[field] %}
@@ -103,7 +109,10 @@
       </button>
     </div>
     {% endif %} {% endfor %} {% endif %} {% endwith %}
-    {% block content %} {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
 
 
     <script
