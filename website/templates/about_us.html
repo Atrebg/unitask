@@ -1,87 +1,56 @@
-{% extends "base.html" %} {% block title %}About us{% endblock %} {% block content%}
+{% extends "base.html" %}
+{% block title %}About us{% endblock %}
+{% block content%}
+
     <br />
-    <h1 align = "center">UNITASK</h1>
-    <h2 align ="center">About us</h2>
 
-    <body>
-    We are a group of students from <a href="https://www.polito.it/">Politecnico di Torino</a>.
-    The idea which brought us to UNITASK is mainly related to our condition of students that want to
-    have the possibility to earn some money in their free time.
-    With our platform we want to give the possibility to people who need help to
-    perform simple task, to reach young students as fast as possible.
-    </body>
-    <h3>Our team</h3>
+    <div class="container">
+    <div class="row">
+        <h1 align = "center">UNITASK - About us</h1>
+        <div align="justify">We are a group of students from <a href="https://www.polito.it/">Politecnico di Torino</a>.
+        The idea which brought us to UNITASK is mainly related to our condition of students that want to
+        have the possibility to earn some money in their free time.
+        With our platform we want to give the possibility to people who need help to
+        perform simple task, to reach young students as fast as possible.
+            <br/><br/></div>
+        <h2 align="center">OUR TEAM</h2>
+    </div>
 
-     <div class="row row-cols-lg-3 mt-3 mb-3 p-3">
-            <div class="col">
-                <div class="row p-2">
-                    <div align="center" class="col-lg m-auto">
-                        <h4>Pietro Carabelli</h4>
-                    </div>
-                    <!--<div class="col-lg">-->
-                        <img src="/static/images/team/Pietro.png" class="rounded-3 w-100">
-                    <!--</div>-->
+        <div class="row">
+            <div class="row">
+                <div class="col-sm" align="center">
+                    <h3>Giacomo Bertazzolo</h3>
+                    <img src="/static/images/team/Giacomo.png" class="rounded-circle w-100">
+                </div>
+                <div class="col-sm" align="center">
+                    <h3>Pietro Carabelli</h3>
+                    <img src="/static/images/team/Pietro.png"  class="rounded-circle w-100">
+                </div>
+                <div class="col-sm" align="center">
+                    <h3>Valeria Liuni</h3>
+                <img src="/static/images/team/Valeria.png"  class="rounded-circle w-100">
                 </div>
             </div>
-            <div class="col">
-                <div class="row p-2">
-                    <div align="center" class="col-lg m-auto">
-                        <h4>Giacomo Bertazzolo</h4>
-                    </div>
-
-                   <!-- <div class="col-lg">-->
-                        <img src="/static/images/team/Giacomo.png" class="rounded-circle w-100">
-                    <!--</div>-->
-                </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm" align="center">
+                <h3>Caterina Nassi</h3>
+                <img src="/static/images/team/Caterina.png" class="rounded-circle w-100">
             </div>
-           <div class="col">
-                <div class="row p-2">
-                    <div align="center" class="col-lg m-auto">
-                        <h4>Valeria Liuni</h4>
-                    </div>
-
-                    <!--<div class="col-lg">-->
-                        <img src="/static/images/team/Valeria.png" class="rounded-circle w-100">
-                    <!--</div>-->
+                <div class="col-sm" align="center">
+                <h3>Samuele Stasi</h3>
+                    <img src="/static/images/team/Samuele.png" style="max-height:80% ; min-width:50%" class="rounded-circle w-100">
                 </div>
-            </div>
-
-            <div class="col mt-2">
-                <div class="row p-2 mt-3">
-                    <div align="center" class="col-lg m-auto">
-                        <h4>Caterina Nassi</h4>
-                    </div>
-
-                    <!--<div class="col-lg">-->
-                        <img src="/static/images/team/Caterina.png" class="rounded-circle w-100">
-                    <!--</div>-->
+                <div class="col-sm" align="center">
+                    <h3>Oliviero Vidoni</h3>
+                <img src="/static/images/team/Oliviero.png" style="max-height:80% ; min-width:50%" class="rounded-circle w-100">
                 </div>
             </div>
 
-            <div class="col mt-2">
-                <div class="row p-2 mt-3">
-                    <div align="center" class="col-lg m-auto">
-                        <h4>Samuele Stasi</h4>
-                    </div>
+        </div>
 
-                    <!--<div class="col-lg">-->
-                        <img src="/static/images/team/Samuele.png" class="rounded-circle w-100">
-                    <!--</div>-->
-                </div>
-            </div>
 
-            <div class="col mt-2">
-                <div class="row p-2 mt-3">
-                    <div align="center" class="col-lg m-auto">
-                        <h4>Oliviero Vidoni</h4>
-                    </div>
+    </div>
 
-                   <!-- <div class="col-lg">-->
-                        <img src="/static/images/team/Oliviero.png" class="rounded-circle w-100">
-                   <!-- </div>-->
-                </div>
-            </div>
-
-         </div>
 
 {% endblock %}
