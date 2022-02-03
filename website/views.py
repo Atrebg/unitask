@@ -32,6 +32,7 @@ def home():
 @views.route('/offer')
 @login_required
 def offer():
+    Offer.controltasksdate()
     q = Offer.query.filter(Offer.isAss == False, Offer.isClosed == False).all()
 
     def filtro(t):
