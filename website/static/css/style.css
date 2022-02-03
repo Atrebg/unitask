@@ -19,3 +19,10 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.a:visited{
+    color: white;
+}
+
+.btn{
+    color: #198754;
+}

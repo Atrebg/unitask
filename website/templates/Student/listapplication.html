@@ -1,5 +1,77 @@
-{% extends "base.html" %} {% block title %}List of application{% endblock %} {% block content%}
+{% extends "base.html" %}
+{% block title %}List of application{% endblock %}
+{% block content%}
     <br />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <h1 align="center">Pending applications</h1>
+
+                <table class="table">
+
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">TASK</th>
+                        <th scope="col">DATE</th>
+                        <th scope="col">DELETE APPLICATION</th>
+                    </tr>
+                    </thead>
+                    {% for offer in user.applications %}
+                        {% if offer.isAss==False %}
+                            <tbody>
+                            <tr>
+                                <th scope="row"><a href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
+                                <td>{{ offer.date_task }}</td>
+                                <td><button type="button"  class="btn btn-dark"><a style="color: white" href={{ url_for('views.deleteapplication', task_id=offer.id) }} > Delete Application</a></button></td>
+                            </tr>
+                            </tbody>
+                            </table>
+
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+            <div class="col-sm-12 col-md-6">
+                <h1 align="center">Closed application</h1>
+                <div class="row">
+                    <h2 align="center">Task won</h2>
+                    {% for offer in user.applications %}
+                        {% if offer.isAss==True %}
+                            {% if offer.scelta==user.id %}
+                                <li class="list-group-item">
+                                    <a href= {{ url_for('views.task', task_id=offer.id) }}>{{ offer.title }}</a> vinta
+                                </div>
+                                <div class="row">
+                                    <h2 align="center">Task won and performed</h2>
+                                    {% if offer.isPerf==False %}
+                                        <button> <a href={{ url_for('views.writereview', task_id=offer.id) }} > I performed the task. Review task poster</a></button>
+                                    {% endif %}
+                                </div>
+                                <div class="row">
+                                <h2 align="center">Task lost</h2>
+                            {% else %}
+                                <li class="list-group-item">
+                                {{ offer.title }} persa
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+<br/><br/>
+<!--Giacomo-->
+
     <h1 align="center">Pending applications</h1>
 <ul class="list-group list-group-flush" id="offers">
   {% for offer in user.applications %}
@@ -37,4 +109,8 @@
 
   {% endfor %}
 </ul>
+ <!---->
+
+
+
 {% endblock %}
