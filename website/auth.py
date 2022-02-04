@@ -86,14 +86,14 @@ def riempidb():
     ]
 
     tasks = [
-        {'titolo': "cane", 'descrizione': "bla bla bla bla", 'date': "2022-02-16", },
-        {'titolo': "gatto", 'descrizione': "bla bla bla bla", 'date': "2022-02-17"},
-        {'titolo': "nonna", 'descrizione': "bla bla bla bla", 'date': "2022-02-18"},
-        {'titolo': "nonno", 'descrizione': "bla bla bla bla", 'date': "2022-02-19"},
-        {'titolo': "spazzatura", 'descrizione': "bla bla bla bla", 'date': "2022-02-19"},
-        {'titolo': "trasloco", 'descrizione': "bla bla bla bla", 'date': "2022-02-24"},
-        {'titolo': "compiti", 'descrizione': "bla bla bla bla", 'date': "2022-03-28"},
-        {'titolo': "roba", 'descrizione': "bla bla bla bla", 'date': "2021-03-28"}
+        {'titolo': "cane", 'descrizione': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi.", 'date': "2022-02-16", },
+        {'titolo': "gatto", 'descrizione': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi.", 'date': "2022-02-17"},
+        {'titolo': "nonna", 'descrizione': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi.", 'date': "2022-02-18"},
+        {'titolo': "nonno", 'descrizione': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi.", 'date': "2022-02-19"},
+        {'titolo': "spazzatura", 'descrizione': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi.", 'date': "2022-02-19"},
+        {'titolo': "trasloco", 'descrizione': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi.", 'date': "2022-02-24"},
+        {'titolo': "compiti", 'descrizione': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi.", 'date': "2022-03-28"},
+        {'titolo': "roba", 'descrizione': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi.", 'date': "2021-03-28"}
     ]
 
     ids = {5,6,7,5,6,7,5}

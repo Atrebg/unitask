@@ -54,6 +54,27 @@ class Student(User, db.Model):
             return False
         return True
 
+    def taskwon(self):
+        ltaskwon = []
+        for off in self.applications:
+            if off.scelta == self.id:
+                ltaskwon.append(off)
+        return ltaskwon
+
+    def taskwonandperform(self):
+        t = []
+        for off in self.applications:
+            if off.scelta == self.id and off.isPerf:
+                t.append(off)
+        return t
+
+    def tasklost(self):
+        t = []
+        for off in self.applications:
+            if off.scelta != self.id:
+                t.append(off)
+        return t
+
 
 class Adult(User, db.Model):
     __tablename__ = 'adult'
@@ -111,11 +132,11 @@ class Offer(db.Model, UserMixin):
         return False
 
     def getdict(self):
-        a = {"title": self.title, "address1": self.address, "address2": "Torino", "coords": {"lat": self.lat, "lng": self.lng},
-            "placeId": self.placeId, "task_id": self.id}
+        a = {"title": self.title, "address1": self.address, "address2": "Torino",
+             "coords": {"lat": self.lat, "lng": self.lng},
+             "placeId": self.placeId, "task_id": self.id}
 
         return a
 
 # {"title": "Death Valley National Park", "address1": "California", "address2": "United States",
 #    "coords": {"lat": 36.4617, "lng": -116.8668}, "placeId": "ChIJR4qudndLx4ARVLDye3zwycw"},
-

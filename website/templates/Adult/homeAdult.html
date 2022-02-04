@@ -13,7 +13,7 @@
 
         {% if offer.isAss!=True and offer.isClosed==False %}
             <li class="list-group-item">
-            <a href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a> {{ offer.date_task }}
+           <a  href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a> {{ offer.date_task }}
       <div>
         {% for applicant in offer.applicants %}
             {{ applicant.id }}
@@ -40,31 +40,33 @@
 
 
 
-    <h1 align="center">List of Task Posted</h1>
-<ul class="list-group list-group-flush" id="offers">
-  {% for offer in user.tasks %}
+    <div class="container">
+    <div class="row">
+            <h1 align="center">POSTED TASK</h1>
 
-        {% if offer.isAss!=True and offer.isClosed==False %}
-            <li class="list-group-item">
-     <a href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a> {{ offer.date_task }}
-      <div>
-        {% for applicant in offer.applicants %}
-            {{ applicant.id }}
+        <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">TASK</th>
+                        <th scope="col">DESCRIPTION</th>
+                        <th scope="col">NUMBER OF APPLICANTS</th>
+                    </tr>
+                    </thead>
+                    {% for offer in user.tasks %}
+                        <tbody>
+                        <tr>
+                            <th scope="row"><a  href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
+                            <td>{{ offer.description }}</td>
+                            <td align="center"> {{ offer.applicants|length }}</td>
+                        </tr>
+                        </tbody>
+                    {% endfor %}
+        </table>
+    </div>
+    </div>
 
-          {% endfor %}
-          <button type="button" class="close" > <a href={{ url_for('views.deletetask', task_id=offer.id) }}>
-             <span aria-hidden="true">&times;</span>
-          </a>
-         </button>
-          </div>
-          <br/>
-            </li>
-        {% endif %}
-
-
-
-  {% endfor %}
-</ul>
+    <br/>
+    <br/>
 
 {% endblock %}
 
