@@ -3,43 +3,6 @@
 {% block content%}
 
     <br />
-
-    <div class="container">
-    <div class="row">
-            <h1 align="center">POSTED TASK</h1>
-
-        <ul class="list-group list-group-flush" id="offers">
-                {% for offer in user.tasks %}
-
-        {% if offer.isAss!=True and offer.isClosed==False %}
-            <li class="list-group-item">
-           <a  href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a> {{ offer.date_task }}
-      <div>
-        {% for applicant in offer.applicants %}
-            {{ applicant.id }}
-
-          {% endfor %}
-          <button type="button" class="close" > <a href={{ url_for('views.deletetask', task_id=offer.id) }}>
-             <span aria-hidden="true">&times;</span>
-          </a>
-         </button>
-          </div>
-          <br/>
-            </li>
-        {% endif %}
-
-  {% endfor %}
-</ul>
-    </div>
-    </div>
-
-
-
-
-
-
-
-
     <div class="container">
     <div class="row">
             <h1 align="center">POSTED TASK</h1>
