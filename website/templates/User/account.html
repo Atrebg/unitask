@@ -2,6 +2,7 @@
      <br />
     <h1 align = "center">UNITASK</h1>
 
+
     {% if user.type=='adult' %}
      <button> <a href={{ url_for('views.taskpending') }} > Lista task chiuse</a></button>
     {% endif %}
