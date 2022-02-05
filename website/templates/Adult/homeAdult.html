@@ -3,29 +3,30 @@
 {% block content%}
 
     <br />
-    <div class="container">
-    <div class="row">
-            <h1 align="center">POSTED TASK</h1>
 
-        <table class="table">
-                    <thead class="thead-dark">
+    <div class="container">
+        <div class="row">
+            <h1 align="center">YOUR POSTED TASK</h1>
+
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">TASK</th>
+                    <th scope="col">DESCRIPTION</th>
+                    <th scope="col">NUMBER OF APPLICANTS</th>
+                </tr>
+                </thead>
+                {% for offer in user.tasks %}
+                    <tbody>
                     <tr>
-                        <th scope="col">TASK</th>
-                        <th scope="col">DESCRIPTION</th>
-                        <th scope="col">NUMBER OF APPLICANTS</th>
+                        <th scope="row"><a  href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
+                        <td>{{ offer.description }}</td>
+                        <td align="center"> {{ offer.applicants|length }}</td>
                     </tr>
-                    </thead>
-                    {% for offer in user.tasks %}
-                        <tbody>
-                        <tr>
-                            <th scope="row"><a  href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
-                            <td>{{ offer.description }}</td>
-                            <td align="center"> {{ offer.applicants|length }}</td>
-                        </tr>
-                        </tbody>
-                    {% endfor %}
-        </table>
-    </div>
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 
     <br/>

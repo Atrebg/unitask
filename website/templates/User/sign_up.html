@@ -12,6 +12,7 @@
         </div>
         <div class="col-sm-12 col-md-6">
             <h1 align="center"> <br/>Signup</h1>
+        <div>Lorem ipsum dolor sit amet</div>
             <form method = "POST">
                <div class="form-group">
                 {{ form.email.label }}
@@ -37,7 +38,7 @@
 
     <div class="form-group">
         {{ form.type.label}}
-        {{ form.type }}
+        {{ form.type(class_='btn btn-secondary dropdown-toggle m-3 p-2', style='') }}
         {% for error in form.type.errors %}
             <p>{{ error }}</p>
         {% endfor %}
@@ -58,7 +59,7 @@
   </div>
         <br />
     <div align="center">
-  {{ form.submit(class='btn btn-dark m-2') }}
+  {{ form.submit(class='btn btn-success m-2') }}
     {{ form.hidden_tag() }}
     </div>
             </form>

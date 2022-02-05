@@ -36,49 +36,88 @@
             <div class="col-sm-12 col-md-6">
                 <h1 align="center">Closed application</h1>
                 <div class="row">
-                    <h4 align="center">Task won</h4>
-                {%set  l = user.taskwon() %}
-                    {% if l %}
-                    {% for offer in l %}
-                        <li class="list-group-item" align="center">
-                        <a href= {{ url_for('views.task', task_id=offer.id) }}>{{ offer.title }}</a> vinta
-                    {% endfor %}
+                    <h2 align="center">Task won</h2>
 
-                </div>
-                <div class="row">
-                    <h4 align="center">Task won and performed</h4>
-                {%set  l = user.taskwonandperform() %}
+                    {%set  l = user.taskwon() %}
                     {% if l %}
-                    {% for offer in l %}
-                        <li class="list-group-item" align="center">
-                        {{ offer.title }}
-                        {% if not offer.isClosed %}
-                            <button> <a href={{ url_for('views.writereview', task_id=offer.id) }} > I performed the task. Review task poster</a></button>
-                        {% endif %}
-                    {% endfor %}
+                        <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">TASK</th>
+                        <th scope="col">DATE</th>
+                        <th scope="col">DELETE APPLICATION</th>
+                    </tr>
+                    </thead>
+
+                        {% for offer in l %}
+
+                            <a href= {{ url_for('views.task', task_id=offer.id) }}>{{ offer.title }}</a>
+                        {% endfor %}
                     {% else %}
-                        <li class="list-group-item" align="center">
-                        No task won
+                        <div align="center">
+                            We are sorry! You have no task won.
+                        </div>
                     {% endif %}
                 </div>
                 <div class="row">
-                    <h4 align="center">Task lost</h4>
+                    <h2 align="center">Task won and performed</h2>
+                    {%set  l = user.taskwonandperform() %}
+                    {% if l %}
+                        <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">TASK</th>
+                        <th scope="col">DATE</th>
+                        <th scope="col">DELETE APPLICATION</th>
+                    </tr>
+                    </thead>
+                        {% for offer in l %}
+                            <li class="list-group-item" align="center">
+                            {{ offer.title }}
+                            {% if not offer.isClosed %}
+                                <button> <a href={{ url_for('views.writereview', task_id=offer.id) }} > I performed the task. Review task poster</a></button>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <div align="center">
+                            We are sorry! You have no task won.
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="row">
+                    <h2 align="center">Task lost</h2>
                     {%set  l = user.tasklost() %}
                     {% if l %}
+                        <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">TASK</th>
+                        <th scope="col">DATE</th>
+                        <th scope="col">DELETE APPLICATION</th>
+                    </tr>
+                    </thead>
                         {% for offer in l %}
                             <li class="list-group-item" align="center">
                             {{ offer.title }}
                         {% endfor %}
                     {% else %}
-                        <li class="list-group-item" align="center">
-                        No task lost
+                        <div align="center">
+                            There are no task lost!
+                        </div>
                     {% endif %}
                 </div>
             </div>
-        </div>
 
-    </div>
-    <br/><br/>
+
+
+
+
+
+
+
+
+
+<br/><br/>
+<!--Giacomo-->
+
     <br/><br/><br/><br/>
+
 
 {% endblock %}
