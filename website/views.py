@@ -118,13 +118,7 @@ def sendapplication(task_id):
     task.applicants.append(current_user)
     db.session.commit()
     return redirect(url_for('views.home'))
-    # daeli = []
-    # for task in tasks:
-    #   for user in task.applicants:
-    #      if user.id == current_user.id:
-    #         daeli.append(task)
-    # for task in daeli:
-    #   tasks.remove(task)
+
 
 
 @views.route('/choosestud/<task_id>/<stud_id>', methods=['GET', 'POST'])
@@ -336,6 +330,5 @@ def maps():
 
 @views.route('/prova/<offerId>')
 def prova(offerId):
-    print offerId
-    print 'qui'
+    
     return redirect(url_for('views.home'))

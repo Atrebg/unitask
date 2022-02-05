@@ -19,7 +19,7 @@
                     </thead>
                     {% for offer in tasks %}
                         <tbody>
-                        <tr>
+                        <tr onClick="window.location.href = '/task/'+{{ offer.id }}">
                             <th scope="row"><a href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }} </a></th>
                             <td>{{ offer.description }}</td>
                             <td><button type="button"  class="btn btn-dark"><a style="color: white" href={{ url_for('views.task', task_id=offer.id) }}>APPLY</a></button></td>

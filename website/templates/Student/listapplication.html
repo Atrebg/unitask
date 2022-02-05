@@ -43,10 +43,7 @@
                         <li class="list-group-item" align="center">
                         <a href= {{ url_for('views.task', task_id=offer.id) }}>{{ offer.title }}</a> vinta
                     {% endfor %}
-                {% else %}
-                        <li class="list-group-item" align="center">
-                        No task won
-                    {% endif %}
+
                 </div>
                 <div class="row">
                     <h4 align="center">Task won and performed</h4>
@@ -78,20 +75,10 @@
                     {% endif %}
                 </div>
             </div>
+        </div>
 
-
-
-
-
-
-
-
-
-
-<br/><br/>
-<!--Giacomo-->
-
+    </div>
+    <br/><br/>
     <br/><br/><br/><br/>
-
 
 {% endblock %}
