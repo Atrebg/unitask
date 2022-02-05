@@ -9,27 +9,35 @@
         <!-- PENDING APPLICATION -->
 
             <div class="col-5 p-4 m-2 col-page">
-                <h1 align="left" class="mb-4">PENDING APPLICATIONSS</h1>
+                <h1 align="left" class="mb-4">PENDING APPLICATIONS</h1>
 
                 <table class="table table-hover">
-                    <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
-                    <tr>
-                        <th scope="col">TASK</th>
-                        <th scope="col">DATE</th>
-                        <th scope="col">DELETE APPLICATION</th>
-                    </tr>
-                    </thead>
-                    {% for offer in user.applications %}
-                        {% if offer.isAss==False %}
-                            <tbody>
-                            <tr>
-                                <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
-                                <td>{{ offer.date_task }}</td>
-                                <td><button type="button"  class="btn btn-outline-danger mx-4"><a class="delete-button" href={{ url_for('views.deleteapplication', task_id=offer.id) }} > Delete</a></button></td>
-                            </tr>
-                            </tbody>
-                        {% endif %}
-                    {% endfor %}
+
+                    {% if user.applications==True %}
+                        {% for offer in user.applications %}
+                            {% if offer.isAss==False %}
+                                <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
+                                    <tr>
+                                        <th scope="col">TASK</th>
+                                        <th scope="col">DATE</th>
+                                        <th scope="col">DELETE APPLICATION</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
+                                        <td>{{ offer.date_task }}</td>
+                                        <td><button type="button"  class="btn btn-outline-danger mx-4"><a class="delete-button" href={{ url_for('views.deleteapplication', task_id=offer.id) }} > Delete</a></button></td>
+                                    </tr>
+                                </tbody>
+                            {% endif %}
+                        {% endfor %}
+                        {% else %}
+
+                        There are no task pending!
+
+                    {% endif %}
+
                 </table>
             </div>
         <div class="col-1"></div>
@@ -93,7 +101,8 @@
                 </div>
             </div>
 
-
+    </div>
+    </div>
 
 
 
