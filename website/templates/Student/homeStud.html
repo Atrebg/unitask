@@ -23,7 +23,7 @@
                         <tr>
                             <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }} </a></th>
                             <td>{{ offer.description }}</td>
-                            <td><button type="button"  class="btn btn-secondary"><a style="color: white" href={{ url_for('views.task', task_id=offer.id) }}>APPLY</a></button></td>
+                            <td><button type="button"  class="btn btn-secondary"><a style="color: white" href={{ url_for('views.sendapplication', task_id=offer.id) }}>APPLY</a></button></td>
                         </tr>
                         </tbody>
                     {% endfor %}

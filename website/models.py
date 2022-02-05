@@ -71,7 +71,7 @@ class Student(User, db.Model):
     def tasklost(self):
         t = []
         for off in self.applications:
-            if off.scelta != self.id:
+            if off.scelta != self.id and off.scelta:
                 t.append(off)
         return t
 

@@ -57,7 +57,7 @@ def posttask():
         administrative_area_level_1 = request.form['administrative_area_level_1']
         postal_code = request.form['postal_code']
         country = request.form['country']
-        print(address)
+
         dt = datetime.strptime(datatask, '%Y-%m-%d')
         params = {
             'key' : API_KEY,
