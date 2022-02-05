@@ -5,12 +5,14 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-md-6">
-                <h1 align="center">Pending applications</h1>
 
-                <table class="table">
+        <!-- PENDING APPLICATION -->
 
-                    <thead class="thead-dark">
+            <div class="col-5 p-4 m-2 col-page">
+                <h1 align="left" class="mb-4">PENDING APPLICATIONSS</h1>
+
+                <table class="table table-hover">
+                    <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
                     <tr>
                         <th scope="col">TASK</th>
                         <th scope="col">DATE</th>
@@ -21,37 +23,32 @@
                         {% if offer.isAss==False %}
                             <tbody>
                             <tr>
-                                <th scope="row"><a href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
+                                <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
                                 <td>{{ offer.date_task }}</td>
-                                <td><button type="button"  class="btn btn-dark"><a style="color: white" href={{ url_for('views.deleteapplication', task_id=offer.id) }} > Delete Application</a></button></td>
+                                <td><button type="button"  class="btn btn-outline-danger mx-4"><a class="delete-button" href={{ url_for('views.deleteapplication', task_id=offer.id) }} > Delete</a></button></td>
                             </tr>
                             </tbody>
-
-
                         {% endif %}
                     {% endfor %}
                 </table>
             </div>
+        <div class="col-1"></div>
 
-            <div class="col-sm-12 col-md-6">
-                <h1 align="center">Closed application</h1>
+        <!-- CLOSED APPLICATION -->
+
+            <div class="col-5 p-4 m-2 col-page">
+                <h1 align="left" class="mb-4">CLOSED APPLICATION</h1>
                 <div class="row">
-                    <h2 align="center">Task won</h2>
-
+                    <h3 align="left" style="color: white; background: #2c3e50">TASK WON</h3>
                     {%set  l = user.taskwon() %}
                     {% if l %}
-                        <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">TASK</th>
-                        <th scope="col">DATE</th>
-                        <th scope="col">DELETE APPLICATION</th>
-                    </tr>
-                    </thead>
-
+                        <ul class="mx-4">
                         {% for offer in l %}
-
-                            <a href= {{ url_for('views.task', task_id=offer.id) }}>{{ offer.title }}</a>
+                        <li>
+                            <a style="color:darkblue" href= {{ url_for('views.task', task_id=offer.id) }}>{{ offer.title }}</a>
+                      </li>
                         {% endfor %}
+                         </ul>
                     {% else %}
                         <div align="center">
                             We are sorry! You have no task won.
@@ -59,22 +56,18 @@
                     {% endif %}
                 </div>
                 <div class="row">
-                    <h2 align="center">Task won and performed</h2>
+                    <h3 class="mt-3" align="left" style="color: white; background: #2c3e50">TASK WON AND PERFORMED</h3>
                     {%set  l = user.taskwonandperform() %}
                     {% if l %}
-                        <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">TASK</th>
-                        <th scope="col">DATE</th>
-                        <th scope="col">DELETE APPLICATION</th>
-                    </tr>
-                    </thead>
+                        <ul class="mx-4">
+
                         {% for offer in l %}
-                            <li class="list-group-item" align="center">
+                            <li align="center">
                             {{ offer.title }}
                             {% if not offer.isClosed %}
-                                <button> <a href={{ url_for('views.writereview', task_id=offer.id) }} > I performed the task. Review task poster</a></button>
+                                <button type="button" class="btn btn-outline-success mx-4"> <a class="review-button" shref={{ url_for('views.writereview', task_id=offer.id) }} > Review </a></button>
                             {% endif %}
+                        </ul>
                         {% endfor %}
                     {% else %}
                         <div align="center">
@@ -83,20 +76,15 @@
                     {% endif %}
                 </div>
                 <div class="row">
-                    <h2 align="center">Task lost</h2>
+                    <h3 class="mt-3" align="left" style="color: white; background: #2c3e50">TASK LOST</h3>
                     {%set  l = user.tasklost() %}
                     {% if l %}
-                        <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">TASK</th>
-                        <th scope="col">DATE</th>
-                        <th scope="col">DELETE APPLICATION</th>
-                    </tr>
-                    </thead>
+                        <ul class="mx-4">
                         {% for offer in l %}
-                            <li class="list-group-item" align="center">
-                            {{ offer.title }}
+                            <li  align="center">
+                            {{ offer.title }}</li>
                         {% endfor %}
+                        </ul>
                     {% else %}
                         <div align="center">
                             There are no task lost!

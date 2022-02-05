@@ -19,7 +19,7 @@
                 {% for offer in user.tasks %}
                     <tbody>
                     <tr>
-                        <th scope="row"><a  href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
+                        <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
                         <td>{{ offer.description }}</td>
                         <td align="center"> {{ offer.applicants|length }}</td>
                     </tr>

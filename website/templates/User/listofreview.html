@@ -1,4 +1,10 @@
-{% extends "base.html" %} {% block title %}List of review of users{% endblock %} {% block content%}
+{% extends "base.html" %}
+{% block title %}List of review of users{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block content%}
     <br />
     <h1 align="center">List review of {{ reviewed.first_name }}{{ reviewed.surname }}</h1>
 <ul class="list-group list-group-flush" id="offers">
