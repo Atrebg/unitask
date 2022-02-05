@@ -322,7 +322,7 @@ def maps():
          configurations["locations"].append(offer.getdict())
 
     mapsApi = "AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A"
-    mapOptions = { "center" : {"lat": 45.1161, "lng": 7.7420}, "fullscreenControl ": True, " mapTypeControl ": False,"streetViewControl": False, "zoom": 4, "zoomControl": True, "maxZoom": 17}
+    mapOptions = { "center" : {"lat": 45.1161, "lng": 7.7420}, "fullscreenControl ": True, " mapTypeControl ": False,"streetViewControl": False, "zoom": 2, "zoomControl": True, "maxZoom": 17}
     configurations['mapsApiKey'] = mapsApi
     configurations['mapOptions'] = mapOptions
     return render_template("maps.html", user=current_user, CONFIGURATIONS=configurations, api = mapsApi, mapsOptions=mapOptions)
