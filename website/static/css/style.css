@@ -1,3 +1,7 @@
+body{
+    padding-top:4em;
+}
+
 .navbar{
     list-style-type: none;
     margin: 0;
@@ -52,10 +56,6 @@
 }
 .col-page:hover{
     background-color: lightyellow;
-}
-
-.login-form{
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 /* CSS */
@@ -114,3 +114,44 @@ box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 
     margin:1em;
     padding: 1.5em;
 }
+
+.task-row{
+    padding: 2.5em;
+}
+
+.task-container {
+    margin:2.5em;
+  background-color: #fbeee0;
+  border: 2px solid #2c3e50;
+  border-radius: 30px;
+  box-shadow: #2c3e50 4px 4px 0 0;
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.task-owner{
+    font-style: italic;
+}
+.task-title{
+    font-size:68px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.task-description{
+    padding:1.5em;
+}
+
+.login-form {
+    margin:1em;
+    align-content: center;
+    padding:32px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
