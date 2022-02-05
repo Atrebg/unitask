@@ -1,13 +1,11 @@
 html,
 body {
   height: 100%;
-  margin: 0;
-  padding: 0;
 }
 
 #map-container {
   width: 100%;
-  height: 90%;
+  height: 95%;
   position: relative;
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
