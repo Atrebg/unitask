@@ -13,8 +13,9 @@
 
                 <table class="table table-hover">
 
-                    {% if user.applications==True %}
-                        {% for offer in user.applications %}
+                        {%set  l = user.getapplications() %}
+                        {% if l %}
+                            {% for offer in l %}
                             {% if offer.isAss==False %}
                                 <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
                                     <tr>
@@ -33,10 +34,9 @@
                             {% endif %}
                         {% endfor %}
                         {% else %}
+                            No task pending
+                        {% endif %}
 
-                        There are no task pending!
-
-                    {% endif %}
 
                 </table>
             </div>

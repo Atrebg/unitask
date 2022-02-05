@@ -75,6 +75,9 @@ class Student(User, db.Model):
                 t.append(off)
         return t
 
+    def getapplications(self):
+        t=self.applications
+        return t
 
 class Adult(User, db.Model):
     __tablename__ = 'adult'
