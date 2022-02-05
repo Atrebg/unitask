@@ -2,12 +2,53 @@
      <br />
     <h1 align = "center">UNITASK</h1>
 
+    <div class="container">
+    <div class="row">
+        <div align="center" class="col-3 profile-box m-3 p-4">
+            <div class="row">
+                <div class="col-2">
+                 {% if user.type=='student'%}
+                            <img align="left" width="60" height="60" alt="usertype" src="/static/images/pic/student.png"/>
+                    {% endif %}
+            </div>
+                <div class="col-8">
+                    <h3 class="px-2">{{user.first_name}} {{ user.surname }}</h3>
+                    <p class="px-3">{{ user.email }}</p>
+                    </div>
+
+            </div>
+        </div>
+
+        <div  class="col-8 reviews-box m-3">
+
+            <!--personal reviews-->
+<h1 align="left" class="p-2">Dicono di me </h1>
+
+        {% for recens in user.reviewsreceived %}
+            <div class="box-review">
+                <h2>Reviewed by: <span class="review-author"> {{recens.author.first_name }}</span></h2>
+                <h4 class="review-title">{{ recens.title }}</h4>
+                {{ recens.text }}
+            </div>
+          {% endfor %}
+
+            <!--close-->
+
+
+
+
+
+
+        </div>
+    </div>
+    </div>
+
+
+
+
+
 
     {% if user.type=='adult' %}
      <button> <a href={{ url_for('views.taskpending') }} > Lista task chiuse</a></button>
     {% endif %}
-
-    <h2 align ="center">Vedi recensioni Personali</h2>
-    <button> <a href={{ url_for('views.personalreviews') }} > Lista reviews</a></button>
-    <h2 align ="center">Personal settings</h2>
 {% endblock %}
