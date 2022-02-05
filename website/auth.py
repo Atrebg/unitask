@@ -124,7 +124,7 @@ def riempidb():
             dt = datetime.strptime(task['date'], '%Y-%m-%d')
             us = User.query.get(b)
             b+=1
-            new_offer = Offer(title=task['titolo'], description=task['descrizione'], date_task=dt, id_adult=us.id, lat = task['lat'], lng = task['lng'], placeId=task['placeId'])
+            new_offer = Offer(title=task['titolo'], description=task['descrizione'], date_task=dt, id_adult=us.id, lat = task['lat'], lng = task['lng'], placeId=task['placeId'], address=task['address'])
             db.session.add(new_offer)
             db.session.commit()
 
