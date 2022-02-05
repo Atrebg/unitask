@@ -51,15 +51,16 @@ def sign_up():
         name = request.form.get('name')
         surname = request.form.get('surname')
         password = request.form.get('password')
+        description = request.form.get('description')
         passwordconf = request.form.get('passwordconf')
         type = request.form.get('type')
 
         user = User.query.filter_by(email=email).first()
         new_user = User
         if type == 'student':
-            new_user = Student(email=email, password=generate_password_hash(password, method='sha256'), first_name=name, surname=surname, type=type)
+            new_user = Student(email=email, password=generate_password_hash(password, method='sha256'), first_name=name, surname=surname, type=type, description=description)
         elif type == 'adult':                new_user = Adult(email=email, password=generate_password_hash(password, method='sha256'),
-                                first_name=name, surname=surname, type=type)
+                                first_name=name, surname=surname, type=type, description=description)
         db.session.add(new_user)
         db.session.commit()
         flash('Account created!', category='success')

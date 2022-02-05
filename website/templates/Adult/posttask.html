@@ -28,6 +28,13 @@
             <p>{{ error }}</p>
         {% endfor %}
     </div>
+    <div class="form-group">
+            {{ form.dateexpire.label(class= "dropdwown") }}
+            {{ form.dateexpire(class = 'form-control') }}
+            {% for error in form.dateexpire.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
     <div class="panel">
         <div>
             <img class="sb-title-icon" src="https://fonts.gstatic.com/s/i/googlematerialicons/location_pin/v5/24px.svg" alt="">

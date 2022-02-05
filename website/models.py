@@ -79,6 +79,7 @@ class Student(User, db.Model):
         t=self.applications
         return t
 
+
 class Adult(User, db.Model):
     __tablename__ = 'adult'
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)

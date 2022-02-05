@@ -19,6 +19,7 @@ class SignupForm(FlaskForm):
     email = StringField('Email:', validators=[DataRequired(), Email()])
     name = StringField('Name:', validators=[DataRequired(), Length(min=3, max=25)])
     surname = StringField('Surname:', validators=[DataRequired(), Length(min=3, max=25)])
+    description = StringField('Description:', validators=[Length(min=3)])
     type = SelectField("Select type of user:", choices=[('student', 'Student'), ('adult', 'Adult')])
     password = PasswordField('Password:', validators=[DataRequired(), Length(min=8, max=16)])
     passwordconf = PasswordField('Confirm Password:', validators=[DataRequired(), Length(min=8, max=16), EqualTo('password', message='Password must match')])
@@ -40,6 +41,7 @@ class PosttaskForm(FlaskForm):
     zip = StringField('Zip:')
     country = StringField('Country:')
     date = DateField(validators=[DataRequired()])
+    dateexpire= DateField(validators=[DataRequired()])
     submit = SubmitField('Post Task')
 
 

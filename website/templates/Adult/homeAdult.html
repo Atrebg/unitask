@@ -14,17 +14,23 @@
                     <th scope="col">TASK</th>
                     <th scope="col">DESCRIPTION</th>
                     <th scope="col">NUMBER OF APPLICANTS</th>
+                    <th scope="col">Delete</th>
                 </tr>
                 </thead>
-                {% for offer in user.tasks %}
-                    <tbody>
-                    <tr>
-                        <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
-                        <td>{{ offer.description }}</td>
-                        <td align="center"> {{ offer.applicants|length }}</td>
-                    </tr>
-                    </tbody>
-                {% endfor %}
+                {% if user.tasks|length != 0 %}
+                    {% for offer in user.tasks %}
+                        <tbody>
+                        <tr>
+                            <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
+                            <td>{{ offer.description }}</td>
+                            <td align="center"> {{ offer.applicants|length }}</td>
+                            <td><button type="button"  class="btn btn-secondary"><a style="color: white" href={{ url_for('views.deletetask', task_id=offer.id) }}>Delete task</a></button></td>
+                        </tr>
+                        </tbody>
+                    {% endfor %}
+                {% else %}
+                You did not post any task
+                {% endif %}
             </table>
         </div>
     </div>

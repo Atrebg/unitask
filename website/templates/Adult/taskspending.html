@@ -2,18 +2,19 @@
     <br />
     <h1 align="center">List of Task Closed</h1>
 <ul class="list-group list-group-flush" id="offers">
-  {% for offer in pending %}
-            <li class="list-group-item">
-     {{ offer.title }} {{ offer.performer.first_name }}
-          <br/>
-                {% if offer.isAss==True and offer.isPerf==False %}
-            <button> <a href={{ url_for('views.writereview', task_id=offer.id) }} > The task has been performed! Review the performer</a></button>
-            </li>
-        {% endif %}
-
-
-
-  {% endfor %}
+    {%  if pending|length != 0 %}
+      {% for offer in pending %}
+                <li class="list-group-item">
+         {{ offer.title }} {{ offer.performer.first_name }}
+              <br/>
+                    {% if offer.isAss==True and offer.isPerf==False %}
+                <button> <a href={{ url_for('views.writereview', task_id=offer.id) }} > The task has been performed! Review the performer</a></button>
+                </li>
+                    {% endif %}
+      {% endfor %}
+    {% else %}
+        No task pending
+    {% endif %}
 </ul>
 
 {% endblock %}
