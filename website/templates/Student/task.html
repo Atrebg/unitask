@@ -7,7 +7,7 @@
         <div class="row task-row">
             <div class="col-12">
                 <h1 align="left" class="task-title">{{ taskscelta.title }}</h1>
-                <h3>Posted by <span class="task-owner"><a href="{{ url_for('views.showreviews', user_id=taskscelta.id_adult, task_id='0') }}">{{ taskscelta.poster.first_name }}{{ taskscelta.poster.surname }}</a></span></h3>
+                <h3>Posted by <span class="task-owner"><a style="color:darkblue" href="{{ url_for('views.showreviews', user_id=taskscelta.id_adult, task_id='0') }}">{{ taskscelta.poster.first_name }}{{ taskscelta.poster.surname }}</a></span></h3>
                 <h4>Location: {{ taskscelta.address }}, Torino</h4>
 
                 <div class="task-description">
@@ -17,7 +17,7 @@
                             <br/>
                             <br/>
                             <div align="center">
-                                <button type="button" class="btn btn-primary btn-lg"><a style="color: white" href={{ url_for('views.sendapplication', task_id=taskscelta.id) }} >Apply</a>
+                                <button type="button" style="background: #2c3e50" class="btn btn-primary btn-lg"><a style="color: white" href={{ url_for('views.sendapplication', task_id=taskscelta.id) }} >Apply</a>
                                 </button>
                             </div>
                 {% endif %}

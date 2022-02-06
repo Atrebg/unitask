@@ -6,43 +6,41 @@
     <div class="container">
         <div class="row">
 
-        <!-- PENDING APPLICATION -->
-
             <div class="col-5 p-4 m-2 col-page">
                 <h1 align="left" class="mb-4">PENDING APPLICATIONS</h1>
 
                 <table class="table table-hover">
 
-                        {%set  l = user.getapplications() %}
-                        {% if l %}
-                            {% for offer in l %}
+                    {%set  l = user.getapplications() %}
+                    {% if l %}
+                        {% for offer in l %}
                             {% if offer.isAss==False %}
                                 <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
-                                    <tr>
-                                        <th scope="col">TASK</th>
-                                        <th scope="col">DATE</th>
-                                        <th scope="col">DELETE APPLICATION</th>
-                                    </tr>
+                                <tr>
+                                    <th scope="col">TASK</th>
+                                    <th scope="col">DATE</th>
+                                    <th scope="col">DELETE APPLICATION</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
-                                        <td>{{ offer.date_task }}</td>
-                                        <td><button type="button"  class="btn btn-outline-danger mx-4"><a class="delete-button" href={{ url_for('views.deleteapplication', task_id=offer.id) }} > Delete</a></button></td>
-                                    </tr>
+                                <tr>
+                                    <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
+                                    <td>{{ offer.date_task }}</td>
+                                    <td><button type="button"  class="btn btn-outline-danger mx-4"><a class="delete-button" href={{ url_for('views.deleteapplication', task_id=offer.id) }} > Delete</a></button></td>
+                                </tr>
                                 </tbody>
                             {% endif %}
                         {% endfor %}
-                        {% else %}
-                            No task pending
-                        {% endif %}
+                    {% else %}
+                        No task pending
+                    {% endif %}
 
 
                 </table>
             </div>
-        <div class="col-1"></div>
+            <div class="col-1"></div>
 
-        <!-- CLOSED APPLICATION -->
+            <!-- CLOSED APPLICATION -->
 
             <div class="col-5 p-4 m-2 col-page">
                 <h1 align="left" class="mb-4">CLOSED APPLICATION</h1>
@@ -51,12 +49,12 @@
                     {%set  l = user.taskwon() %}
                     {% if l %}
                         <ul class="mx-4">
-                        {% for offer in l %}
-                        <li>
-                            <a style="color:darkblue" href= {{ url_for('views.task', task_id=offer.id) }}>{{ offer.title }}</a>
-                      </li>
-                        {% endfor %}
-                         </ul>
+                            {% for offer in l %}
+                                <li>
+                                    <a style="color:darkblue" href= {{ url_for('views.task', task_id=offer.id) }}>{{ offer.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     {% else %}
                         <div align="center">
                             We are sorry! You have no task won.
@@ -68,17 +66,17 @@
                     {%set  l = user.taskwonandperform() %}
                     {% if l %}
 
-                    <ul>
-                        {% for offer in l %}
-                            <div class="m-2" style="display: flex; justify-content: space-between">
-                            <li class="mx-4">
-                                {{ offer.title }}, posted by {{offer.poster.first_name}} </li>
-                            {% if not offer.isClosed %}
-                                <button style="" type="button" class="btn btn-outline-success mx-4"> <a class="review-button" shref={{ url_for('views.writereview', task_id=offer.id) }} > Review </a></button>
-                                </div>
-                            {% endif %}
+                        <ul>
+                            {% for offer in l %}
+                                <div class="m-2" style="display: flex; justify-content: space-between">
+                                    <li class="mx-4">
+                                        {{ offer.title }}, posted by {{offer.poster.first_name}} </li>
+                                    {% if not offer.isClosed %}
+                                        <button style="" type="button" class="btn btn-outline-success mx-4"> <a class="review-button" shref={{ url_for('views.writereview', task_id=offer.id) }} > Review </a></button>
+                                        </div>
+                                    {% endif %}
 
-                        {% endfor %}
+                            {% endfor %}
                         </ul>
                     {% else %}
                         <div align="center">
@@ -91,10 +89,10 @@
                     {%set  l = user.tasklost() %}
                     {% if l %}
                         <ul class="mx-4" style="list-style: none">
-                        {% for offer in l %}
-                            <li  align="center">
-                            {{ offer.title }}</li>
-                        {% endfor %}
+                            {% for offer in l %}
+                                <li  align="center">
+                                    {{ offer.title }}</li>
+                            {% endfor %}
                         </ul>
                     {% else %}
                         <div align="center">
@@ -104,20 +102,9 @@
                 </div>
             </div>
 
+        </div>
     </div>
-    </div>
 
-
-
-
-
-
-
-
-<br/><br/>
-<!--Giacomo-->
-
-    <br/><br/><br/><br/>
-
+    <br/><br/>
 
 {% endblock %}
