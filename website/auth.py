@@ -75,8 +75,8 @@ def sign_up():
 
 def riempidb():
     studenti = [
-        {'name': "Giacomo", 'surname': "Bertazzolo"},
-        {'name': "Valeria", 'surname': "Liuni"},
+        {'name': "Giacomo", 'surname': "Bertazzolo", 'description': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi."},
+        {'name': "Valeria", 'surname': "Liuni", 'description': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi."},
         {'name': "Samuele", 'surname': "Stasi"},
         {'name': "Oliviero", 'surname': "Vidoni"},
     ]
