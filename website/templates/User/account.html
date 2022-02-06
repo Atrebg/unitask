@@ -18,6 +18,10 @@
                     <div class="col-8">
                         <h3 class="px-2">{{user.first_name}} {{ user.surname }}</h3>
                         <p class="px-3">{{ user.email }}</p>
+                        <h3>About me:</h3>
+                        <div>
+                            la mia descrizione
+                        </div>
                     </div>
 
                 </div>
@@ -26,7 +30,7 @@
             <div  class="col-8 reviews-box m-3">
 
                 <!--personal reviews-->
-                <h1 align="left" class="p-2">About me: </h1>
+                <h1 align="left" class="p-2">What people tell: </h1>
 
                 {% for recens in user.reviewsreceived %}
                     <div class="box-review">

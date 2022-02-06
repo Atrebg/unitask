@@ -7,29 +7,28 @@ flask-sqlalchemy
 flask-bootstrap
 flask.ext
 
-COSE DA FARE SINGOLE PAGINE 
-Task: Tabella titolo, descrizione, chi ha postato
-Listofrevoew: scrivere quando non ci sono ancora revieww
-
-
 IMPORTA DA PYTHON PACKAGES
 WTFSelectField
 
 TODO GIACOMO:
-1) Update personal settings account
-2) Pagamento (?)
+SIGNUP
+Aggiungere nel form di signup la descrizione
 
-TODO VALE:
-1) TUTTI I CSS
+ACCOUNT
+• Aggiungere che se non ci sono review compare Non hanno ancora fatto review su di te
+• Dove ho scritto "la mia descrizione" mettere il riferimento alla descrizione presa dal database
 
-FATTO 
-1) Sistemare query per veder e le task postate a cui applicare
-2) Sistemare model aggiungendo la tabella come ha fatto vedere da edo
-3) Creare pagina per vedere le persone che hanno applicato e fare l'accettazione
-4) Dividere i tipi di user
-5) review
-6) Aggiungere About Us
-7) Gestire application è fatto ma manca qualcosa
-8) Flask form come da edo e meugi
+LIST OF REVIEW
+• Questa pagina deve avere la stessa struttura di ACCOUNT SENZA IL BOX che si chiama profile-box, ma solo review-box
+
+
+1) Pagamento(?)
+
+TODO VALE
+• Rivedere pagina your applications
+• Pagina chooseStud di Adult
+• Post a task di adult
+• Task Pending di adult
+
 
 
