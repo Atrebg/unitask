@@ -5,7 +5,8 @@
     {%  if pending|length != 0 %}
       {% for offer in pending %}
                 <li class="list-group-item">
-         {{ offer.title }} {{ offer.performer.first_name }}
+                    titolo task : {{ offer.title }}
+                    performata da: {{ offer.performer.first_name }}
               <br/>
                     {% if offer.isAss==True and offer.isPerf==False %}
                 <button> <a href={{ url_for('views.writereview', task_id=offer.id) }} > The task has been performed! Review the performer</a></button>

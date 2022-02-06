@@ -59,7 +59,8 @@ def sign_up():
         new_user = User
         if type == 'student':
             new_user = Student(email=email, password=generate_password_hash(password, method='sha256'), first_name=name, surname=surname, type=type, description=description)
-        elif type == 'adult':                new_user = Adult(email=email, password=generate_password_hash(password, method='sha256'),
+        elif type == 'adult':
+            new_user = Adult(email=email, password=generate_password_hash(password, method='sha256'),
                                 first_name=name, surname=surname, type=type, description=description)
         db.session.add(new_user)
         db.session.commit()

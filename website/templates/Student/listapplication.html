@@ -72,7 +72,7 @@
                                     <li class="mx-4">
                                         {{ offer.title }}, posted by {{offer.poster.first_name}} </li>
                                     {% if not offer.isClosed %}
-                                        <button style="" type="button" class="btn btn-outline-success mx-4"> <a class="review-button" shref={{ url_for('views.writereview', task_id=offer.id) }} > Review </a></button>
+                                        <button style="" type="button" class="btn btn-outline-success mx-4"> <a class="review-button" href={{ url_for('views.writereview', task_id=offer.id) }} > Review </a></button>
                                         </div>
                                     {% endif %}
 

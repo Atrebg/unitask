@@ -20,7 +20,11 @@
                         <p class="px-3">{{ user.email }}</p>
                         <h3>About me:</h3>
                         <div>
-                            la mia descrizione
+                            {% if user.description != None %}
+                                {{ user.description }}
+                            {% else %}
+                                You didn't add a description
+                            {% endif %}
                         </div>
                     </div>
 
@@ -31,7 +35,7 @@
 
                 <!--personal reviews-->
                 <h1 align="left" class="p-2">What people tell: </h1>
-
+            {% if user.reviewsreceived|length !=0 %}
                 {% for recens in user.reviewsreceived %}
                     <div class="box-review">
                         <h2>Reviewed by: <span class="review-author"> {{recens.author.first_name }}</span></h2>
@@ -39,6 +43,9 @@
                         {{ recens.text }}
                     </div>
                 {% endfor %}
+            {% else %}
+            Non ci sono reviews
+            {% endif %}
 
             </div>
         </div>

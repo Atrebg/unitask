@@ -7,24 +7,27 @@
 {% block content%}
     <br />
     <h1 align="center">List review of {{ reviewed.first_name }} {{ reviewed.surname }}</h1>
-<ul class="list-group list-group-flush" id="offers">
 
-  <li class="list-group-item">
-    {{ reviewed.first_name }} {{ reviewed.surname }}
-      <div>
-      {% if user.reviewsposted %}
-        {% for recens in user.reviewsposted %}
-            {{ recens.title }} {{ recens.text }}
-            By: {{ recens.author.first_name }}
-            {% if user.type=='adult' %}
-                <br/>
-            <button class="btn btn-sm btn-outline-primary" > <a href={{ url_for('views.choosestud', task_id=task_id, stud_id=reviewed.id) }} >Choose this student </a></button>
+    <div  class="col-8 reviews-box m-3">
+
+                <!--personal reviews-->
+                <h1 align="left" class="p-2">What people tell: </h1>
+            {% if reviewed.reviewsreceived|length !=0 %}
+                {% for recens in reviewed.reviewsreceived %}
+                    <div class="box-review">
+                        <h2>Reviewed by: <span class="review-author"> {{recens.author.first_name }}</span></h2>
+                        <h4 class="review-title">{{ recens.title }}</h4>
+                        {{ recens.text }}
+                        {% if user.type=='adult' %}
+                    <br/>
+                    <button class="btn btn-sm btn-outline-primary" > <a href={{ url_for('views.choosestud', task_id=task_id, stud_id=reviewed.id) }} >Choose this student </a></button>
+                {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+            Non ci sono reviews
             {% endif %}
+
             </div>
-          {% endfor %}
-      {% else %}
-        No reviews available for this user
-      {% endif %}
-  </li></ul>
 
 {% endblock %}
