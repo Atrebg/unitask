@@ -11,10 +11,6 @@ IMPORTA DA PYTHON PACKAGES
 WTFSelectField
 
 TODO GIACOMO:
-
-ACCOUNT
-• Dove ho scritto "la mia descrizione" mettere il riferimento alla descrizione presa dal database (fatto)
-
 1) Pagamento(?)
 
 TODO VALE

@@ -11,13 +11,7 @@
     <div class="container">
         <div class="row">
             <div  align="center" class="reviews-box m-3">
-
-                <!--personal reviews-->
                 <h1 align="left" class="p-2">REVIEWS </h1>
-                {% if user.type=='adult' %}
-                    <br/>
-                    <button class="btn btn-sm btn-outline-primary" > <a href={{ url_for('views.choosestud', task_id=task_id, stud_id=reviewed.id) }} >CHOOSE THIS USER</a></button>
-                {% endif %}
                 {% if reviewed.reviewsreceived|length !=0 %}
                     {% for recens in reviewed.reviewsreceived %}
                         <div class="box-review">
@@ -29,9 +23,12 @@
                     {% endfor %}
                 {% else %}
                     <div class="box-review">
-                           We are sorry, there are no available reviews for this user.
+                        We are sorry, there are no available reviews for this user.
 
-                        </div>
+                    </div>
+                {% endif %}
+                {% if user.type=='adult' %}
+                    <button style="background: #2c3e50" class="btn btn-primary btn-lg" > <a style="color: white" href={{ url_for('views.choosestud', task_id=task_id, stud_id=reviewed.id) }} >CHOOSE THIS USER</a></button>
                 {% endif %}
 
             </div>
