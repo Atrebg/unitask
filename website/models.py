@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     surname = db.Column(db.String(150))
-    description = db.Column(db.String(150))
+    description = db.Column(db.String(200))
     type = db.Column(db.String(20))
     reviewsposted = db.relationship('Review', foreign_keys='Review.id_reviewer',
                                     backref='author')

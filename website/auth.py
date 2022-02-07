@@ -77,8 +77,8 @@ def riempidb():
     studenti = [
         {'name': "Giacomo", 'surname': "Bertazzolo", 'description': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi."},
         {'name': "Valeria", 'surname': "Liuni", 'description': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi."},
-        {'name': "Samuele", 'surname': "Stasi"},
-        {'name': "Oliviero", 'surname': "Vidoni"},
+        {'name': "Samuele", 'surname': "Stasi", 'description': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi."},
+        {'name': "Oliviero", 'surname': "Vidoni", 'description': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi."},
     ]
 
     adulti = [
@@ -105,6 +105,7 @@ def riempidb():
         user_db = Student(first_name=studente['name'],
                        surname=studente['surname'],
                        email=mail,
+                          description=studente['description'],
                        password=generate_password_hash('1234567890', method='sha256'),
                        type='student')
         db.session.add(user_db)
@@ -115,6 +116,7 @@ def riempidb():
         user_db = Adult(first_name=adulto['name'],
                        surname=adulto['surname'],
                        email=mail,
+
                        password=generate_password_hash('1234567890', method='sha256'),
                        type='adult')
         db.session.add(user_db)
