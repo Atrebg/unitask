@@ -8,7 +8,8 @@
         <div class="row">
             <h1 align="center">YOUR POSTED TASK</h1>
 
-            <table class="table">
+            {% if user.tasks|length != 0 %}
+                <table class="table">
                 <thead class="thead" style="color:whitesmoke; background:#2c3e50">
                 <tr>
                     <th scope="col">TASK</th>
@@ -17,22 +18,23 @@
                     <th scope="col"></th>
                 </tr>
                 </thead>
-                {% if user.tasks|length != 0 %}
-                    {% for offer in user.tasks %}
-                        <tbody>
-                        <tr>
-                            {% if not offer.isAss %}
-                                <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
-                                <td>{{ offer.description }}</td>
-                                <td align="center"> {{ offer.applicants|length }}</td>
-                                <td><button type="button" style="background: #2c3e50" class="btn btn-secondary"><a style="color: white" href={{ url_for('views.deletetask', task_id=offer.id) }}>DELETE TASK</a></button></td>
-                            {% endif %}
-                        </tr>
-                        </tbody>
-                    {% endfor %}
-                {% else %}
-                You did not post any task
-                {% endif %}
+                {% for offer in user.tasks %}
+                    <tbody>
+                    <tr>
+                        {% if not offer.isAss %}
+                            <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
+                            <td>{{ offer.description }}</td>
+                            <td align="center"> {{ offer.applicants|length }}</td>
+                            <td><button type="button" style="background: #2c3e50" class="btn btn-secondary"><a style="color: white" href={{ url_for('views.deletetask', task_id=offer.id) }}>DELETE TASK</a></button></td>
+                        {% endif %}
+                    </tr>
+                    </tbody>
+                {% endfor %}
+            {% else %}
+                <div>
+                You have not posted any task yet! If you want to start and post your first task click here: <a style="color:darkblue" href={{ url_for('views.posttask')}}>POST</a>.
+                </div>
+            {% endif %}
             </table>
         </div>
     </div>

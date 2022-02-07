@@ -1,27 +1,29 @@
-{% extends "base.html" %} {% block title %}Student choice{% endblock %} {% block content%}
-    <br />
-    <h1 align="center"> Choose a Student</h1>
-<ul class="list-group list-group-flush" id="offers">
+{% extends "base.html" %}
+{% block title %}Student choice{% endblock %}
+{% block content%}
 
-  <li class="list-group-item">
-    <h3>Task name: {{ taskscelta.title }}</h3>
-  <br/>
-      <div>Task description: {{ taskscelta.description }}</div>
-      <div>
-      <br/>
-      <h3>Applicants:</h3>
-      <br/>
-        {% for applicant in taskscelta.applicants %}
-            <div>
-            <a href={{ url_for('views.showreviews', user_id=applicant.id, task_id=taskscelta.id) }} >{{ applicant.first_name }} {{ applicant.surname }}</a>
-            <button class="btn btn-sm btn-outline-primary" > <a href={{ url_for('views.choosestud', task_id=taskscelta.id, stud_id=applicant.id) }} >Choose this student </a></button>
+    <div class ="container task-container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Task name: {{ taskscelta.title }}</h1>
+                <div>Task description: {{ taskscelta.description }}</div>
+                <div>
+                    <br/>
+                    <h3>Applicants:</h3>
+                    <br/>
+                    {% for applicant in taskscelta.applicants %}
+                        <div align="left">
+                            <a style="color:darkblue" href={{ url_for('views.showreviews', user_id=applicant.id, task_id=taskscelta.id) }} >{{ applicant.first_name }} {{ applicant.surname }}</a>
+                            <div align="right">
+                            <button type="button" style="background: #2c3e50" class="btn btn-primary btn-lg"><a style="color: white" href={{ url_for('views.choosestud', task_id=taskscelta.id, stud_id=applicant.id) }} >Choose this student </a></button>
+                        </div>
+                            </div>
+                        <br/>
+                    {% endfor %}
+                </div>
 
             </div>
-            <br/>
-          {% endfor %}
-      </div>
-
-
-  </li></ul>
+        </div>
+    </div>
 
 {% endblock %}

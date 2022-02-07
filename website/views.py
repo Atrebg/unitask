@@ -193,7 +193,6 @@ def showreviews(user_id, task_id):
 def about_us():
     return render_template("about_us.html", user=current_user)
 
-
 @views.route('/account')
 def account():
     return render_template("User/account.html", user=current_user)

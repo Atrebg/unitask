@@ -19,7 +19,6 @@ ACCOUNT
 
 TODO VALE
 • Rivedere pagina your applications
-• Pagina chooseStud di Adult
 • Task Pending di adult
 
 

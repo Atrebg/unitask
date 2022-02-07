@@ -101,7 +101,7 @@ def riempidb():
     ids = {5,6,7,5,6,7,5}
 
     for studente in studenti:
-        mail = studente['name'].lower() + studente['surname'].lower() + '@mail.com'
+        mail = studente['name'].lower() + studente['surname'].lower() + '@gmail.com'
         user_db = Student(first_name=studente['name'],
                        surname=studente['surname'],
                        email=mail,
@@ -112,7 +112,7 @@ def riempidb():
         db.session.commit()
 
     for adulto in adulti:
-        mail = adulto['name'].lower() + adulto['surname'].lower() + '@mail.com'
+        mail = adulto['name'].lower() + adulto['surname'].lower() + '@gmail.com'
         user_db = Adult(first_name=adulto['name'],
                        surname=adulto['surname'],
                        email=mail,
