@@ -29,21 +29,6 @@ def home():
     return redirect(url_for('views.offer'))
 
 
-@views.route('/offer')
-@login_required
-def offer():
-    Offer.controltasksdate()
-    q = Offer.query.filter(Offer.isAss == False, Offer.isClosed == False).all()
-
-    def filtro(t):
-        if t.__contains__(current_user):
-            return False
-        return True
-
-    q1 = filter(filtro, q)
-
-    return render_template("student/homeStud.html", user=current_user, tasks=q1)
-
 
 """@views.route('/posttask', methods=['GET',
                                    'POST'])  # 17,14 views is the name of our blueprint (/ is the main page, this function will run
@@ -127,20 +112,6 @@ def sendapplication(task_id):
     return redirect(url_for('views.home'))
 
 
-@views.route('/choosestud/<task_id>/<stud_id>', methods=['GET', 'POST'])
-@login_required
-def choosestud(task_id, stud_id):
-    task1 = Offer.query.filter(Offer.id == task_id).first()
-    if not Offer.controldate(task1):
-        flash('Too late the task is closed', category='error')
-        return redirect(url_for('views.home'))
-    task1.scelta = stud_id
-    task1.isAss = True
-    db.session.commit()
-
-    return redirect(url_for('views.home'))
-
-
 @views.route('/listapplications', methods=['GET', 'POST'])
 @login_required  # every time we go to the home page
 def listapplications():
@@ -205,18 +176,6 @@ def account():
     return render_template("User/account.html", user=current_user)
 
 
-@views.route('/taskpending')
-def taskpending():
-    pending = []
-    for task in current_user.tasks:
-        if task.isAss and task.isClosed == False:
-            pending.append(task)
-        if task.isAss == False and task.isPerf == True:
-            pending.append(task)
-
-    return render_template("adult/taskspending.html", user=current_user, pending=pending)
-
-
 @views.route('/personalreviews')
 def personalreviews():
 
@@ -234,19 +193,6 @@ def deleteapplication(task_id):
     db.session.commit()
     flash('Application deleted!', category='success')
     return redirect(url_for('views.home'))
-
-
-@views.route('/deletetask/<task_id>')
-def deletetask(task_id):
-    t = Offer.query.filter(Offer.id == task_id).first()
-    if t.applicants:
-        flash('There are already applications for this task you cannot delete this task', category='error')
-        return redirect(url_for('views.home'))
-    db.session.delete(t)
-    db.session.commit()
-    flash('Task deleted!', category='success')
-    return redirect(url_for('views.home'))
-
 
 @views.route("/updateaccount", methods=['GET', 'POST'])
 @login_required
@@ -310,6 +256,7 @@ def resetdbuser():
         db.session.commit()
 
     return redirect(url_for('auth.logout'))
+
 
 @views.route('/maps')
 @login_required
