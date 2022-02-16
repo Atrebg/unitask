@@ -25,7 +25,7 @@ views = Blueprint('views', __name__)
 def home():
     if current_user.type == 'adult':
         Offer.controltasksdate()
-        return render_template("Adult/homeAdult.html", user=current_user)
+        return render_template("adult/homeAdult.html", user=current_user)
     return redirect(url_for('views.offer'))
 
 
@@ -42,23 +42,29 @@ def offer():
 
     q1 = filter(filtro, q)
 
-    return render_template("Student/homeStud.html", user=current_user, tasks=q1)
+    return render_template("student/homeStud.html", user=current_user, tasks=q1)
 
 
-@views.route('/posttask', methods=['GET',
+"""@views.route('/posttask', methods=['GET',
                                    'POST'])  # 17,14 views is the name of our blueprint (/ is the main page, this function will run
 @login_required  # every time we go to the home page
 def posttask():
     form = PosttaskForm()
     if request.method == 'POST':
-        datatask = request.form['date']
         address = request.form['location']
+        if not address:
+            flash('La data non puo essere anteriore a quella di oggi', category='error')
+            return redirect(url_for('views.posttask'))
+        datatask = request.form['date']
+
         locality = request.form['locality']
         administrative_area_level_1 = request.form['administrative_area_level_1']
         postal_code = request.form['postal_code']
         country = request.form['country']
+        dateexpire = request.form['dateexpire']
 
         dt = datetime.strptime(datatask, '%Y-%m-%d')
+        dtexp = datetime.strptime(dateexpire, '%Y-%m-%d')
         params = {
             'key' : API_KEY,
             'address' : address+locality+administrative_area_level_1+postal_code+country
@@ -72,7 +78,7 @@ def posttask():
 
         print(geometry)
         today = datetime.now()
-        if dt < today:
+        if dt < today or dtexp < today or dt < dtexp:
             form.date.data = ''
             flash('La data non puo essere anteriore a quella di oggi', category='error')
             return redirect(url_for('views.posttask'))
@@ -90,7 +96,8 @@ def posttask():
                 flash('Task posted!', category='success')
                 return redirect(url_for('views.home'))
 
-    return render_template("Adult/posttask.html", user=current_user, form=form)
+    return render_template("adult/posttask.html", user=current_user, form=form)
+"""
 
 
 @views.route('/task/<task_id>', methods=['GET', 'POST'])
@@ -105,7 +112,7 @@ def task(task_id):
         return render_template("Student/task.html", user=current_user, taskscelta=t, btn=btn)
     else:
         t = Offer.query.filter(Offer.id == task_id).first()
-        return render_template("Adult/chooseStud.html", user=current_user, taskscelta=t)
+        return render_template("adult/chooseStud.html", user=current_user, taskscelta=t)
 
 
 @views.route('/apply/<task_id>', methods=['GET', 'POST'])
@@ -118,7 +125,6 @@ def sendapplication(task_id):
     task.applicants.append(current_user)
     db.session.commit()
     return redirect(url_for('views.home'))
-
 
 
 @views.route('/choosestud/<task_id>/<stud_id>', methods=['GET', 'POST'])
@@ -193,6 +199,7 @@ def showreviews(user_id, task_id):
 def about_us():
     return render_template("about_us.html", user=current_user)
 
+
 @views.route('/account')
 def account():
     return render_template("User/account.html", user=current_user)
@@ -202,12 +209,12 @@ def account():
 def taskpending():
     pending = []
     for task in current_user.tasks:
-        if task.isAss:
+        if task.isAss and task.isClosed == False:
             pending.append(task)
         if task.isAss == False and task.isPerf == True:
             pending.append(task)
 
-    return render_template("Adult/taskspending.html", user=current_user, pending=pending)
+    return render_template("adult/taskspending.html", user=current_user, pending=pending)
 
 
 @views.route('/personalreviews')

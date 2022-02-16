@@ -100,6 +100,7 @@ class Offer(db.Model, UserMixin):
     lat = db.Column(db.Float)
     lng = db.Column(db.Float)
     date = db.Column(db.DateTime(timezone=True), default=func.now())
+    dateexpire = db.Column(db.DateTime(timezone=True), default=func.now())
     isAss = db.Column(db.Boolean, default=False)
     date_task = db.Column(db.DateTime(timezone=True))
     id_adult = db.Column(db.Integer, db.ForeignKey('adult.id'))
@@ -116,7 +117,7 @@ class Offer(db.Model, UserMixin):
         from datetime import datetime
         today = datetime.today()
         for task in Offer.query.filter(Offer.isClosed == False):
-            if task.date_task <= today and task.isAss == False:
+            if task.dateexpire <= today and task.isAss == False:
                 task.isClosed = True
 
         db.session.commit()

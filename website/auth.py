@@ -112,7 +112,7 @@ def riempidb():
         db.session.commit()
 
     for adulto in adulti:
-        mail = adulto['name'].lower() + adulto['surname'].lower() + '@gmail.com'
+        mail = adulto['name'].lower() + adulto['surname'].lower() + '@mail.com'
         user_db = Adult(first_name=adulto['name'],
                        surname=adulto['surname'],
                        email=mail,
