@@ -9,7 +9,7 @@
                     performata da: {{ offer.performer.first_name }}
               <br/>
                     {% if offer.isAss==True and offer.isPerf==False %}
-                <button> <a href={{ url_for('views.writereview', task_id=offer.id) }} > The task has been performed! Review the performer</a></button>
+                <button> <a href={{ url_for('users.writereview', task_id=offer.id) }} > The task has been performed! Review the performer</a></button>
                 </li>
                     {% endif %}
       {% endfor %}
@@ -28,20 +28,24 @@
 
                     {%set  l = user.gettasksopen() %}
                     {% if l %}
-                        {% for offer in l %}
-                            {% if offer.isAss==False %}
-                                <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
+                         <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
                                 <tr>
                                     <th scope="col">TASK</th>
                                     <th scope="col">DATE</th>
-                                    <th scope="col">DELETE APPLICATION</th>
+                                    <th scope="col">Applicants</th>
+                                    <th scope="col">DELETE TASK</th>
                                 </tr>
                                 </thead>
+                        {% for offer in l %}
+
+                            {% if offer.isAss==False %}
+
                                 <tbody>
                                 <tr>
                                     <th scope="row"><a style="color:darkblue" href={{ url_for('users.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
-                                    <td>{{ offer.date_task }}</td>
-                                    <td><button type="button"  class="btn btn-outline-danger mx-4"><a class="delete-button" href={{ url_for('students.deleteapplication', task_id=offer.id) }} > Delete</a></button></td>
+                                    <td>{{ offer.date_task.strftime("%d/%m/%Y") }}</td>
+                                    <td>{{ offer.applicants|length }}</td>
+                                    <td><button type="button"  class="btn btn-outline-danger mx-4"><a class="delete-button" href={{ url_for('adults.deletetask', task_id=offer.id) }} > Delete</a></button></td>
                                 </tr>
                                 </tbody>
                             {% endif %}
@@ -52,15 +56,40 @@
 
 
                 </table>
+            <div class="row">
+
+
+
+            <div class="col-1">
+            <h3 align="left">Assigned</h3>
+                <ul class="list-group list-group-flush" id="offers">
+    {%  if pending|length != 0 %}
+      {% for offer in pending %}
+                <li class="list-group-item">
+                    titolo: {{ offer.title }}
+                    performata da: {{ offer.performer.first_name }}
+              <br/>
+                    {% if offer.isAss==True and offer.isPerf==False %}
+                <button> <a href={{ url_for('users.writereview', task_id=offer.id) }} > The task has been performed! Review the performer</a></button>
+                </li>
+                    {% endif %}
+      {% endfor %}
+    {% else %}
+        No task pending
+    {% endif %}
+</ul>
             </div>
-            <div class="col-1"></div>
+
+            </div>
+            </div>
+
 
             <!-- CLOSED APPLICATION -->
 
             <div class="col-5 p-4 m-2 col-page">
                 <h1 align="left" class="mb-4">TASK CLOSED</h1>
                 <div class="row">
-                    <h3 align="left" style="color: white; background: #2c3e50">PERFORMED</h3>
+                    <h3 align="left" style="color: white; background: #2c3e50">Closed and performed</h3>
                     {%set  l = user.gettaskclosed() %}
                     {% if l %}
                         <ul class="mx-4">
@@ -72,7 +101,7 @@
                         </ul>
                     {% else %}
                         <div align="center">
-                            We are sorry! You have no task won.
+                            You have no task performed.
                         </div>
                     {% endif %}
                 </div>
@@ -84,15 +113,14 @@
                         <ul>
                         <div class="m-2" style="display: flex; justify-content: space-between">
                             {% for offer in l %}
-                                    <li class="mx-4">
-                                        {{ offer.title }}, posted by {{offer.poster.first_name}} </li>
+                                    <li class="mx-4">{{ offer.title }} </li>
 
                             {% endfor %}
                         </div>
                         </ul>
                     {% else %}
                         <div align="center">
-                            We are sorry! You have no task won.
+                           You have no task expired.
                         </div>
                     {% endif %}
                 </div>

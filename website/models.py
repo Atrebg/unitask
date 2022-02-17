@@ -65,7 +65,7 @@ class Student(User, db.Model):
     def taskwonandperform(self):
         t = []
         for off in self.applications:
-            if off.scelta == self.id and off.isPerf:
+            if off.scelta == self.id and off.isPerf and not off.isClosed:
                 t.append(off)
         return t
 
@@ -94,7 +94,7 @@ class Adult(User, db.Model):
     def gettaskclosed(self):
         t = []
         for off in self.tasks:
-            if off.isClosed:
+            if off.isClosed and off.isPerf:
                 t.append(off)
         return t
 
