@@ -22,14 +22,16 @@
                         {% for offer in tasks %}
                             <tbody>
                             <tr>
-                                <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }} </a></th>
+                                <th scope="row"><a style="color:darkblue" href={{ url_for('users.task', task_id=offer.id) }} >{{ offer.title }} </a></th>
                                 <td>{{ offer.description }}</td>
-                                <td><button type="button" style="background: #2c3e50"  class="btn btn-secondary"><a style="color: white" href={{ url_for('views.sendapplication', task_id=offer.id) }}>APPLY</a></button></td>
+                                <td><button type="button" style="background: #2c3e50"  class="btn btn-secondary"><a style="color: white" href={{ url_for('students.sendapplication', task_id=offer.id) }}>APPLY</a></button></td>
                             </tr>
                             </tbody>
                         {% endfor %}
                     {% else %}
-                    No task available
+                        <tbody>
+                        <td> No task available </td>
+                        </tbody>
                     {% endif %}
                 </table>
             </form>

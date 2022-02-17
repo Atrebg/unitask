@@ -24,9 +24,9 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
+                                    <th scope="row"><a style="color:darkblue" href={{ url_for('users.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
                                     <td>{{ offer.date_task }}</td>
-                                    <td><button type="button"  class="btn btn-outline-danger mx-4"><a class="delete-button" href={{ url_for('views.deleteapplication', task_id=offer.id) }} > Delete</a></button></td>
+                                    <td><button type="button"  class="btn btn-outline-danger mx-4"><a class="delete-button" href={{ url_for('students.deleteapplication', task_id=offer.id) }} > Delete</a></button></td>
                                 </tr>
                                 </tbody>
                             {% endif %}
@@ -51,7 +51,7 @@
                         <ul class="mx-4">
                             {% for offer in l %}
                                 <li>
-                                    <a style="color:darkblue" href= {{ url_for('views.task', task_id=offer.id) }}>{{ offer.title }}</a>
+                                    <a style="color:darkblue" href= {{ url_for('users.task', task_id=offer.id) }}>{{ offer.title }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -72,7 +72,7 @@
                                     <li class="mx-4">
                                         {{ offer.title }}, posted by {{offer.poster.first_name}} </li>
                                     {% if not offer.isClosed %}
-                                        <button style="" type="button" class="btn btn-outline-success mx-4"> <a class="review-button" href={{ url_for('views.writereview', task_id=offer.id) }} > Review </a></button>
+                                        <button style="" type="button" class="btn btn-outline-success mx-4"> <a class="review-button" href={{ url_for('users.writereview', task_id=offer.id) }} > Review </a></button>
                                         </div>
                                     {% endif %}
 

@@ -26,7 +26,7 @@ def login():
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
                 if user.type == 'student':
-                    return redirect(url_for('views.offer'))
+                    return redirect(url_for('views.home'))
                 return redirect(url_for('views.home'))
             else:
                 flash('Incorrect password, try again.', category='error')
@@ -67,7 +67,7 @@ def sign_up():
         flash('Account created!', category='success')
         login_user(new_user, remember=True)
         if new_user.type == 'student':
-            return redirect(url_for('views.offer'))
+            return redirect(url_for('students.offer'))
             
         return redirect(url_for('views.home'))
     return render_template("User/sign_up.html", user=current_user, form=form)
@@ -101,7 +101,7 @@ def riempidb():
     ids = {5,6,7,5,6,7,5}
 
     for studente in studenti:
-        mail = studente['name'].lower() + studente['surname'].lower() + '@gmail.com'
+        mail = studente['name'].lower() + studente['surname'].lower() + '@mail.com'
         user_db = Student(first_name=studente['name'],
                        surname=studente['surname'],
                        email=mail,

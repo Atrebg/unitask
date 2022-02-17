@@ -11,6 +11,7 @@ from website.models import *
 from website.adult import *
 from website.views import *
 from website.student import *
+from website.user import *
 
 API_KEY = "AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A"
 base_url = 'https://maps.googleapis.com/maps/api/geocode/json?'
@@ -27,6 +28,7 @@ def posttask():
             flash('La data non puo essere anteriore a quella di oggi', category='error')
             return redirect(url_for('adults.posttask'))
         datatask = request.form['date']
+        amount = request.form['amount']
 
         locality = request.form['locality']
         administrative_area_level_1 = request.form['administrative_area_level_1']
@@ -62,13 +64,14 @@ def posttask():
                 a = {"title": title, "address1": address, "address2": "Torino", "coords": {"lat": lat, "lng": lng},
                      "placeId": placeId}
                 new_offer = Offer(title=title, description=description, date_task=dt, id_adult=current_user.id, lat=lat,
-                                  lng=lng, placeId=placeId)
+                                  lng=lng, placeId=placeId, amount=amount)
                 db.session.add(new_offer)
                 db.session.commit()
                 flash('Task posted!', category='success')
                 return redirect(url_for('views.home'))
     else:
         return render_template("adult/posttask.html", user=current_user, form=form)
+
 
 @adults.route('/choosestud/<task_id>/<stud_id>', methods=['GET', 'POST'])
 @login_required
@@ -83,6 +86,7 @@ def choosestud(task_id, stud_id):
 
         return redirect(url_for('views.home'))
 
+
 @adults.route('/taskpending')
 def taskpending():
         pending = []
@@ -93,6 +97,7 @@ def taskpending():
                 pending.append(task)
 
         return render_template("adult/taskspending.html", user=current_user, pending=pending)
+
 
 @adults.route('/deletetask/<task_id>')
 def deletetask(task_id):

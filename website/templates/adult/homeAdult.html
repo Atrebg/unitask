@@ -22,10 +22,10 @@
                     <tbody>
                     <tr>
                         {% if not offer.isAss %}
-                            <th scope="row"><a style="color:darkblue" href={{ url_for('views.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
+                            <th scope="row"><a style="color:darkblue" href={{ url_for('users.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
                             <td>{{ offer.description }}</td>
                             <td align="center"> {{ offer.applicants|length }}</td>
-                            <td><button type="button" style="background: #2c3e50" class="btn btn-secondary"><a style="color: white" href={{ url_for('views.deletetask', task_id=offer.id) }}>DELETE TASK</a></button></td>
+                            <td><button type="button" style="background: #2c3e50" class="btn btn-secondary"><a style="color: white" href={{ url_for('adults.deletetask', task_id=offer.id) }}>DELETE TASK</a></button></td>
                         {% endif %}
                     </tr>
                     </tbody>

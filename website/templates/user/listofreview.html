@@ -28,7 +28,7 @@
                     </div>
                 {% endif %}
                 {% if user.type=='adult' %}
-                    <button style="background: #2c3e50" class="btn btn-primary btn-lg" > <a style="color: white" href={{ url_for('views.choosestud', task_id=task_id, stud_id=reviewed.id) }} >CHOOSE THIS USER</a></button>
+                    <button style="background: #2c3e50" class="btn btn-primary btn-lg" > <a style="color: white" href={{ url_for('adults.choosestud', task_id=task_id, stud_id=reviewed.id) }} >CHOOSE THIS USER</a></button>
                 {% endif %}
 
             </div>

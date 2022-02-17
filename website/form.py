@@ -1,3 +1,4 @@
+# coding=utf-8
 from flask import flash
 from flask_wtf import FlaskForm, Form
 from flask_wtf.file import FileField, FileAllowed
@@ -35,6 +36,7 @@ class SignupForm(FlaskForm):
 class PosttaskForm(FlaskForm):
     tasktitle = StringField('Title:', validators=[DataRequired(), Length(min=3, max=25)])
     taskdescription = StringField('Description:', validators=[DataRequired(), Length(min=3, max=25)])
+    amount = IntegerField("Payment (Euro):", validators=[DataRequired()])
     address = StringField('Address:', validators=[DataRequired(), Length(min=3, max=25)])
     spt = StringField('Apt, Suite, etc (optional):')
     state = StringField('State:', validators=[DataRequired(), Length(min=3, max=25)])

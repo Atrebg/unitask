@@ -97,6 +97,7 @@ class Offer(db.Model, UserMixin):
     description = db.Column(db.String(150))
     address = db.Column(db.String(150))
     placeId = db.Column(db.String(150))
+    amount = db.Column(db.Integer)
     lat = db.Column(db.Float)
     lng = db.Column(db.Float)
     date = db.Column(db.DateTime(timezone=True), default=func.now())

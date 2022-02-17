@@ -19,11 +19,14 @@ def create_app():
     from .auth import auth
     from website.adult import adults
     from website.student import students
+    from website.user import users
 
     app.register_blueprint(views, url_prefix="/")  # Stiamo dicendo come sono definite le pagine e dove sono
     app.register_blueprint(auth)
     app.register_blueprint(adults)
     app.register_blueprint(students)
+    app.register_blueprint(users)
+
 
     from .models import User, Offer, Adult, Student
 

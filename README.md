@@ -19,3 +19,8 @@ TODO VALE
 
 
 
+eliminare dalle applications le task chiuse
+chiudere le task quando scadono
+
+
+
