@@ -22,5 +22,7 @@ TODO VALE
 eliminare dalle applications le task chiuse
 chiudere le task quando scadono
 
+    FARE CONTROLLO SULLE TASK OGNI VOLTA CHE CAMBIO PAGINA O QUASI
+
 
 

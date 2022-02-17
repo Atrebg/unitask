@@ -49,6 +49,7 @@ def sendapplication(task_id):
 @students.route('/listapplications', methods=['GET', 'POST'])
 @login_required  # every time we go to the home page
 def listapplications():
+
     return render_template("Student/listapplication.html", user=current_user)
 
 

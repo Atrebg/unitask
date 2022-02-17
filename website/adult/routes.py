@@ -47,8 +47,6 @@ def posttask():
         lat = geometry['lat']
         lng = geometry['lng']
         placeId = r['results'][0]['place_id']
-
-        print(geometry)
         today = datetime.now()
         if dt < today or dtexp < today or dt < dtexp:
             form.date.data = ''

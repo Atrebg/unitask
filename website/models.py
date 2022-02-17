@@ -74,10 +74,15 @@ class Student(User, db.Model):
         for off in self.applications:
             if off.scelta != self.id and off.scelta:
                 t.append(off)
+            elif not off.isAss and off.isClosed:
+                t.append(off)
         return t
 
-    def getapplications(self):
-        t=self.applications
+    def getapplicationsopen(self):
+        t = []
+        for off in self.applications:
+            if not off.isClosed:
+                t.append(off)
         return t
 
 
@@ -85,6 +90,27 @@ class Adult(User, db.Model):
     __tablename__ = 'adult'
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     tasks = db.relationship('Offer', backref='poster')
+
+    def gettaskclosed(self):
+        t = []
+        for off in self.tasks:
+            if off.isClosed:
+                t.append(off)
+        return t
+
+    def gettaskexpired(self):
+        t = []
+        for off in self.tasks:
+            if off.isClosed and not off.isPerf:
+                t.append(off)
+        return t
+
+    def gettasksopen(self):
+        t = []
+        for off in self.tasks:
+            if not off.isClosed:
+                t.append(off)
+        return t
 
     __mapper_args__ = {
         'polymorphic_identity': 'adult',
@@ -126,7 +152,7 @@ class Offer(db.Model, UserMixin):
     def controldate(self):
         from datetime import datetime
         today = datetime.today()
-        if self.date_task <= today:
+        if self.dateexpire <= today:
             self.isClosed = True
             db.session.commit()
             return False

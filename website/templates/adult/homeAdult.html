@@ -8,7 +8,7 @@
         <div class="row">
             <h1 align="center">YOUR POSTED TASK</h1>
 
-            {% if user.tasks|length != 0 %}
+            {% if user.gettasksopen()|length != 0 %}
                 <table class="table">
                 <thead class="thead" style="color:whitesmoke; background:#2c3e50">
                 <tr>
@@ -18,7 +18,7 @@
                     <th scope="col"></th>
                 </tr>
                 </thead>
-                {% for offer in user.tasks %}
+                {% for offer in user.gettasksopen() %}
                     <tbody>
                     <tr>
                         {% if not offer.isAss %}

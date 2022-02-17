@@ -7,17 +7,19 @@
         <div class="row task-row">
             <div class="col-12">
                 <h1 align="left" class="task-title">{{ taskscelta.title }}</h1>
-                <h3>Posted by <span class="task-owner"><a style="color:darkblue" href="{{ url_for('views.showreviews', user_id=taskscelta.id_adult, task_id='0') }}">{{ taskscelta.poster.first_name }}{{ taskscelta.poster.surname }}</a></span></h3>
+                <h3>Posted by <span class="task-owner"><a style="color:darkblue" href="{{ url_for('users.showreviews', user_id=taskscelta.id_adult, task_id='0') }}">{{ taskscelta.poster.first_name }}{{ taskscelta.poster.surname }}</a></span></h3>
                 <h4>Location: {{ taskscelta.address }}, Torino</h4>
-
+                <h6>This task will be performed on {{ taskscelta.date_task.strftime("%d/%m/%Y") }}</h6>
+                <h6>The application deadline is: {{ taskscelta.dateexpire.strftime("%d/%m/%Y") }}</h6>
                 <div class="task-description">
                     {{ taskscelta.description}}
                 </div>
+                <div>This task will pay: {{ taskscelta.amount }} €</div>
                 {% if btn ==True %}
                             <br/>
                             <br/>
                             <div align="center">
-                                <button type="button" style="background: #2c3e50" class="btn btn-primary btn-lg"><a style="color: white" href={{ url_for('views.sendapplication', task_id=taskscelta.id) }} >APPLY</a>
+                                <button type="button" style="background: #2c3e50" class="btn btn-primary btn-lg"><a style="color: white" href={{ url_for('students.sendapplication', task_id=taskscelta.id) }} >APPLY</a>
                                 </button>
                             </div>
                 {% endif %}

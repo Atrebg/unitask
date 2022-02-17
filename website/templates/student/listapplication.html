@@ -11,7 +11,7 @@
 
                 <table class="table table-hover">
 
-                    {%set  l = user.getapplications() %}
+                    {%set  l = user.getapplicationsopen() %}
                     {% if l %}
                         {% for offer in l %}
                             {% if offer.isAss==False %}
