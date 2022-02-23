@@ -25,7 +25,7 @@ def posttask():
     if request.method == 'POST':
         address = request.form['location']
         if not address:
-            flash('La data non puo essere anteriore a quella di oggi', category='error')
+            flash('Insert a valid address', category='error')
             return redirect(url_for('adults.posttask'))
         datatask = request.form['date']
         amount = request.form['amount']
@@ -62,7 +62,7 @@ def posttask():
                 a = {"title": title, "address1": address, "address2": "Torino", "coords": {"lat": lat, "lng": lng},
                      "placeId": placeId}
                 new_offer = Offer(title=title, description=description, date_task=dt, dateexpire=dtexp ,id_adult=current_user.id, lat=lat,
-                                  lng=lng, placeId=placeId, amount=amount)
+                                  lng=lng, placeId=placeId, amount=amount, address = address)
                 db.session.add(new_offer)
                 db.session.commit()
                 flash('Task posted!', category='success')
