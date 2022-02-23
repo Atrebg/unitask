@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
-{% block content%}
+{% block content %}
 
-    <br />
+    <br/>
 
     <div class="container">
         <div class="row">
@@ -23,17 +23,32 @@
                     <tbody>
                     <tr>
                         {% if not offer.isAss %}
-                            <th scope="row"><a style="color:darkblue" href={{ url_for('users.task', task_id=offer.id) }} >{{ offer.title }}</a></th>
+                            <th scope="row"><a style="color:darkblue"
+                                               href={{ url_for('users.task', task_id=offer.id) }}>{{ offer.title }}</a>
+                            </th>
                             <td>{{ offer.description }}</td>
                             <td align="center"> {{ offer.applicants|length }}</td>
-                            <td><button type="button" style="background: #2c3e50" class="btn btn-secondary"><a style="color: white" href={{ url_for('adults.deletetask', task_id=offer.id) }}>DELETE TASK</a></button></td>
+                            <td>
+                                <button type="button" style="background: #2c3e50" class="btn btn-secondary"><a
+                                        style="color: white" href={{ url_for('adults.deletetask', task_id=offer.id) }}>DELETE
+                                    TASK</a></button>
+                            </td>
                         {% endif %}
                     </tr>
                     </tbody>
                 {% endfor %}
             {% else %}
-                <div>
-                You have not posted any task yet! If you want to start and post your first task click here: <a style="color:darkblue" href={{ url_for('views.posttask')}}>POST</a>.
+                <div class="row">
+                    <div align="center" class="col-4">
+                        <img class="img-fluid" alt="sorry" src="/static/images/pic/sorry.png"/>
+                    </div>
+                    <div class="col-8" style="margin-top:2em;">
+                        <div class="button-55">You have not posted a task yet! </br>
+                            Click <a style="color:darkblue" href={{ url_for('users.posttask') }}>here</a> if you want to
+                            post your first task.
+                        </div>
+
+                    </div>
                 </div>
             {% endif %}
             </table>

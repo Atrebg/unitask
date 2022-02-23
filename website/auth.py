@@ -77,19 +77,19 @@ def sign_up():
 def riempidb():
     studenti = [
         {'name': "Giacomo", 'surname': "Bertazzolo",
-         'description': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi."},
+         'description': "I am a studente in IT engineering. I can help you with your computer and all of your electronic devices."},
         {'name': "Valeria", 'surname': "Liuni",
          'description': "I am a student in Engineering and Management at Politecnico di Torino. I love animals and I am ready to help you with them!"},
-        {'name': "Samuele", 'surname': "Stasi",
-         'description': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi."},
+        {'name': "Caterina", 'surname': "Nassi",
+         'description': "I am a student in Education and Formation. I love babies, and I am usually available at the last minute. "},
         {'name': "Oliviero", 'surname': "Vidoni",
          'description': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi."},
     ]
 
     adulti = [
-        {'name': "mamma", 'surname': "papa"},
-        {'name': "zia", 'surname': "zio"},
-        {'name': "nonno", 'surname': "nonna"},
+        {'name': "Maria", 'surname': "Bianchi", 'description': "I am a Manager in a consultancy firm. I have a 4 lovely dogs and I am always looking for someone who can help me with them."},
+        {'name': "Paolo", 'surname': "Giorgi", 'description': "I am a grandfather with 4 amazing nephews. They cannot bear anymore my problems with technology and for this reason I decided to join this community."},
+        {'name': "Mario", 'surname': "Rossi", 'description': "I am a single father whit 3 beautiful children. It may happen that I cannot find someone who can help me with them, especially when there are last minute calls at work."},
     ]
 
     tasks = [
@@ -145,7 +145,7 @@ def riempidb():
         user_db = Adult(first_name=adulto['name'],
                         surname=adulto['surname'],
                         email=mail,
-
+                        description=adulto['description'],
                         password=generate_password_hash('1234567890', method='sha256'),
                         type='adult')
         db.session.add(user_db)

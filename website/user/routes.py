@@ -74,10 +74,17 @@ def about_us():
 def account():
     return render_template("User/account.html", user=current_user)
 
+@users.route('/posttask')
+def posttask():
+    return render_template("User/posttask.html", user=current_user)
+
+@users.route('/listapplications')
+def listapplications():
+    return render_template("User/listapplications.html", user=current_user)
+
 
 @users.route('/personalreviews')
 def personalreviews():
-
     return render_template("User/personalreviews.html", user=current_user)
 
 

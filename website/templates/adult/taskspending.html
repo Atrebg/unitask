@@ -3,37 +3,31 @@
 {% block content %}
 
     <br/>
-    <h1 align="center">Your tasks</h1>
+    <h1 align="center">YOUR TASKS</h1>
 
     <div class="container">
         <div class="row">
 
             <div class="col-5 p-4 m-2 col-page">
-                <h1 align="left" class="mb-4">TASK OPEN</h1>
-            <!--Task aperte che devono essere ancora assegnate-->
+                <h2 align="center" class="mb-4">Open Tasks</h2>
                 <table class="table table-hover">
-
                     {% set  l = user.gettasksopen() %}
                     {% if l %}
-                        <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
-                        <tr>
-                            <th scope="col">TASK</th>
-                            <th scope="col">DATE</th>
-                            <th scope="col">Applicants</th>
-                            <th scope="col">DELETE TASK</th>
-                        </tr>
-                        </thead>
                         {% for offer in l %}
-
                             {% if offer.isAss==False %}
-
+                                <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
+                                <tr>
+                                    <th scope="col">Task</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                                </thead>
                                 <tbody>
                                 <tr>
                                     <th scope="row"><a style="color:darkblue"
                                                        href={{ url_for('users.task', task_id=offer.id) }}>{{ offer.title }}</a>
                                     </th>
                                     <td>{{ offer.date_task.strftime("%d/%m/%Y") }}</td>
-                                    <td>{{ offer.applicants|length }}</td>
                                     <td>
                                         <button type="button" class="btn btn-outline-danger mx-4"><a
                                                 class="delete-button"
@@ -45,84 +39,147 @@
                             {% endif %}
                         {% endfor %}
                     {% else %}
-                        No task pending
+                        <div class="row">
+                            <div align="center" class="col-4">
+                                <img class="img-fluid" alt="sorry" src="/static/images/pic/sorry.png"/>
+                            </div>
+                            <div class="col-8" style="margin-top:2em;">
+                                <div class="button-55">
+                                    You have no pending tasks!
+                                </div>
+                            </div>
+                        </div>
                     {% endif %}
 
                 </table>
             </div>
 
+            <!--//////////////////////////////////////////-->
 
-            <!-- CLOSED APPLICATION -->
-
+            <div class="col-1"></div>
             <div class="col-5 p-4 m-2 col-page">
-                <h1 align="left" class="mb-4">TASK CLOSED</h1>
+                <h2 align="center" class="mb-4">Closed Tasks</h2>
+
                 <div class="row">
-                    <h3 align="left" style="color: white; background: #2c3e50">Closed and reviewed</h3>
-                    {% set  l = user.gettaskclosed() %}
-                    {% if l %}
-                        <ul class="mx-4">
-                            {% for offer in l %}
-                                <li>
-                                     {{ offer.title }}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        <div align="center">
-                            You have no task closed and reviewed.
-                        </div>
-                    {% endif %}
-                </div>
-            <div class="row">
-                     <!--Task aperte che devono essere ancora assegnate-->
-                        <h3 align="left" style="color: white; background: #2c3e50">Assigned</h3>
-                        <ul class="list-group list-group-flush" id="offers">
-                            {% if pending|length != 0 %}
-                                {% for offer in pending %}
-                                    <li class="list-group-item">
-                                        titolo: {{ offer.title }}
-                                        performata da: {{ offer.performer.first_name }}
-                                        <br/>
-                                        {% if offer.isAss==True and offer.isPerf==False %}
-                                            <button><a href={{ url_for('users.writereview', task_id=offer.id) }}> The
-                                                task has been performed! Review the performer</a></button>
-                                            </li>
-                                        {% endif %}
+                    <div class="col">
+                        <h4 align="left">Closed and reviewed</h4>
+                        <table class="table table-hover">
+                            {% set  l = user.gettaskclosed() %}
+                            {% if l %}
+                                <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
+                                <tr>
+                                    <th scope="col">Task</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                                </thead>
+                                {% for offer in l %}
+                                    <tbody>
+                                    <tr>
+                                        <td>{{ offer.title }}</td>
+                                        <td>{{ offer.date_task.strftime("%d/%m/%Y") }}</td>
+                                    </tr>
+                                    </tbody>
                                 {% endfor %}
                             {% else %}
-                                No task pending
+                                <div class="row">
+                                    <div class="col-" style="margin-top:2em;">
+                                        <div class="button-task">
+                                            You have no closed and reviewed tasks!
+                                        </div>
+                                    </div>
+                                </div>
                             {% endif %}
-                        </ul>
-                    </div>
 
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <h4 align="left">Assigned</h4>
+                    <div class="col">
+                        <table class="table table-hover">
+                            {% set  l = user.gettaskclosed() %}
+                            {% if l %}
+                                <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
+                                <tr>
+                                    <th scope="col">Task</th>
+                                    <th scope="col">Performer</th>
+                                    <th scope="col">Review</th>
+                                </tr>
+                                </thead>
+
+                                {% if pending|length != 0 %}
+                                    {% for offer in pending %}
+                                        <tbody>
+                                        <tr>
+                                            <td>{{ offer.title }}</td>
+                                            <td>{{ offer.performer.first_name }}</td>
+                                            {% if offer.isAss==True and offer.isPerf==False %}
+                                                <td>
+                                                    <button type="button" class="btn btn-outline-danger mx-4"><a
+                                                            href={{ url_for('users.writereview', task_id=offer.id) }}>
+                                                        Review</a>
+                                                    </button>
+                                                </td>
+                                                </tr>
+                                                </tbody>
+                                            {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% else %}
+                                <div class="row">
+                                    <div class="col-" style="margin-top:2em;">
+                                        <div class="button-task">
+                                            You have no tasks assigned to review!
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col">
+                        <h4 align="left">Expired, but not performed</h4>
+                        <table class="table table-hover">
+                            {% set  l = user.gettaskexpired() %}
+                            {% if l %}
+                                <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
+                                <tr>
+                                    <th scope="col">Task</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                                </thead>
+                                {% for offer in l %}
+                                    <tbody>
+                                    <tr>
+                                        <td>{{ offer.title }}</td>
+                                        <td>{{ offer.date_task.strftime("%d/%m/%Y") }}</td>
+                                    </tr>
+                                    </tbody>
+                                {% endfor %}
+                            {% else %}
+                                <div class="row">
+                                    <div class="col-" style="margin-top:2em;">
+                                        <div class="button-task">
+                                            You have no tasks expired!
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                        </table>
+                    </div>
                 </div>
 
             </div>
-                <div class="row">
-                    <h3 class="mt-3" align="left" style="color: white; background: #2c3e50">Task expired and not
-                        performed</h3>
-                    {% set  l = user.gettaskexpired() %}
-                    {% if l %}
-
-                        <ul>
-                            <div class="m-2" style="display: flex; justify-content: space-between">
-                                {% for offer in l %}
-                                    <li class="mx-4">{{ offer.title }} </li>
-
-                                {% endfor %}
-                            </div>
-                        </ul>
-                    {% else %}
-                        <div align="center">
-                            You have no task expired.
-                        </div>
-                    {% endif %}
-                </div>
 
         </div>
+
     </div>
 
     <br/><br/>
-
-
 {% endblock %}

@@ -107,3 +107,4 @@ def deletetask(task_id):
         db.session.commit()
         flash('Task deleted!', category='success')
         return redirect(url_for('views.home'))
+
