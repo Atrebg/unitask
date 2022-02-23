@@ -19,6 +19,7 @@
                 </tr>
                 </thead>
                 {% for offer in user.gettasksopen() %}
+                    {{ offer.description }}
                     <tbody>
                     <tr>
                         {% if not offer.isAss %}
