@@ -61,7 +61,7 @@ def posttask():
             else:
                 a = {"title": title, "address1": address, "address2": "Torino", "coords": {"lat": lat, "lng": lng},
                      "placeId": placeId}
-                new_offer = Offer(title=title, description=description, date_task=dt, id_adult=current_user.id, lat=lat,
+                new_offer = Offer(title=title, description=description, date_task=dt, dateexpire=dtexp ,id_adult=current_user.id, lat=lat,
                                   lng=lng, placeId=placeId, amount=amount)
                 db.session.add(new_offer)
                 db.session.commit()

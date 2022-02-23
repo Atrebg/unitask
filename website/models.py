@@ -127,7 +127,7 @@ class Offer(db.Model, UserMixin):
     lat = db.Column(db.Float)
     lng = db.Column(db.Float)
     date = db.Column(db.DateTime(timezone=True), default=func.now())
-    dateexpire = db.Column(db.DateTime(timezone=True), default=func.now())
+    dateexpire = db.Column(db.DateTime(timezone=True))
     isAss = db.Column(db.Boolean, default=False)
     date_task = db.Column(db.DateTime(timezone=True))
     id_adult = db.Column(db.Integer, db.ForeignKey('adult.id'))
