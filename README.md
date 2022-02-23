@@ -17,7 +17,7 @@ TODO GIACOMO:
 TODO VALE
 • Rivedere pagina your applications
 • Task Pending di adult
-
+• Capire cos'è personal reviews
 
 
 

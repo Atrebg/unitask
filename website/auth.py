@@ -79,7 +79,7 @@ def riempidb():
         {'name': "Giacomo", 'surname': "Bertazzolo",
          'description': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi."},
         {'name': "Valeria", 'surname': "Liuni",
-         'description': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi."},
+         'description': "I am a student in Engineering and Management at Politecnico di Torino. I love animals and I am ready to help you with them!"},
         {'name': "Samuele", 'surname': "Stasi",
          'description': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi."},
         {'name': "Oliviero", 'surname': "Vidoni",
