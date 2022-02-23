@@ -28,6 +28,11 @@ views = Blueprint('views', __name__)
 def home():
     if current_user.type == 'adult':
         Offer.controltasksdate()
+        for of in current_user.tasks:
+            if not of.isClosed:
+                print(current_user.tasks)
+        for offer in current_user.gettasksopen():
+            print (offer)
         return render_template("adult/homeAdult.html", user=current_user)
     return redirect(url_for('students.offer'))
 
