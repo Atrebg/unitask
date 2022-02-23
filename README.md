@@ -12,10 +12,12 @@ WTFSelectField
 
 TODO GIACOMO:
 1) Pagamento(?)
+2) Check logica delle tabelle 
 
 TODO VALE
 • Rivedere pagina your applications
 • Task Pending di adult
+
 
 
 

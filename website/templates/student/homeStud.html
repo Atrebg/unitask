@@ -1,37 +1,53 @@
 {% extends "base.html" %}
 {% block title %}Home Stud{% endblock %}
-{% block content%}
-    <br />
+{% block content %}
+    <br/>
 
     <div class="container">
         <div class="row">
             <h1 align="center">Find your perfect match</h1>
             <form method="POST">
-                <h2 class="m-2" align= "center">List of open tasks</h2>
+
                 <br/>
 
-                <table class="table table-hover">
-                    <thead class="thead" style="color:whitesmoke; background:#2c3e50">
-                    <tr>
-                        <th scope="col">TASK</th>
-                        <th scope="col">DESCRIPTION</th>
-                        <th scope="col">APPLY</th>
-                    </tr>
-                    </thead>
-                    {% if tasks|length != 0  %}
+                    {% if tasks|length != 0 %}
+                        <h2 class="m-2" align="center">List of open tasks</h2>
+                        <table class="table table-hover">
+                        <thead class="thead" style="color:whitesmoke; background:#2c3e50">
+                        <tr>
+                            <th scope="col">TASK</th>
+                            <th scope="col">DESCRIPTION</th>
+                            <th scope="col">APPLY</th>
+                        </tr>
+                        </thead>
                         {% for offer in tasks %}
                             <tbody>
                             <tr>
-                                <th scope="row"><a style="color:darkblue" href={{ url_for('users.task', task_id=offer.id) }} >{{ offer.title }} </a></th>
+                                <th scope="row"><a style="color:darkblue"
+                                                   href={{ url_for('users.task', task_id=offer.id) }}>{{ offer.title }} </a>
+                                </th>
                                 <td>{{ offer.description }}</td>
-                                <td><button type="button" style="background: #2c3e50"  class="btn btn-secondary"><a style="color: white" href={{ url_for('students.sendapplication', task_id=offer.id) }}>APPLY</a></button></td>
+                                <td>
+                                    <button type="button" style="background: #2c3e50" class="btn btn-secondary"><a
+                                            style="color: white"
+                                            href={{ url_for('students.sendapplication', task_id=offer.id) }}>APPLY</a>
+                                    </button>
+                                </td>
                             </tr>
                             </tbody>
                         {% endfor %}
                     {% else %}
-                        <tbody>
-                        <td> No task available </td>
-                        </tbody>
+                        <div class = "row">
+                        <div align="center" class="col-4">
+                            <img class="img-fluid" alt="sorry" src="/static/images/pic/sorry.png"/>
+                        </div>
+                            <div class="col-8" style="margin-top:2em;">
+<div class="button-55">We are sorry, but there are no task posted now. </br> Please come back later and check again to find your perfect match!</div>
+
+                            </div>
+                            <!-- HTML !-->
+
+                    </div>
                     {% endif %}
                 </table>
             </form>

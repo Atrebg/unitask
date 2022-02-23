@@ -6,16 +6,45 @@
 
 {% block content%}
     <br />
-    <h1 align="center">What people tell about {{ reviewed.first_name }} {{ reviewed.surname }}</h1>
+    <h1 align="center">About {{ reviewed.first_name }} {{ reviewed.surname }}</h1>
+
+
 
     <div class="container">
         <div class="row">
-            <div  align="center" class="reviews-box m-3">
+            <div align="center" class="col-3 profile-box m-3 p-3">
+                <div class="row">
+                <div class="col-2">
+                    {% if user.type=='student' %}
+                        <img align="left" width="60" height="60" alt="usertype" src="/static/images/pic/worker.png"/>
+                    {% elif user.type=='adult' %}
+                        <img align="left" width="60" height="60" alt="usertype" src="/static/images/pic/student.png"/>
+                    {% endif %}
+                </div>
+                <div class="col-8">
+                <div class="row">
+                    <h4>User description:</h4>
+                        <div style="text-align:justify; padding: 0;">
+                            {% if reviewed.description != None %}
+                                <div class="profileDescription">
+                                    {{ user.description }}
+                                </div>
+                            {% else %}
+                               We are sorry! The user has no description.
+                            {% endif %}
+                        </div>
+                </div>
+                </div>
+                </div>
+             </div>
+
+            <div class="col-8 reviews-box m-3">
+
                 <h1 align="left" class="p-2">REVIEWS </h1>
                 {% if reviewed.reviewsreceived|length !=0 %}
                     {% for recens in reviewed.reviewsreceived %}
                         <div class="box-review">
-                            <h2>Reviewed by: <span class="review-author"> {{recens.author.first_name }}</span></h2>
+                            <h2>Reviewed by: <span class="review-author"> {{ recens.author.first_name }}</span></h2>
                             <h4 class="review-title">{{ recens.title }}</h4>
                             {{ recens.text }}
 
@@ -28,11 +57,17 @@
                     </div>
                 {% endif %}
                 {% if user.type=='adult' %}
-                    <button style="background: #2c3e50" class="btn btn-primary btn-lg" > <a style="color: white" href={{ url_for('adults.choosestud', task_id=task_id, stud_id=reviewed.id) }} >CHOOSE THIS USER</a></button>
+                    <button style="background: #2c3e50" class="btn btn-primary btn-lg"><a style="color: white"
+                                                                                          href={{ url_for('adults.choosestud', task_id=task_id, stud_id=reviewed.id) }}>CHOOSE
+                        THIS USER</a></button>
                 {% endif %}
 
             </div>
-        </div>
+
     </div>
+    </div>
+
+
+
 
 {% endblock %}
