@@ -42,8 +42,8 @@ class PosttaskForm(FlaskForm):
     state = StringField('State:', validators=[DataRequired(), Length(min=3, max=25)])
     zip = StringField('Zip:')
     country = StringField('Country:')
-    date = DateField(validators=[DataRequired()])
-    dateexpire= DateField(validators=[DataRequired()])
+    date = DateField("Date", validators=[DataRequired()])
+    dateexpire= DateField("Expiration Date",validators=[DataRequired()])
     submit = SubmitField('Post Task')
 
 

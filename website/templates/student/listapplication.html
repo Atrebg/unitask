@@ -17,9 +17,9 @@
                             {% if offer.isAss==False %}
                                 <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
                                 <tr>
-                                    <th scope="col">TASK</th>
-                                    <th scope="col">DATE</th>
-                                    <th scope="col">DELETE APPLICATION</th>
+                                    <th scope="col">Task</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Delete Application</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -74,7 +74,7 @@
             <div class="col-5 p-4 m-2 col-page">
                 <h2 align="left" class="mb-4">CLOSED APPLICATION</h2>
                 <div class="row">
-                    <h4 align="left" style="color: white; background: #2c3e50">TASK WON</h4>
+                    <h4 align="left" style="color: white; background: #2c3e50">Task won</h4>
                     {%set  l = user.taskwon() %}
                     {% if l %}
                         <ul class="mx-4">
@@ -91,7 +91,7 @@
                     {% endif %}
                 </div>
                 <div class="row">
-                    <h4 class="mt-3" align="left" style="color: white; background: #2c3e50">TASK WON AND PERFORMED</h4>
+                    <h4 class="mt-3" align="left" style="color: white; background: #2c3e50">Task won and performed</h4>
                     {%set  l = user.taskwonandperform() %}
                     {% if l %}
 
@@ -114,7 +114,7 @@
                     {% endif %}
                 </div>
                 <div class="row">
-                    <h4 class="mt-3" align="left" style="color: white; background: #2c3e50">TASK LOST</h4>
+                    <h4 class="mt-3" align="left" style="color: white; background: #2c3e50">Task lost</h4>
                     {%set  l = user.tasklost() %}
                     {% if l %}
                         <ul class="mx-4" style="list-style: none">

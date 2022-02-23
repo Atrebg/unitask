@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 {% block title %}Post Tasks{% endblock %}
-{% block content%}
-    <br />
+{% block content %}
+    <br/>
 
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <form class="postatask-form" method="POST" style="margin:0;">
-                    <h1 align= "left"> Post Task </h1>
-                    <div align ="justify"> Tell us what are you looking for and we
+                    <h1 align="left"> Post Task </h1>
+                    <div align="justify"> Tell us what are you looking for and we
                         will do our best to find it!
-                    </div><br/>
+                    </div>
+                    <br/>
 
                     <div class="form-group">
                         {{ form.tasktitle.label }}
@@ -33,49 +34,121 @@
                             <p>{{ error }}</p>
                         {% endfor %}
                     </div>
+
                     <div class="form-group">
-                        {{ form.date.label(class= "dropdwown") }}
-                        {{ form.date(class = 'form-control') }}
-                        {% for error in form.date.errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.dateexpire.label(class= "dropdwown") }}
-                        {{ form.dateexpire(class = 'form-control') }}
-                        {% for error in form.dateexpire.errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                    <div class="panel">
-                        <br/>
-                        <div>
-                            <img class="sb-title-icon" src="https://fonts.gstatic.com/s/i/googlematerialicons/location_pin/v5/24px.svg" alt="">
-                            <span class="sb-title">Address Selection</span>
-                        </div>
-                        <div>
-                            <input type="text" placeholder="Address" id="location" name="location"/>
-                            <input type="text" placeholder="Apt, Suite, etc (optional)"/>
-                            <input type="text" placeholder="City" id="locality" name="locality"/>
-                            <div class="half-input-container">
-                                <input type="text" class="half-input" placeholder="State/Province" id="administrative_area_level_1" name="administrative_area_level_1"/>
-                                <input type="text" class="half-input" placeholder="Zip/Postal code" id="postal_code" name="postal_code" />
+                        <div style="display:inline;">
+                            <div>
+                                {{ form.date.label(class= "dropdwown") }}
+                                <button type="button" class="icon-info-sign" style="border:none; background: none;"
+                                        data-toggle="modal" data-target="#typeModal"></button>
+                                {{ form.date(class = 'form-control') }}
+                                {% for error in form.date.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
                             </div>
-                            <input type="text" placeholder="Country" id="country" name="country"/>
+
+                            <!-- trigger for type modal-->
+
+
+                            <!-- Modal for type-->
+                            <div class="modal fade" id="typeModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Type of user</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            Choose Student if you are looking for a task to perform.<br/><br/>
+                                            Choose Adult if you want to post a task that needs to be performed.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok!
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <br/>
-                    </div>
-                    <div align="center">
-                        {{ form.submit(class='btn btn-success m-2') }}
-                        {{ form.hidden_tag() }}
                     </div>
 
+
+                    <div class="form-group">
+                        <div style="display:inline;">
+                            <div>
+                                {{ form.dateexpire.label(class= "dropdwown") }}
+                                <button type="button" class="icon-info-sign" style="border:none; background: none;"
+                                        data-toggle="modal" data-target="#typeModal"></button>
+                                {{ form.dateexpire(class = 'form-control') }}
+                                {% for error in form.dateexpire.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            <div style="position:relative; float:left">
+                                <!-- trigger for type modal-->
+
+
+                                <!-- Modal for type-->
+                                <div class="modal fade" id="typeModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Type of user</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                Choose Student if you are looking for a task to perform.<br/><br/>
+                                                Choose Adult if you want to post a task that needs to be performed.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Ok!
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="panel">
+                            <br/>
+                            <div>
+                                <img class="sb-title-icon"
+                                     src="https://fonts.gstatic.com/s/i/googlematerialicons/location_pin/v5/24px.svg"
+                                     alt="">
+                                <span class="sb-title">Address Selection</span>
+                            </div>
+                            <div>
+                                <input class="inputAddress" type="text" placeholder="Address" id="location"
+                                       name="location"/>
+                                <input class="inputAddress" type="text" placeholder="Apt, Suite, etc (optional)"/>
+                                <input class="inputAddress" type="text" placeholder="City" id="locality"
+                                       name="locality"/>
+                                <div class="half-input-container">
+                                    <input type="text" class="half-input" placeholder="State/Province"
+                                           id="administrative_area_level_1" name="administrative_area_level_1"/>
+                                    <input type="text" class="half-input" placeholder="Zip/Postal code" id="postal_code"
+                                           name="postal_code"/>
+                                </div>
+                                <input class="inputAddress" type="text" placeholder="Country" id="country"
+                                       name="country"/>
+                            </div>
+                            <br/>
+                        </div>
+                        <div align="center">
+                            {{ form.submit(class='btn btn-success m-2') }}
+                            {{ form.hidden_tag() }}
+                        </div>
+                    </div>
                 </form>
                 <script
                         type="text/javascript"
                         src="{{ url_for('static', filename='app.js') }}"
                 ></script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cAC" async defer></script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cAC"
+                        async defer></script>
             </div>
             <div class="col-sm-12 col-md-6">
                 <img class="img-fluid" style="max-height: 85%; min-width: 100%" src="/static/images/pic/dogsitter.png"/>
