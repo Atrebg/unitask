@@ -50,7 +50,7 @@ def posttask():
         today = datetime.now()
         if dt < today or dtexp < today or dt < dtexp:
             form.date.data = ''
-            flash('La data non puo essere anteriore a quella di oggi', category='error')
+            flash('Enter a correct date', category='error')
             return redirect(url_for('adults.posttask'))
         else:
             title = form.tasktitle.data
