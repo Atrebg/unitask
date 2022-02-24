@@ -93,7 +93,7 @@ def riempidb():
     ]
 
     tasks = [
-        {'titolo': "My lovely pet",
+        {'titolo': "My lovely pet ",
          'descrizione': "I need help with my lovey pet. I'm looking for someone who can take care of her for the afternoon. She is really sweet and docile.",
          'date': "2022-04-23", 'lat': "45.058427", 'lng': "7.655138", 'placeId': "ChIJbZ33QSFtiEcR3Yr-cxhtfDQ",
          'address': "Corso Lione 40"},
