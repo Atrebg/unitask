@@ -49,8 +49,13 @@ def sendapplication(task_id):
 @students.route('/listapplications', methods=['GET', 'POST'])
 @login_required  # every time we go to the home page
 def listapplications():
+    a = 0
+    for off in current_user.getapplicationsopen():
+        if not off.isAss:
+            a=1
+            break
 
-    return render_template("Student/listapplication.html", user=current_user)
+    return render_template("Student/listapplication.html", user=current_user ,a = a )
 
 
 @students.route('/deleteapplication/<task_id>')
