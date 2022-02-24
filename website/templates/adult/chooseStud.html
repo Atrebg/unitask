@@ -11,7 +11,7 @@
                     <br/>
                     <h3>Applicants:</h3>
                     <br/>
-                    {% if not taskscelta.applicants %}
+                    {% if taskscelta.applicants %}
                     {% for applicant in taskscelta.applicants %}
                         <div align="left">
                             <a style="color:darkblue" href={{ url_for('users.showreviews', user_id=applicant.id, task_id=taskscelta.id) }} >{{ applicant.first_name }} {{ applicant.surname }}</a>
