@@ -11,11 +11,12 @@
             <h2 align="center" class="mb-4">Pending Applications</h2>
             <table class="table table-hover">
                 {% set  l = user.getapplicationsopen() %}
-                {% set a=0 %}
+                {% set a = 0 %}
                 {% if l %}
+                    {% set a = 1 %}
                     {% for offer in l %}
                         {% if offer.isAss==False %}
-                            {% set a =1 %}
+                            {% set a = 2 %}
                             <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
                             <tr>
                                 <th scope="col">Task</th>
@@ -65,7 +66,7 @@
                         {% endif %}
                     {% endfor %}
                 {% endif %}
-                {% if not l or a==0 %}
+                {% if a==2 or a==0 %}
                     <div class="row">
                         <div align="center" class="col-4">
                             <img class="img-fluid" alt="sorry" src="/static/images/pic/sorry.png"/>
