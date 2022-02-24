@@ -64,5 +64,5 @@ class UpdateAccountForm (FlaskForm):
     def validate_email(self, email):
         race = User.query.filter_by(email=email.data).first()
         if race:
-            raise ValidationError('Email already in use, please follow password recovery procedure')
+            raise ValidationError('Email already in use')
 
