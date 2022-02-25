@@ -34,7 +34,7 @@ class SignupForm(FlaskForm):
 
 
 class PosttaskForm(FlaskForm):
-    tasktitle = StringField('Title:', validators=[DataRequired(message ='prova'), Length(min=3, max=25)])
+    tasktitle = StringField('Title:', validators=[DataRequired(), Length(min=3, max=25)])
     taskdescription = StringField('Description:', validators=[DataRequired(), Length(min=3, max=25)])
     amount = IntegerField("Payment (Euro):", validators=[DataRequired()])
     address = StringField('Address:', validators=[DataRequired(), Length(min=3, max=25)])
