@@ -4,6 +4,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+from flask import render_template
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -21,12 +22,22 @@ def create_app():
     from website.student import students
     from website.user import users
 
+    @app.errorhandler(404)
+    def page_not_found(e):
+
+        return render_template('404.html', user = 'NULL'), 404
+
+    @app.errorhandler(500)
+    def page_not_found(e):
+        return render_template('500.html', user = 'NULL'), 500
+
     app.register_blueprint(views, url_prefix="/")  # Stiamo dicendo come sono definite le pagine e dove sono
     app.register_blueprint(auth)
     app.register_blueprint(adults)
     app.register_blueprint(students)
     app.register_blueprint(users)
-
+    app.register_error_handler(404, page_not_found)
+    app.register_error_handler(500, page_not_found)
 
     from .models import User, Offer, Adult, Student
 

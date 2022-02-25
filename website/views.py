@@ -3,12 +3,14 @@
 
 import json
 
+import errorhandler as errorhandler
 from flask import Blueprint, render_template, flash, jsonify, request, url_for, redirect
 from flask_login import login_required, current_user
 from datetime import date, datetime
 import googlemaps
 import requests
 from werkzeug.security import generate_password_hash
+from werkzeug.exceptions import HTTPException
 
 from .auth import riempidb
 from .form import *
@@ -86,11 +88,4 @@ def resetdbuser():
     return redirect(url_for('auth.logout'))
 
 
-@views.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html')
 
-
-@views.errorhandler(500)
-def page_not_found(e):
-    return render_template('500.html'), 500
