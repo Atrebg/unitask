@@ -21,11 +21,17 @@ def create_app():
     from website.student import students
     from website.user import users
 
+    @app.errorhandler(404)
+    def page_not_found(e):
+        from flask import render_template
+        return render_template('404.html', user = 'NULL'), 404
+
     app.register_blueprint(views, url_prefix="/")  # Stiamo dicendo come sono definite le pagine e dove sono
     app.register_blueprint(auth)
     app.register_blueprint(adults)
     app.register_blueprint(students)
     app.register_blueprint(users)
+    app.register_error_handler(404, page_not_found)
 
 
     from .models import User, Offer, Adult, Student
