@@ -13,6 +13,12 @@ auth = Blueprint('auth', __name__)
 
 
 # We sad clearly that we can accept get and post requests
+
+@auth.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()

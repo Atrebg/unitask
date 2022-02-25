@@ -17,8 +17,9 @@ from website.adult import *
 from website.user import *
 
 from models import *
+
 API_KEY = "AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A"
-base_url= 'https://maps.googleapis.com/maps/api/geocode/json?'
+base_url = 'https://maps.googleapis.com/maps/api/geocode/json?'
 views = Blueprint('views', __name__)
 
 
@@ -65,22 +66,31 @@ def resetdbuser():
     for studente in studenti:
         mail = studente['name'].lower() + studente['surname'].lower() + '@mail.com'
         user_db = Student(first_name=studente['name'],
-                       surname=studente['surname'],
-                       email=mail,
-                       password=generate_password_hash('1234567890', method='sha256'),
-                       type='student')
+                          surname=studente['surname'],
+                          email=mail,
+                          password=generate_password_hash('1234567890', method='sha256'),
+                          type='student')
         db.session.add(user_db)
         db.session.commit()
 
     for adulto in adulti:
         mail = adulto['name'].lower() + adulto['surname'].lower() + '@mail.com'
         user_db = Adult(first_name=adulto['name'],
-                       surname=adulto['surname'],
-                       email=mail,
-                       password=generate_password_hash('1234567890', method='sha256'),
-                       type='adult')
+                        surname=adulto['surname'],
+                        email=mail,
+                        password=generate_password_hash('1234567890', method='sha256'),
+                        type='adult')
         db.session.add(user_db)
         db.session.commit()
 
     return redirect(url_for('auth.logout'))
 
+
+@views.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html')
+
+
+@views.errorhandler(500)
+def page_not_found(e):
+    return render_template('500.html'), 500
