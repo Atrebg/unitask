@@ -76,6 +76,13 @@ class Student(User, db.Model):
                 t.append(off)
         return t
 
+    def taskwonperfandclosed(self):
+        t = []
+        for off in self.applications:
+            if off.scelta == self.id and off.isPerf and off.isClosed:
+                t.append(off)
+        return t
+
     def tasklost(self):
         t = []
         for off in self.applications:
