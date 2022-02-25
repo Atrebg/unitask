@@ -96,10 +96,10 @@
 
 
                 <div class="row">
-                    <h4 align="left">Assigned</h4>
+                    <h4 align="left">Assigned to review</h4>
                     <div class="col">
                         <table class="table table-hover">
-                            {% set  l = user.gettaskclosed() %}
+                            {% set  l = user.gettasksAssnotPerf() %}
                             {% if l %}
                                 <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
                                 <tr>
@@ -117,7 +117,9 @@
                                             <td>{{ offer.performer.first_name }}</td>
                                             {% if offer.isAss==True and offer.isPerf==False %}
                                                 <td>
-                                                    <button type="button" class="btn btn-outline-danger mx-4"><a
+                                                    <button type="button"
+                                                            class="btn btn-outline-danger mx-4 review-button"><a
+                                                            style="color:black"
                                                             href={{ url_for('users.writereview', task_id=offer.id) }}>
                                                         Review</a>
                                                     </button>
