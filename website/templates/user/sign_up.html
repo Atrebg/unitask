@@ -1,142 +1,147 @@
 {% extends "base.html" %}
 
 {% block title %}Sign-up{% endblock %}
-{% block content%}
+{% block content %}
 
     <br/>
 
     <div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-6">
-            <img class="img-fluid" style="max-height: 85%; min-width: 100%" src="/static/images/pic/garden.jpg"/>
-        </div>
-        <div class="col-sm-12 col-md-6">
-        <form class = "signup-form" style="margin:0;" method = "POST">
-            <h1 align="left" style="font-size:48px">Signup</h1>
-        <div align ="justify"> Are you ready to join our community?
-            Fill the information here, and you will be ready to start!
-        </div><br/>
-
-               <div class="form-group">
-                {{ form.email.label }}
-                {{ form.email(class = 'form-control') }}
-                {% for error in form.email.errors %}
-            <p>{{ error }}</p>
-        {% endfor %}
-    </div>
-          <div class="form-group">
-        {{ form.name.label }}
-        {{ form.name(class = 'form-control') }}
-        {% for error in form.name.errors %}
-            <p>{{ error }}</p>
-        {% endfor %}
-  </div>
-    <div class="form-group">
-        {{ form.surname.label }}
-        {{ form.surname(class = 'form-control') }}
-        {% for error in form.surname.errors %}
-            <p>{{ error }}</p>
-        {% endfor %}
-  </div>
-            <div class="form-group">
-            <div style="display:inline;">
-                <div style="position:relative; float:left">{{ form.description.label }}</div>
-                <div style="position:relative; float:right">
-                    <!-- trigger for description modal-->
-<button type="button" class="icon-info-sign" style="border:none; background: none;" data-toggle="modal" data-target="#exampleModalCenter"> </button>
-
-<!-- Modal for description-->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Description</h5>
-      </div>
-      <div class="modal-body">
-        Complete your profile inserting a description that will be visible to the other users.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok!</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-                </div>
-
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <img class="img-fluid" style="max-height: 85%; min-width: 100%; margin-bottom: 10vh"
+                     src="/static/images/pic/garden.jpg"/>
             </div>
+            <div class="col-sm-12 col-md-6">
+                <form class="signup-form" style="margin:0;" method="POST">
+                    <h1 align="left" style="font-size:48px">Signup</h1>
+                    <div align="justify"> Are you ready to join our community?
+                        Fill the information here, and you will be ready to start!
+                    </div>
+                    <br/>
 
-        {{ form.description(class = 'form-control') }}
-        {% for error in form.description.errors %}
-            <p>{{ error }}</p>
-        {% endfor %}
-  </div>
+                    <div class="form-group">
+                        {{ form.email.label }}
+                        {{ form.email(class = 'form-control') }}
+                        {% for error in form.email.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.name.label }}
+                        {{ form.name(class = 'form-control') }}
+                        {% for error in form.name.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.surname.label }}
+                        {{ form.surname(class = 'form-control') }}
+                        {% for error in form.surname.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <div style="display:inline;">
+                            <div style="position:relative; float:left">{{ form.description.label }}</div>
+                            <div style="position:relative; float:right">
+                                <!-- trigger for description modal-->
+                                <button type="button" class="icon-info-sign" style="border:none; background: none;"
+                                        data-toggle="modal" data-target="#exampleModalCenter"></button>
 
-    <div class="form-group">
-        <div style="display:inline;">
-            <div style="position:relative; float:left;">
-                {{ form.type.label }}
-                {{ form.type(class_='btn btn-secondary dropdown-toggle m-1', style='margin:0;') }}
-                {% for error in form.type.errors %}
-            <p>{{ error }}</p>
-        {% endfor %}
-            </div>
-            <div style="position:relative; float:right;">
-                                    <!-- trigger for type modal-->
-<button type="button" class="icon-info-sign" style="border:none; background: none;" data-toggle="modal" data-target="#typeModal"> </button>
-
-<!-- Modal for type-->
-<div class="modal fade" id="typeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Type of user</h5>
-      </div>
-      <div class="modal-body">
-          Choose Student if you are looking for a task to perform.<br/><br/>
-          Choose Adult if you want to post a task that needs to be performed.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok!</button>
-      </div>
-    </div>
-  </div>
-</div>
+                                <!-- Modal for description-->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Description</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                Complete your profile inserting a description that will be visible to
+                                                the other users.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Ok!
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
 
+                            </div>
+
+                        </div>
+
+                        {{ form.description(class = 'form-control') }}
+                        {% for error in form.description.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                        <div style="display:inline;">
+                            <div style="position:relative; float:left;">
+                                {{ form.type.label }}
+                                {{ form.type(class_='btn btn-secondary dropdown-toggle m-1', style='margin:0;') }}
+                                {% for error in form.type.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            <div style="position:relative; float:right;">
+                                <!-- trigger for type modal-->
+                                <button type="button" class="icon-info-sign" style="border:none; background: none;"
+                                        data-toggle="modal" data-target="#typeModal"></button>
+
+                                <!-- Modal for type-->
+                                <div class="modal fade" id="typeModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Type of user</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                Choose Student if you are looking for a task to perform.<br/><br/>
+                                                Choose Adult if you want to post a task that needs to be performed.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Ok!
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
 
+                            </div>
+                        </div>
 
-            </div>
-        </div>
+                    </div>
 
-  </div>
-
-<br/><br/>
-        <div class="form-group">
-            {{ form.password.label }}
-            {{ form.password(class = 'form-control') }}
-            {% for error in form.password.errors %}
-             <p>{{ error }}</p>
-         {% endfor %}
-  </div>
-        <div class="form-group">
-            {{ form.passwordconf.label }}
-            {{ form.passwordconf(class = 'form-control') }}
-            {% for error in form.passwordconf.errors %}
-             <p>{{ error }}</p>
-         {% endfor %}
-  </div>
-        <br />
-    <div align="center">
-  {{ form.submit(class='btn btn-success m-2') }}
-    {{ form.hidden_tag() }}
-    </div>
-            </form>
+                    <br/><br/>
+                    <div class="form-group">
+                        {{ form.password.label }}
+                        {{ form.password(class = 'form-control') }}
+                        {% for error in form.password.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.passwordconf.label }}
+                        {{ form.passwordconf(class = 'form-control') }}
+                        {% for error in form.passwordconf.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <br/>
+                    <div align="center">
+                        {{ form.submit(class='btn btn-success m-2') }}
+                        {{ form.hidden_tag() }}
+                    </div>
+                </form>
 
             </div>
         </div>

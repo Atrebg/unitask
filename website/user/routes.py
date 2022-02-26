@@ -13,6 +13,7 @@ from website.adult import *
 from website.views import *
 from website.student import *
 from website.user import *
+
 API_KEY = "AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A"
 base_url = 'https://maps.googleapis.com/maps/api/geocode/json?'
 
@@ -74,9 +75,11 @@ def about_us():
 def account():
     return render_template("User/account.html", user=current_user)
 
+
 @users.route('/posttask')
 def posttask():
     return render_template("User/posttask.html", user=current_user)
+
 
 @users.route('/listapplications')
 def listapplications():
@@ -118,4 +121,3 @@ def task(task_id):
     else:
         t = Offer.query.filter(Offer.id == task_id).first()
         return render_template("adult/chooseStud.html", user=current_user, taskscelta=t)
-

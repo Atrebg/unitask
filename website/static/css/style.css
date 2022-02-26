@@ -92,7 +92,6 @@ body{
 }
 
 .profile-box{
-
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 .reviews-box{
@@ -109,7 +108,7 @@ box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 
 }
 
 .box-review{
-    background-color: lightgrey;
+    background-color: #e9ecef;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
     margin:1em;
     padding: 1.5em;
@@ -189,8 +188,6 @@ box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 
   left: 50px;
 }
 
-
-/* CSS */
 .button-55 {
     padding:1em;
   align-self: center;

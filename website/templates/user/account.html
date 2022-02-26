@@ -4,7 +4,7 @@
     <br/>
     <h1 align="center">Your profile</h1>
 
-    <div class="container">
+    <div class="container" style="margin-bottom: 50vh">
         <div class="row">
             <div align="center" class="col-3 profile-box m-3 p-3">
                 <div class="row">
@@ -25,7 +25,7 @@
                         <h3>About me:</h3>
                         <div style="text-align:left;">
                             {% if user.description != None %}
-                                <div class="profileDescription" >
+                                <div class="profileDescription">
                                     {{ user.description }}
                                 </div>
                             {% else %}

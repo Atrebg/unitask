@@ -23,7 +23,8 @@ class SignupForm(FlaskForm):
     description = StringField('Description:', validators=[Length(min=3)])
     type = SelectField("Select type of user:", choices=[('student', 'Student'), ('adult', 'Adult')])
     password = PasswordField('Password:', validators=[DataRequired(), Length(min=8, max=16)])
-    passwordconf = PasswordField('Confirm Password:', validators=[DataRequired(), Length(min=8, max=16), EqualTo('password', message='Password must match')])
+    passwordconf = PasswordField('Confirm Password:', validators=[DataRequired(), Length(min=8, max=16),
+                                                                  EqualTo('password', message='Password must match')])
     submit = SubmitField('Register')
 
     @staticmethod
@@ -43,26 +44,23 @@ class PosttaskForm(FlaskForm):
     zip = StringField('Zip:')
     country = StringField('Country:')
     date = DateField("Date", validators=[DataRequired()])
-    dateexpire= DateField("Expiration Date",validators=[DataRequired()])
+    dateexpire = DateField("Expiration Date", validators=[DataRequired()])
     submit = SubmitField('Post Task')
 
 
 class ReviewForm(FlaskForm):
-    reviewtitle = StringField('Titolo:', validators=[DataRequired(), Length(min=3, max=25)])
+    reviewtitle = StringField('Title:', validators=[DataRequired(), Length(min=3, max=25)])
     reviewdescription = StringField('Description:', validators=[DataRequired(), Length(min=3, max=25)])
     submit = SubmitField('Review')
 
 
-class UpdateAccountForm (FlaskForm):
-
+class UpdateAccountForm(FlaskForm):
     name = StringField('Name:', validators=[DataRequired(), Length(min=3, max=25)])
     surname = StringField('Surname:', validators=[DataRequired(), Length(min=3, max=25)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Update')
 
-
     def validate_email(self, email):
         race = User.query.filter_by(email=email.data).first()
         if race:
             raise ValidationError('Email already in use')
-

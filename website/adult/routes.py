@@ -17,9 +17,8 @@ API_KEY = "AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A"
 base_url = 'https://maps.googleapis.com/maps/api/geocode/json?'
 
 
-@adults.route('/posttask', methods=['GET',
-                                    'POST'])  # 17,14 views is the name of our blueprint (/ is the main page, this function will run
-@login_required  # every time we go to the home page
+@adults.route('/posttask', methods=['GET', 'POST'])
+@login_required
 def posttask():
     form = PosttaskForm()
     if request.method == 'POST':
@@ -61,8 +60,9 @@ def posttask():
             else:
                 a = {"title": title, "address1": address, "address2": "Torino", "coords": {"lat": lat, "lng": lng},
                      "placeId": placeId}
-                new_offer = Offer(title=title, description=description, date_task=dt, dateexpire=dtexp ,id_adult=current_user.id, lat=lat,
-                                  lng=lng, placeId=placeId, amount=amount, address = address)
+                new_offer = Offer(title=title, description=description, date_task=dt, dateexpire=dtexp,
+                                  id_adult=current_user.id, lat=lat,
+                                  lng=lng, placeId=placeId, amount=amount, address=address)
                 db.session.add(new_offer)
                 db.session.commit()
                 flash('Task posted!', category='success')
@@ -74,37 +74,36 @@ def posttask():
 @adults.route('/choosestud/<task_id>/<stud_id>', methods=['GET', 'POST'])
 @login_required
 def choosestud(task_id, stud_id):
-        task1 = Offer.query.filter(Offer.id == task_id).first()
-        if not Offer.controldate(task1):
-            flash('Too late the task is closed', category='error')
-            return redirect(url_for('views.home'))
-        task1.scelta = stud_id
-        task1.isAss = True
-        db.session.commit()
-
+    task1 = Offer.query.filter(Offer.id == task_id).first()
+    if not Offer.controldate(task1):
+        flash('Too late the task is closed', category='error')
         return redirect(url_for('views.home'))
+    task1.scelta = stud_id
+    task1.isAss = True
+    db.session.commit()
+
+    return redirect(url_for('views.home'))
 
 
 @adults.route('/taskpending')
 def taskpending():
-        pending = []
-        for task in current_user.tasks:
-            if task.isAss and task.isClosed == False:
-                pending.append(task)
-            if task.isAss == False and task.isPerf == True:
-                pending.append(task)
+    pending = []
+    for task in current_user.tasks:
+        if task.isAss and task.isClosed == False:
+            pending.append(task)
+        if task.isAss == False and task.isPerf == True:
+            pending.append(task)
 
-        return render_template("adult/taskspending.html", user=current_user, pending=pending)
+    return render_template("adult/taskspending.html", user=current_user, pending=pending)
 
 
 @adults.route('/deletetask/<task_id>')
 def deletetask(task_id):
-        t = Offer.query.filter(Offer.id == task_id).first()
-        if t.applicants:
-            flash('There are already applications for this task you cannot delete this task', category='error')
-            return redirect(url_for('views.home'))
-        db.session.delete(t)
-        db.session.commit()
-        flash('Task deleted!', category='success')
+    t = Offer.query.filter(Offer.id == task_id).first()
+    if t.applicants:
+        flash('There are already applications for this task you cannot delete this task', category='error')
         return redirect(url_for('views.home'))
-
+    db.session.delete(t)
+    db.session.commit()
+    flash('Task deleted!', category='success')
+    return redirect(url_for('views.home'))

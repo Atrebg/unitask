@@ -93,9 +93,12 @@ def riempidb():
     ]
 
     adulti = [
-        {'name': "Maria", 'surname': "Bianchi", 'description': "I am a Manager in a consultancy firm. I have a 4 lovely dogs and I am always looking for someone who can help me with them."},
-        {'name': "Paolo", 'surname': "Giorgi", 'description': "I am a grandfather with 4 amazing nephews. They cannot bear anymore my problems with technology and for this reason I decided to join this community."},
-        {'name': "Mario", 'surname': "Rossi", 'description': "I am a single father whit 3 beautiful children. It may happen that I cannot find someone who can help me with them, especially when there are last minute calls at work."},
+        {'name': "Maria", 'surname': "Bianchi",
+         'description': "I am a Manager in a consultancy firm. I have a 4 lovely dogs and I am always looking for someone who can help me with them."},
+        {'name': "Paolo", 'surname': "Giorgi",
+         'description': "I am a grandfather with 4 amazing nephews. They cannot bear anymore my problems with technology and for this reason I decided to join this community."},
+        {'name': "Mario", 'surname': "Rossi",
+         'description': "I am a single father whit 3 beautiful children. It may happen that I cannot find someone who can help me with them, especially when there are last minute calls at work."},
     ]
 
     tasks = [

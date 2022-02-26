@@ -18,7 +18,7 @@
                                 <tr>
                                     <th scope="col">Task</th>
                                     <th scope="col">Date</th>
-                                    <th scope="col">Delete Application</th>
+                                    <th scope="col">Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -26,7 +26,7 @@
                                     <th scope="row"><a style="color:darkblue"
                                                        href={{ url_for('users.task', task_id=offer.id) }}>{{ offer.title }}</a>
                                     </th>
-                                    <td>{{ offer.date_task }}</td>
+                                    <td>{{ offer.date_task.strftime("%d/%m/%Y") }}</td>
 
                                     <td>
                                         <button type="button" data-toggle="modal" data-target="#deleteApplication"
@@ -101,7 +101,7 @@
                     <div class="col">
                         <h4 align="left">Task won and reviewed</h4>
                         <table class="table table-hover">
-                            {% set  l = user.taskwonandperform() %}
+                            {% set  l = user.taskwonperfandclosed() %}
                             {% if l %}
                                 <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
                                 <tr>
@@ -134,7 +134,7 @@
                     <h4 align="left">Task won to review</h4>
                     <div class="col">
                         <table class="table table-hover">
-                            {% set  l = user.taskwonandnotperform() %}
+                            {% set  l = user.taskwonandperform() %}
                             {% if l %}
                                 <thead class="thead-dark" style="color:whitesmoke; background:#2c3e50">
                                 <tr>
@@ -153,8 +153,8 @@
                                             <td>
                                                 <button type="button" class="btn btn-outline-danger mx-4 review-button">
                                                     <a style="color:black"
-                                                        href={{ url_for('users.writereview', task_id=offer.id) }}>
-                                                    Review</a>
+                                                       href={{ url_for('users.writereview', task_id=offer.id) }}>
+                                                        Review</a>
                                                 </button>
                                             </td>
                                             </tr>

@@ -24,12 +24,11 @@ def create_app():
 
     @app.errorhandler(404)
     def page_not_found(e):
-
-        return render_template('404.html', user = 'NULL'), 404
+        return render_template('404.html', user='NULL'), 404
 
     @app.errorhandler(500)
     def page_not_found(e):
-        return render_template('500.html', user = 'NULL'), 500
+        return render_template('500.html', user='NULL'), 500
 
     app.register_blueprint(views, url_prefix="/")  # Stiamo dicendo come sono definite le pagine e dove sono
     app.register_blueprint(auth)

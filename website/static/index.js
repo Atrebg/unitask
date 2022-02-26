@@ -2,18 +2,18 @@
 //quando riceve una risposta ricarica la pagina window.location.href
 
 function deleteOffer(offerId) {
-  fetch("/delete-offer", {
-    method: "POST",
-    body: JSON.stringify({ offerId: offerId }),
-  }).then((_res) => {
-    window.location.href = "/";
-  });
+    fetch("/delete-offer", {
+        method: "POST",
+        body: JSON.stringify({offerId: offerId}),
+    }).then((_res) => {
+        window.location.href = "/";
+    });
 }
 
 function chooseTask(offerId) {
-  fetch( "/prova/offerId", {
-    method: "GET"
-  }).then((_res)=> {
-    window.location.href="/";
-  });
+    fetch("/prova/offerId", {
+        method: "GET"
+    }).then((_res) => {
+        window.location.href = "/";
+    });
 }

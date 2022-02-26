@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-6">
-                <form class="review-form" style="margin:0" method="POST">
+                <form class="review-form" style="margin:0; margin-bottom: 10vh" method="POST">
                     <h1 align="left">Review</h1>
                     <div align="justify">
                         Leave a review to the other user. <br/><br/>
@@ -25,6 +25,7 @@
                             <p>{{ error }}</p>
                         {% endfor %}
                     </div>
+                    <br/>
                     <div class="form-group">
                         {{ form.reviewdescription.label }}
                         {{ form.reviewdescription(class = 'form-control') }}

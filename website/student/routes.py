@@ -52,10 +52,10 @@ def listapplications():
     a = 0
     for off in current_user.getapplicationsopen():
         if not off.isAss:
-            a=1
+            a = 1
             break
 
-    return render_template("Student/listapplication.html", user=current_user ,a = a )
+    return render_template("Student/listapplication.html", user=current_user, a=a)
 
 
 @students.route('/deleteapplication/<task_id>')
@@ -85,11 +85,12 @@ def maps():
 
     configurations = {"locations": []}
     for offer in q1:
-         configurations["locations"].append(offer.getdict())
+        configurations["locations"].append(offer.getdict())
 
     mapsApi = "AIzaSyDLAnxto2DehvN5I5YdJuyBgEj7CZnX01A"
-    mapOptions = { "center" : {"lat": 45.1161, "lng": 7.7420}, "fullscreenControl ": True, " mapTypeControl ": False,"streetViewControl": False, "zoom": 2, "zoomControl": True, "maxZoom": 17}
+    mapOptions = {"center": {"lat": 45.1161, "lng": 7.7420}, "fullscreenControl ": True, " mapTypeControl ": False,
+                  "streetViewControl": False, "zoom": 2, "zoomControl": True, "maxZoom": 17}
     configurations['mapsApiKey'] = mapsApi
     configurations['mapOptions'] = mapOptions
-    return render_template("Student/maps.html", user=current_user, CONFIGURATIONS=configurations, api = mapsApi, mapsOptions=mapOptions)
-
+    return render_template("Student/maps.html", user=current_user, CONFIGURATIONS=configurations, api=mapsApi,
+                           mapsOptions=mapOptions)

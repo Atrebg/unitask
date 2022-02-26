@@ -10,7 +10,7 @@
 
 
 
-    <div class="container">
+    <div class="container" style="margin-bottom: 50vh">
         <div class="row">
             <div align="center" class="col-3 profile-box m-3 p-3">
                 <div style="display:inline">
@@ -68,11 +68,13 @@
 
             {% if user.type=='adult' %}
                 <div class="row">
-                <div align="center" class="col" >
+                    <div align="center" class="col">
 
-                <button style="background: #2c3e50; max-width: 50%; max-height: 100%" class="btn">
-                    <a style="color: white" href={{ url_for('adults.choosestud', task_id=task_id, stud_id=reviewed.id) }}>CHOOSE THIS STUDENT</a></button>
-                </div>
+                        <button style="background: #2c3e50; max-width: 50%; max-height: 100%" class="btn">
+                            <a style="color: white"
+                               href={{ url_for('adults.choosestud', task_id=task_id, stud_id=reviewed.id) }}>CHOOSE THIS
+                                STUDENT</a></button>
+                    </div>
                 </div>
             {% endif %}
 
