@@ -63,4 +63,4 @@ def create_database(app):
     else:
         # db.drop_all(app=app)
         db.create_all(app=app)
-        print('Esiste gia')
+        print('It already exists')

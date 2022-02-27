@@ -89,7 +89,7 @@ def riempidb():
         {'name': "Caterina", 'surname': "Nassi",
          'description': "I am a student in Education and Formation. I love babies, and I am usually available at the last minute. "},
         {'name': "Oliviero", 'surname': "Vidoni",
-         'description': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi."},
+         'description': ""},
     ]
 
     adulti = [
@@ -109,23 +109,23 @@ def riempidb():
         {'titolo': "My PC is not working",
          'descrizione': "I am looking for someone who can fix my computer. My internet connection does not work, can you help me?",
          'date': "2022-05-17", 'lat': "45.07215960121708", 'lng': "7.681296735921444",
-         'placeId': "ChIJ-w5Ey3NtiEcRizrB7W-hDNI", 'address': "Via barbaroux 20"},
-        {'titolo': "Grandmother",
+         'placeId': "ChIJ-w5Ey3NtiEcRizrB7W-hDNI", 'address': "Via Barbaroux 20"},
+        {'titolo': "My grandmother",
          'descrizione': "I am looking for someone who can keep company to my gradmother because she is very lonely.",
          'date': "2022-05-18", 'lat': "45.0602789482421", 'lng': "7.659934143334852",
-         'placeId': "ChIJx4qR9SJtiEcRqjxf1yPr6KI", 'address': "Via marcopolo 38"},
-        {'titolo': "nonno",
-         'descrizione': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi.",
-         'date': "2022-02-19", 'lat': "45.074369423709875", 'lng': "7.6562016089387965",
+         'placeId': "ChIJx4qR9SJtiEcRqjxf1yPr6KI", 'address': "Via Marco Polo 38"},
+        {'titolo': "My house is a mess!",
+         'descrizione': "Hy everyone! I am looking for someone who can help me with my messy house. I am an artist and I have a lot of things in my house that I want to get rid off. Please come and help me! ",
+         'date': "2022-04-19", 'lat': "45.074369423709875", 'lng': "7.6562016089387965",
          'placeId': "ChIJXbcpbQJtiEcRayf8ZeGWbPI", 'address': "Corso Ferrucci 12"},
-        {'titolo': "spazzatura",
-         'descrizione': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi.",
-         'date': "2022-02-19", 'lat': "45.031349418202346", 'lng': "7.650670868351874",
-         'placeId': "ChIJk67CatsSiEcRwIxAtahQVQg", 'address': "Lingotto"},
-        {'titolo': "trasloco",
-         'descrizione': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nunc non velit posuere, at ultricies est condimentum. Pellentesque sagittis leo euismod nisi mattis condimentum. Etiam vitae eleifend sem. Etiam consectetur vehicula nisl, et consequat massa vestibulum sed. Sed a magna feugiat, rhoncus lacus in, vulputate nisi.",
+        {'titolo': "Out of town",
+         'descrizione': "I am out of town this weekend and my pet sitter is sick! I am looking for a last minute help with my two cats. Please, I am desperate!",
+         'date': "2022-03-19", 'lat': "45.031349418202346", 'lng': "7.650670868351874",
+         'placeId': "ChIJk67CatsSiEcRwIxAtahQVQg", 'address': "Via Nizza 129"},
+        {'titolo': "Moving out",
+         'descrizione': "Hello! I am moving out of my house and all of my friends are busy. I am looking for someone that can help me. I have a lot of books and they may be heavy. Thank you!",
          'date': "2022-02-24", 'lat': "45.06489699683761", 'lng': "7.630211069168476",
-         'placeId': "ChIJu6nBNJVsiEcRjUReMrrGsg0", 'address': "Via Monginevro"},
+         'placeId': "ChIJu6nBNJVsiEcRjUReMrrGsg0", 'address': "Via Monginevro 3"},
         {'titolo': "After-school activities",
          'descrizione': "I am looking for someone who can help my children of 12 years old with some math exercises.",
          'date': "2022-03-28", 'lat': "45.07150270339428", 'lng': "7.6755482647576425",
@@ -133,7 +133,7 @@ def riempidb():
         {'titolo': "Looking for a gardening expert",
          'descrizione': "I am looking for someone who has a passion in gardening that can help me with my plants.",
          'date': "2022-06-28", 'lat': "45.062928866175696", 'lng': "7.701314035921153",
-         'placeId': "ChIJ-f-CvJ5yiEcR9YkHqilhGP8", 'address': "Via Umbero cosmo 6"}
+         'placeId': "ChIJ-f-CvJ5yiEcR9YkHqilhGP8", 'address': "Via Umberto Cosmo 6"}
     ]
 
     ids = {5, 6, 7, 5, 6, 7, 5}
